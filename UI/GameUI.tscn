@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://gb1m4k26j12t" path="res://Textures/cctv_arrow.png" id="5_itdhl"]
 [ext_resource type="Script" path="res://UI/scripts/pan_arrows.gd" id="5_vjd77"]
 
-[node name="GameUI" type="Control" node_paths=PackedStringArray("panArrows")]
+[node name="GameUI" type="Control" node_paths=PackedStringArray("arrowVisualizer")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -16,7 +16,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
 script = ExtResource("1_7r5vt")
-panArrows = NodePath("PanArrows")
+arrowVisualizer = NodePath("PanArrows")
 
 [node name="DaycounterContainer" type="MarginContainer" parent="."]
 layout_mode = 1

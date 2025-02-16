@@ -8,6 +8,9 @@ extends Control
 
 @export var arrowVisualizer: PanArrowVisualizer = null
 
+var _hitEdges : Array[Vector2i] = []
+var _highlighted : Array[Vector2i] = []
+
 
 # TODO: change to score update
 func _input(event: InputEvent) -> void:
@@ -15,3 +18,37 @@ func _input(event: InputEvent) -> void:
 		score.updateScore(1)
 	if event.is_action_pressed("pan_camera_down"):
 		score.updateScore(-1)
+
+
+func _on_camera_hit_edge(where: Vector2i) -> void:
+	if _hitEdges.has(where):
+		return
+	_hitEdges.append(where)
+	arrowVisualizer.disableEdge(where)
+
+
+func _on_camera_moving(to: Vector2i) -> void:
+	if _highlighted.has(to):
+		return
+	_highlighted.append(to)
+	
+	if _hitEdges.has(to):
+		return
+		
+	arrowVisualizer.highlightEdge(to)
+
+
+func _on_camera_edge_no_longer_hit(where: Vector2i) -> void:
+	if _hitEdges.has(where):
+		_hitEdges.erase(where)
+		arrowVisualizer.restoreEdgeColor(where)
+		if where in _highlighted:
+			arrowVisualizer.highlightEdge(where)
+
+
+func _on_camera_stationary() -> void:
+	for highlight in _highlighted:
+		arrowVisualizer.restoreEdgeColor(highlight)
+		if highlight in _hitEdges:
+			arrowVisualizer.disableEdge(highlight)
+	_highlighted.clear()

@@ -5,6 +5,7 @@ extends Camera2D
 signal hitEdge(where: Vector2i)
 signal edgeNoLongerHit(where: Vector2i)
 signal moving(to: Vector2i)
+signal stationary
 
 @onready var startPoint := global_position
 
@@ -70,10 +71,15 @@ func _physics_process(delta: float) -> void:
 		_moveDirection.y = 0
 	
 	
-	if not _shouldMove(): return
+	if not _shouldMove(): 
+		stationary.emit()
+		return
 	
 	if abs(_moveDirection) == Vector2.ONE:
-		pass
+		moving.emit(Vector2i(_moveDirection.x, 0))
+		moving.emit(Vector2i(0, _moveDirection.y))
+	else:
+		moving.emit(_moveDirection)
 
 	global_translate(
 		Vector2(_moveDirection.x, _moveDirection.y).normalized() * cameraSpeed 
@@ -90,7 +96,6 @@ func _physics_process(delta: float) -> void:
 		edgeNoLongerHit.emit(Vector2.LEFT)
 		
 	if global_position.x == _botRight.x:
-		# TODO: this is contantly emitting, not sure if that is ideal...
 		hitEdge.emit(Vector2.RIGHT)
 	else:
 		edgeNoLongerHit.emit(Vector2.RIGHT)

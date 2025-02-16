@@ -25,8 +25,10 @@ func _input(event: InputEvent) -> void:
 	if _selected == null:
 		return
 	if event.is_action_pressed("grab_character"):
+		_selected.startDrag()
 		_mouseDown = true
 	if event.is_action_released("grab_character"):
+		_selected.endDrag()
 		_mouseDown = false
 	
 

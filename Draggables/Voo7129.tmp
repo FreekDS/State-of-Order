@@ -1,0 +1,33 @@
+[gd_scene load_steps=4 format=3 uid="uid://cts28nfdnoojo"]
+
+[ext_resource type="Script" path="res://Draggables/BaseDraggable.gd" id="1_td4gn"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s4nbj"]
+size = Vector2(39.5, 38.5)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_f512r"]
+
+[node name="VoorbeeldDraggable" type="Node2D"]
+
+[node name="DenDraggable" type="RigidBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DenDraggable"]
+position = Vector2(20.25, 20.75)
+shape = SubResource("RectangleShape2D_s4nbj")
+
+[node name="ColorRect" type="ColorRect" parent="DenDraggable"]
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="DragNode" type="Node2D" parent="DenDraggable" node_paths=PackedStringArray("bounds")]
+script = ExtResource("1_td4gn")
+bounds = NodePath("../CollisionShape2D")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(5, 645)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(568.5, 0)
+shape = SubResource("WorldBoundaryShape2D_f512r")

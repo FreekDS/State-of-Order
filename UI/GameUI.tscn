@@ -1,0 +1,258 @@
+[gd_scene load_steps=7 format=3 uid="uid://vfkensc2u1h1"]
+
+[ext_resource type="Texture2D" uid="uid://dsjsjlqxhrgh3" path="res://Textures/cctv_edge.png" id="1_2c7po"]
+[ext_resource type="PackedScene" uid="uid://hvdvrpklbt7" path="res://UI/components/RichPopText.tscn" id="1_3qqxu"]
+[ext_resource type="Script" path="res://UI/scripts/game_ui.gd" id="1_7r5vt"]
+[ext_resource type="Script" path="res://UI/scripts/Score.gd" id="3_305f0"]
+[ext_resource type="Texture2D" uid="uid://gb1m4k26j12t" path="res://Textures/cctv_arrow.png" id="5_itdhl"]
+[ext_resource type="Script" path="res://UI/scripts/pan_arrows.gd" id="5_vjd77"]
+
+[node name="GameUI" type="Control" node_paths=PackedStringArray("panArrows")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+script = ExtResource("1_7r5vt")
+panArrows = NodePath("PanArrows")
+
+[node name="DaycounterContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -40.0
+offset_bottom = 40.0
+grow_horizontal = 0
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 40
+
+[node name="HBoxContainer" type="HBoxContainer" parent="DaycounterContainer"]
+layout_mode = 2
+
+[node name="DayLabel" type="RichTextLabel" parent="DaycounterContainer/HBoxContainer"]
+layout_mode = 2
+text = "Day"
+fit_content = true
+autowrap_mode = 0
+
+[node name="DayCounter" type="RichTextLabel" parent="DaycounterContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "1"
+fit_content = true
+autowrap_mode = 0
+
+[node name="separator" type="RichTextLabel" parent="DaycounterContainer/HBoxContainer"]
+layout_mode = 2
+text = "-"
+fit_content = true
+autowrap_mode = 0
+
+[node name="Time" type="RichTextLabel" parent="DaycounterContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "00:00"
+fit_content = true
+autowrap_mode = 0
+
+[node name="ChannelContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -43.0
+offset_right = 138.0
+grow_vertical = 0
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_bottom = 20
+
+[node name="Channel" type="RichTextLabel" parent="ChannelContainer"]
+layout_mode = 2
+text = "Channel0"
+fit_content = true
+autowrap_mode = 0
+
+[node name="SocialCreditContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -138.0
+offset_top = -43.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 20
+
+[node name="HBoxContainer" type="HBoxContainer" parent="SocialCreditContainer"]
+layout_mode = 2
+
+[node name="ScoreLabel" type="RichTextLabel" parent="SocialCreditContainer/HBoxContainer"]
+layout_mode = 2
+text = "Social credit -"
+fit_content = true
+autowrap_mode = 0
+
+[node name="Score" parent="SocialCreditContainer/HBoxContainer" instance=ExtResource("1_3qqxu")]
+unique_name_in_owner = true
+layout_mode = 2
+text = "0000"
+script = ExtResource("3_305f0")
+
+[node name="CCTV_Edges" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="topleft" type="MarginContainer" parent="CCTV_Edges"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 0
+
+[node name="TextureRect" type="TextureRect" parent="CCTV_Edges/topleft"]
+modulate = Color(1, 1, 1, 0.368627)
+layout_mode = 2
+texture = ExtResource("1_2c7po")
+
+[node name="topright" type="MarginContainer" parent="CCTV_Edges"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -49.0
+offset_bottom = 49.0
+grow_horizontal = 0
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+
+[node name="TextureRect" type="TextureRect" parent="CCTV_Edges/topright"]
+modulate = Color(1, 1, 1, 0.368627)
+layout_mode = 2
+texture = ExtResource("1_2c7po")
+flip_h = true
+
+[node name="botright" type="MarginContainer" parent="CCTV_Edges"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -49.0
+offset_top = -49.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="TextureRect" type="TextureRect" parent="CCTV_Edges/botright"]
+modulate = Color(1, 1, 1, 0.368627)
+layout_mode = 2
+texture = ExtResource("1_2c7po")
+flip_h = true
+flip_v = true
+
+[node name="botleft" type="MarginContainer" parent="CCTV_Edges"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -49.0
+offset_right = 49.0
+grow_vertical = 0
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 10
+
+[node name="TextureRect" type="TextureRect" parent="CCTV_Edges/botleft"]
+modulate = Color(1, 1, 1, 0.368627)
+layout_mode = 2
+texture = ExtResource("1_2c7po")
+flip_v = true
+
+[node name="PanArrows" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("5_vjd77")
+
+[node name="left" type="TextureRect" parent="PanArrows"]
+modulate = Color(1, 1, 1, 0.282353)
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -20.0
+offset_right = 40.0
+offset_bottom = 20.0
+grow_vertical = 2
+scale = Vector2(0.3, 0.3)
+pivot_offset = Vector2(20, 20)
+texture = ExtResource("5_itdhl")
+flip_h = true
+
+[node name="top" type="TextureRect" parent="PanArrows"]
+modulate = Color(1, 1, 1, 0.282353)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 40.0
+grow_horizontal = 2
+rotation = 1.5708
+scale = Vector2(0.3, 0.3)
+pivot_offset = Vector2(20, 20)
+texture = ExtResource("5_itdhl")
+flip_h = true
+
+[node name="right" type="TextureRect" parent="PanArrows"]
+modulate = Color(1, 1, 1, 0.282353)
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -40.0
+offset_top = -20.0
+offset_bottom = 20.0
+grow_horizontal = 0
+grow_vertical = 2
+scale = Vector2(0.3, 0.3)
+pivot_offset = Vector2(20, 20)
+texture = ExtResource("5_itdhl")
+flip_v = true
+
+[node name="bot" type="TextureRect" parent="PanArrows"]
+modulate = Color(1, 1, 1, 0.282353)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -40.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+rotation = 1.5708
+scale = Vector2(0.3, 0.3)
+pivot_offset = Vector2(20, 20)
+texture = ExtResource("5_itdhl")

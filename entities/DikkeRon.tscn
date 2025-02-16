@@ -181,6 +181,7 @@ offset_bottom = -1.2438
 color = Color(1, 0.476418, 0.421882, 1)
 
 [node name="Hair" type="Node2D" parent="Sprite2D"]
+show_behind_parent = true
 position = Vector2(0, -20)
 script = ExtResource("3_jracq")
 

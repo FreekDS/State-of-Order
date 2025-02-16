@@ -11,6 +11,10 @@ extends Control
 var _hitEdges : Array[Vector2i] = []
 var _highlighted : Array[Vector2i] = []
 
+func _ready() -> void:
+	EventBus.guyCaptured.connect(
+		func(_guy): score.updateScore(1)
+	)
 
 # TODO: change to score update
 func _input(event: InputEvent) -> void:

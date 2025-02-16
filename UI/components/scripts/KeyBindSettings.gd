@@ -1,7 +1,7 @@
 extends Control
 
 
-var KeyBindScene = preload("res://UI/helperScenes/SingleKeyBind.tscn")
+var KeyBindScene = preload("res://UI/components/helperScenes/SingleKeyBind.tscn")
 
 @onready var KeyBindsContainer : VBoxContainer = %AllKeyBinds
 @onready var SaveButton = %SaveButton
@@ -48,7 +48,9 @@ func _ready():
 
 
 func _handle_keybind_listener(forAction: String):
-	for singleKeyBind : SingleKeyBind in KeyBindsContainer.get_children():
+	for singleKeyBind in KeyBindsContainer.get_children():
+		if singleKeyBind is not SingleKeyBind:
+			continue
 		if singleKeyBind.actionName == forAction:
 			continue
 		singleKeyBind.setEnabled(false)
@@ -56,7 +58,9 @@ func _handle_keybind_listener(forAction: String):
 
 func _handle_keybind_changed() -> void:
 	var bindingsWithNewKey := {}
-	for singleKeyBind : SingleKeyBind in KeyBindsContainer.get_children():
+	for singleKeyBind in KeyBindsContainer.get_children():
+		if singleKeyBind is not SingleKeyBind:
+			continue
 		singleKeyBind.setEnabled(true)
 		singleKeyBind.setError(false)
 		if bindingsWithNewKey.has(singleKeyBind.keyCode):
@@ -67,7 +71,9 @@ func _handle_keybind_changed() -> void:
 	for keyCode in bindingsWithNewKey.keys():
 		var bindings = bindingsWithNewKey[keyCode]
 		if len(bindings) > 1:
-			for singleKeyBind : SingleKeyBind in bindings:
+			for singleKeyBind in bindings:
+				if singleKeyBind is not SingleKeyBind:
+					continue
 				singleKeyBind.setError(true)
 
 
@@ -75,7 +81,9 @@ func _handle_keybind_changed() -> void:
 func _on_reset_button_pressed():
 	InputMap.load_from_project_settings()
 	# reload actions
-	for singleKeyBind : SingleKeyBind in KeyBindsContainer.get_children():
+	for singleKeyBind in KeyBindsContainer.get_children():
+		if singleKeyBind is not SingleKeyBind:
+			continue
 		singleKeyBind.setEnabled(true)
 		singleKeyBind.setError(false)
 		
@@ -99,7 +107,9 @@ func _on_reset_button_pressed():
 func _on_save_button_pressed():
 	# TODO persist changes on file
 	# TODO dont save on error
-	for singleKeyBind : SingleKeyBind in KeyBindsContainer.get_children():
+	for singleKeyBind in KeyBindsContainer.get_children():
+		if singleKeyBind is not SingleKeyBind:
+			continue
 		InputMap.action_erase_events(singleKeyBind.actionName)
 		InputMap.action_add_event(singleKeyBind.actionName, singleKeyBind.theEvent)
 	SaveButton.disabled = true

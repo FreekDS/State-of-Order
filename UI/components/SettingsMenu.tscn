@@ -1,9 +1,9 @@
 [gd_scene load_steps=14 format=3 uid="uid://br4o8j3bbcfll"]
 
-[ext_resource type="Script" path="res://UI/scripts/SettingsMenu.gd" id="1_kx4oo"]
-[ext_resource type="Script" path="res://UI/scripts/KeyBindSettings.gd" id="1_r1cng"]
-[ext_resource type="Script" path="res://UI/scripts/AudioSettings.gd" id="2_nnons"]
-[ext_resource type="Script" path="res://UI/scripts/GraphicsSettings.gd" id="3_abk6i"]
+[ext_resource type="Script" path="res://UI/components/scripts/SettingsMenu.gd" id="1_kx4oo"]
+[ext_resource type="Script" path="res://UI/components/scripts/KeyBindSettings.gd" id="1_r1cng"]
+[ext_resource type="Script" path="res://UI/components/scripts/AudioSettings.gd" id="2_nnons"]
+[ext_resource type="Script" path="res://UI/components/scripts/GraphicsSettings.gd" id="3_abk6i"]
 
 [sub_resource type="InputEventKey" id="InputEventKey_k7102"]
 device = -1
@@ -104,6 +104,26 @@ horizontal_scroll_mode = 0
 unique_name_in_owner = true
 layout_mode = 2
 alignment = 1
+
+[node name="ArachnophobiaMode" type="HBoxContainer" parent="Keybinds/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/ScrollContainer/AllKeyBinds"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Label" type="RichTextLabel" parent="Keybinds/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/ScrollContainer/AllKeyBinds/ArachnophobiaMode"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_vertical = 4
+bbcode_enabled = true
+text = "Arachnophobia mode"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+
+[node name="VSeparator" type="VSeparator" parent="Keybinds/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/ScrollContainer/AllKeyBinds/ArachnophobiaMode"]
+layout_mode = 2
+
+[node name="CheckButton" type="CheckButton" parent="Keybinds/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/ScrollContainer/AllKeyBinds/ArachnophobiaMode"]
+layout_mode = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="Keybinds/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2

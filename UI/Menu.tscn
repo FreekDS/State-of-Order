@@ -1,0 +1,63 @@
+[gd_scene load_steps=3 format=3 uid="uid://b244o38gti0l2"]
+
+[ext_resource type="Script" path="res://UI/scripts/menu.gd" id="1_047pa"]
+[ext_resource type="PackedScene" uid="uid://br4o8j3bbcfll" path="res://UI/components/SettingsMenu.tscn" id="2_loq58"]
+
+[node name="Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_047pa")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.849
+anchor_right = 0.5
+anchor_bottom = 0.907
+offset_left = 80.0
+offset_top = -0.152039
+offset_right = -304.0
+offset_bottom = 0.263977
+grow_vertical = 0
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="Play" type="Button" parent="HBoxContainer"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+text = "Play"
+
+[node name="Settings" type="Button" parent="HBoxContainer"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+text = "Settings"
+
+[node name="Hilde Credits" type="Button" parent="HBoxContainer"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+text = "Credits"
+
+[node name="CreditsContainer" type="MarginContainer" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 120
+theme_override_constants/margin_top = 120
+theme_override_constants/margin_right = 120
+theme_override_constants/margin_bottom = 120
+
+[node name="Settings" parent="CreditsContainer" instance=ExtResource("2_loq58")]
+layout_mode = 2
+
+[connection signal="pressed" from="HBoxContainer/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="HBoxContainer/Settings" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="HBoxContainer/Hilde Credits" to="." method="_on_hilde_credits_pressed"]
+[connection signal="closeRequest" from="CreditsContainer/Settings" to="." method="_on_settings_close_request"]

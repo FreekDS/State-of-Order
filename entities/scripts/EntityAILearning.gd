@@ -1,0 +1,34 @@
+class_name DikkeRon
+extends CharacterBody2D
+
+
+@onready var animations: AnimationPlayer = $AnimationPlayer
+@onready var collision: CollisionShape2D = $CollisionShape2D
+
+@onready var sprite: Sprite2D = $Sprite2D
+
+
+signal helpIkBenGeselecteerd(who: DikkeRon)
+signal neverMindIkBenGedeselect(who: DikkeRon)
+
+
+func _ready():
+	animations.play("run", -1, 1.1)
+
+
+
+func isMouseInDaHouse():
+	var mousePos := get_local_mouse_position()
+	return sprite.get_rect().has_point(mousePos)
+
+
+func _physics_process(delta: float) -> void:
+	if isMouseInDaHouse():
+		$Sprite2D/ColorRect.show()
+		helpIkBenGeselecteerd.emit(self)
+	else:
+		$Sprite2D/ColorRect.hide()
+		neverMindIkBenGedeselect.emit(self)
+		
+	velocity.x = -20
+	move_and_slide()

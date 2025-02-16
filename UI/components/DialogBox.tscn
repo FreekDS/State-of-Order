@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://cngd10wrt2gri"]
 
-[ext_resource type="Script" path="res://UI/scripts/DialogBox.gd" id="1_76mnx"]
+[ext_resource type="Script" path="res://UI/components/scripts/DialogBox.gd" id="1_76mnx"]
 
 [sub_resource type="Animation" id="Animation_v5aag"]
 length = 0.001

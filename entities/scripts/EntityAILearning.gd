@@ -32,3 +32,10 @@ func _physics_process(delta: float) -> void:
 		
 	velocity.x = -20
 	move_and_slide()
+	
+func startDrag() -> void:
+	$CollisionShape2D.disabled = true
+	
+func endDrag() -> void:
+	$CollisionShape2D.disabled = false
+	

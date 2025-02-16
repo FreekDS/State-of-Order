@@ -6,9 +6,6 @@ var moiseInHois=false
 
 var beingDragged=false
 
-func _ready() -> void:
-	pass
-	
 func _process(delta: float) -> void:
 	if Rect2(bounds.global_position,bounds.shape.size).has_point(get_global_mouse_position()):
 		moiseInHois=true

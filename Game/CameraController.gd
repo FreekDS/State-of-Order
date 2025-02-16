@@ -2,6 +2,10 @@ class_name CameraController
 extends Camera2D
 
 
+signal hitEdge(where: Vector2i)
+signal edgeNoLongerHit(where: Vector2i)
+signal moving(to: Vector2i)
+
 @onready var startPoint := global_position
 
 @export var _topLeft = Vector2(-400,-200)
@@ -67,6 +71,9 @@ func _physics_process(delta: float) -> void:
 	
 	
 	if not _shouldMove(): return
+	
+	if abs(_moveDirection) == Vector2.ONE:
+		pass
 
 	global_translate(
 		Vector2(_moveDirection.x, _moveDirection.y).normalized() * cameraSpeed 
@@ -74,6 +81,32 @@ func _physics_process(delta: float) -> void:
 	
 	global_position.x = clamp(global_position.x, _topLeft.x, _botRight.x)
 	global_position.y = clamp(global_position.y, _topLeft.y, _botRight.y)
+
+	# Mess
+	if global_position.x == _topLeft.x:
+		# TODO: this is contantly emitting, not sure if that is ideal...
+		hitEdge.emit(Vector2.LEFT)
+	else:
+		edgeNoLongerHit.emit(Vector2.LEFT)
+		
+	if global_position.x == _botRight.x:
+		# TODO: this is contantly emitting, not sure if that is ideal...
+		hitEdge.emit(Vector2.RIGHT)
+	else:
+		edgeNoLongerHit.emit(Vector2.RIGHT)
+	
+	if global_position.y == _botRight.y:
+		hitEdge.emit(Vector2.DOWN)
+	else:
+		edgeNoLongerHit.emit(Vector2.DOWN)
+		
+	if global_position.y == _topLeft.y:
+		hitEdge.emit(Vector2.UP)
+	else:
+		edgeNoLongerHit.emit(Vector2.UP)
+	
+		
+		
 	
 
 

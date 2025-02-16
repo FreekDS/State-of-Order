@@ -5,6 +5,8 @@ var _selected : DikkeRon = null
 var _mouseDown : bool = false
 
 
+signal guyDragged(who: DikkeRon)
+
 func _ready() -> void:
 	
 	for child : DikkeRon in get_children():
@@ -25,10 +27,11 @@ func _input(event: InputEvent) -> void:
 	if _selected == null:
 		return
 	if event.is_action_pressed("grab_character"):
-		_selected.startDrag()
+		#_selected.startDrag()
 		_mouseDown = true
+		guyDragged.emit(_selected)
 	if event.is_action_released("grab_character"):
-		_selected.endDrag()
+		#_selected.endDrag()
 		_mouseDown = false
 	
 

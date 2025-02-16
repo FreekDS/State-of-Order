@@ -12,10 +12,13 @@ signal stationary
 @export var _topLeft = Vector2(-400,-200)
 @export var _botRight = Vector2(400,200)
 
-@export var maxCameraHeight : float = 100.0
-@export var minCameraHeight : float = 0
+
 @export var cameraSpeed : float = 5.0
-@export var zoomIncrement : float = 1.0
+
+@export var zoomIncrement : float = 0.1
+
+@export var maxZoom : float = 3
+@export var minZoom : float = .5
 
 ## Size that must be reached before moving the camera is possible
 @export var startMoveTreshold : float = 100
@@ -36,12 +39,14 @@ func _input(event: InputEvent) -> void:
 		if event.button_index == MOUSE_BUTTON_WHEEL_UP:
 			zoomOut()
 		if event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
-			zoom()
+			zoomIn()
 	
 	if event.is_action("reset_camera"):
-		create_tween().tween_property(
+		var tween := create_tween()
+		tween.tween_property(
 			self,"global_position", startPoint, .1
 		)
+		tween.tween_property(self, "zoom", Vector2.ONE, .1)
 
 
 func _shouldMove() -> bool:
@@ -88,9 +93,8 @@ func _physics_process(delta: float) -> void:
 	global_position.x = clamp(global_position.x, _topLeft.x, _botRight.x)
 	global_position.y = clamp(global_position.y, _topLeft.y, _botRight.y)
 
-	# Mess
+	# Mess TODO: this is contantly emitting, not sure if that is ideal...
 	if global_position.x == _topLeft.x:
-		# TODO: this is contantly emitting, not sure if that is ideal...
 		hitEdge.emit(Vector2.LEFT)
 	else:
 		edgeNoLongerHit.emit(Vector2.LEFT)
@@ -110,19 +114,12 @@ func _physics_process(delta: float) -> void:
 	else:
 		edgeNoLongerHit.emit(Vector2.UP)
 	
-		
-		
-	
 
+func zoomIn():
+	zoom -= Vector2(zoomIncrement, zoomIncrement)
+	zoom = clamp(zoom, Vector2(minZoom, minZoom), Vector2(maxZoom, maxZoom))
 
-func zoom():
-	pass
-	#camera.translate(Vector3(0.0,0.0,zoomIncrement))
-	#var z := camera.position.z
-	#camera.position.z = clampf(z, minCameraHeight, maxCameraHeight)
 
 func zoomOut():
-	pass
-	#camera.translate(Vector3(0.0,0.0,-zoomIncrement))
-	#var z := camera.position.z
-	#camera.position.z = clampf(z, minCameraHeight, maxCameraHeight)
+	zoom += Vector2(zoomIncrement, zoomIncrement)
+	zoom = clamp(zoom, Vector2(minZoom, minZoom), Vector2(maxZoom, maxZoom))

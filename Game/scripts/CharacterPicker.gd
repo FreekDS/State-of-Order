@@ -4,6 +4,8 @@ extends Node2D
 var _selected : DikkeRon = null
 var _mouseDown : bool = false
 
+@export var navigationRegion : NavigationRegion2D
+
 
 signal guyDragged(who: DikkeRon)
 
@@ -12,6 +14,8 @@ func _ready() -> void:
 	for child : DikkeRon in get_children():
 		if child is not DikkeRon:
 			continue
+		
+		child.setup(navigationRegion.get_navigation_map())
 		
 		child.helpIkBenGeselecteerd.connect(_on_select)
 		child.neverMindIkBenGedeselect.connect(_on_deselect)

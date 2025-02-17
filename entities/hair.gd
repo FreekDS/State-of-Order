@@ -19,7 +19,7 @@ var DragMode : bool = false
 var spriteLocBeforeMove : Vector2= Vector2(0,0)
 
 
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	if( not DragMode):
 		updatePointsNormal(delta)
 	else:

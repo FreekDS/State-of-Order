@@ -7,6 +7,7 @@ extends CharacterBody2D
 @onready var sprite: Sprite2D = $Sprite2D
 
 @onready var hair: Node2D = $Sprite2D/Hair
+@onready var stateManager: NPCStateManager = $StateManager
 
 var selected := false
 var pickable := true
@@ -18,6 +19,10 @@ var dead = false
 
 func _ready():
 	animations.play("run", -1, 1.1)
+
+
+func setup(navigationMap: RID):
+	stateManager.navigationMap = navigationMap
 
 
 func isMouseInDaHouse():
@@ -35,8 +40,7 @@ func _physics_process(_delta: float) -> void:
 		neverMindIkBenGedeselect.emit(self)
 		selected = false
 		
-	velocity.x = -10
-	#velocity.y = randf_range(-20.0, 20.0)
+
 	move_and_slide()
 	
 func startDrag() -> void:

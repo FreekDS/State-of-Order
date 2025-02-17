@@ -27,18 +27,22 @@ func _input(event: InputEvent) -> void:
 	if _selected == null:
 		return
 	if event.is_action_pressed("grab_character"):
-		#_selected.startDrag()
+		_selected.startDrag()
 		_mouseDown = true
 		guyDragged.emit(_selected)
 	if event.is_action_released("grab_character"):
-		#_selected.endDrag()
+		_selected.endDrag()
 		_mouseDown = false
 	
 
 func _on_select(who: DikkeRon):
 	if _selected == null:
 		_selected = who
-		# TODO: maak alle andere characters unpickable
+		for child : DikkeRon in get_children():
+			if child is not DikkeRon or child == who:
+				continue
+			child.pickable = false
+		
 
 
 func _on_deselect(who: DikkeRon):
@@ -46,4 +50,7 @@ func _on_deselect(who: DikkeRon):
 		return
 	if who == _selected:
 		_selected = null
-		# TODO: maak alle andere characters pickable
+		for child : DikkeRon in get_children():
+			if child is not DikkeRon:
+				continue
+			child.pickable = true

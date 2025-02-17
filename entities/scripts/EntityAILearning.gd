@@ -4,10 +4,11 @@ extends CharacterBody2D
 
 @onready var animations: AnimationPlayer = $AnimationPlayer
 @onready var collision: CollisionShape2D = $CollisionShape2D
-
+@onready var highlight: Sprite2D = $Sprite2D/Highlight
 @onready var sprite: Sprite2D = $Sprite2D
 
 var selected := false
+var pickable := true
 
 signal helpIkBenGeselecteerd(who: DikkeRon)
 signal neverMindIkBenGedeselect(who: DikkeRon)
@@ -20,27 +21,36 @@ func _ready():
 
 func isMouseInDaHouse():
 	var mousePos := get_local_mouse_position()
-	return sprite.get_rect().has_point(mousePos)
+	return sprite.get_rect().has_point(mousePos) and pickable
 
 
 func _physics_process(delta: float) -> void:
 	if isMouseInDaHouse():
-		$Sprite2D/ColorRect.show()
+		highlight.show()
 		helpIkBenGeselecteerd.emit(self)
 		selected = true
 	else:
-		$Sprite2D/ColorRect.hide()
+		highlight.hide()
 		neverMindIkBenGedeselect.emit(self)
 		selected = false
 		
-	velocity.x = -20
+	velocity.x = -10
+	velocity.y = randf_range(-20.0, 20.0)
 	move_and_slide()
 	
 func startDrag() -> void:
-	$CollisionShape2D.disabled = true
+	set_collision_layer_value(2, true)	# Interact with police
+	set_collision_layer_value(1, false)	# no longer interact with others
+	
+	set_collision_mask_value(1, false)
+	
+	
 	
 func endDrag() -> void:
-	$CollisionShape2D.disabled = false
+	set_collision_layer_value(2, false)	# no longer interact with police
+	set_collision_layer_value(1, true)	# interact with others again
+	
+	set_collision_mask_value(1, true)
 
 
 func die():

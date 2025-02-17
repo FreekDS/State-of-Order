@@ -4,25 +4,29 @@
 [ext_resource type="Texture2D" uid="uid://bbsskleudiwdo" path="res://Textures/politie_gedrocht.png" id="1_xs3o3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_630gw"]
-size = Vector2(55, 21.5)
+size = Vector2(73, 26)
 
 [node name="Politie" type="Area2D"]
+collision_layer = 2
+collision_mask = 2
 script = ExtResource("1_1me37")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0.5, 1.25)
-shape = SubResource("RectangleShape2D_630gw")
 
 [node name="highlight" type="Node2D" parent="."]
 visible = false
 position = Vector2(-21, -3)
+scale = Vector2(1, 1)
 skew = -0.174533
 
 [node name="ColorRect" type="ColorRect" parent="highlight"]
-offset_left = -6.0
-offset_right = 46.0
-offset_bottom = 15.0
+offset_left = -19.0
+offset_top = -3.0
+offset_right = 59.0
+offset_bottom = 26.0
 color = Color(0.699748, 0.185145, 0.273689, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1.5, 8)
+shape = SubResource("RectangleShape2D_630gw")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_xs3o3")

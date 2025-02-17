@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://dylnvnx8f0goe"]
+[gd_scene load_steps=10 format=3 uid="uid://dylnvnx8f0goe"]
 
 [ext_resource type="Texture2D" uid="uid://jlkwma0oc7sl" path="res://Textures/dikke_ron.png" id="1_jhau4"]
 [ext_resource type="Script" path="res://entities/scripts/EntityAILearning.gd" id="1_nkst8"]
+[ext_resource type="Texture2D" uid="uid://c5usasxqp6b3k" path="res://Textures/dikke_ron_wit.png" id="3_67qvq"]
 [ext_resource type="Script" path="res://entities/hair.gd" id="3_jracq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jm8sb"]
@@ -70,46 +71,6 @@ tracks/4/keys = {
 "values": [Vector2(0, -12)]
 }
 
-[sub_resource type="Animation" id="Animation_ce6m8"]
-resource_name = "run"
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.233333, 0.5, 0.733333, 1),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"update": 0,
-"values": [0.0, 0.174533, 0.0, -0.174533, 0.0]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.233333, 0.5, 0.733333, 1),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"update": 0,
-"values": [Vector2(0, 0), Vector2(0, -3), Vector2(0, 0), Vector2(0, -3), Vector2(0, 0)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite2D/Hair:position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.233333, 0.5, 0.733333, 1),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"update": 0,
-"values": [Vector2(0, -20), Vector2(3, -23), Vector2(0, -20), Vector2(-3, -23), Vector2(0, -20)]
-}
-
 [sub_resource type="Animation" id="Animation_doqkt"]
 resource_name = "die"
 length = 1.5
@@ -150,6 +111,46 @@ tracks/2/keys = {
 "values": [Vector2(0, 0)]
 }
 
+[sub_resource type="Animation" id="Animation_ce6m8"]
+resource_name = "run"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.233333, 0.5, 0.733333, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.174533, 0.0, -0.174533, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.233333, 0.5, 0.733333, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -3), Vector2(0, 0), Vector2(0, -3), Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D/Hair:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.233333, 0.5, 0.733333, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, -20), Vector2(3, -23), Vector2(0, -20), Vector2(-3, -23), Vector2(0, -20)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_vpypy"]
 _data = {
 "RESET": SubResource("Animation_fiwkm"),
@@ -167,18 +168,15 @@ position = Vector2(0, -11.5)
 shape = SubResource("RectangleShape2D_jm8sb")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-z_index = 1
 texture = ExtResource("1_jhau4")
 offset = Vector2(0, -12)
 
-[node name="ColorRect" type="ColorRect" parent="Sprite2D"]
+[node name="Highlight" type="Sprite2D" parent="Sprite2D"]
 visible = false
 show_behind_parent = true
-offset_left = -5.21666
-offset_top = -22.2438
-offset_right = 4.78334
-offset_bottom = -1.2438
-color = Color(1, 0.476418, 0.421882, 1)
+z_index = 1
+texture = ExtResource("3_67qvq")
+offset = Vector2(0, -12)
 
 [node name="Hair" type="Node2D" parent="Sprite2D"]
 show_behind_parent = true

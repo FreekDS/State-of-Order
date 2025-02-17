@@ -14,7 +14,6 @@ script = ExtResource("1_1me37")
 [node name="highlight" type="Node2D" parent="."]
 visible = false
 position = Vector2(-21, -3)
-scale = Vector2(1, 1)
 skew = -0.174533
 
 [node name="ColorRect" type="ColorRect" parent="highlight"]

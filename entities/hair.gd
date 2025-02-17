@@ -1,6 +1,8 @@
 extends Node2D
 
+@export var dikkeRon:DikkeRon
 @export var sprite:Sprite2D
+@export var highlight: Sprite2D
 
 # wanted offset, max distance, actual pos, radius
 var points = [
@@ -16,20 +18,22 @@ var DragMode : bool = false
 
 var spriteLocBeforeMove : Vector2= Vector2(0,0)
 
+
 func _process(delta: float) -> void:
 	if( not DragMode):
-		updatePointsNormal()
+		updatePointsNormal(delta)
 	else:
-		updatePointsNormal()
+		updatePointsNormal(delta)
 		sprite.offset=points.back()[2]+Vector2(0,-10)
+		highlight.offset=points.back()[2]+Vector2(0,-10)
 	queue_redraw()
 	
-func updatePointsNormal() -> void:
-	var dif = prevpos-get_parent().global_position
-	prevpos=get_parent().global_position
+func updatePointsNormal(delta) -> void:
+	var dif = prevpos-dikkeRon.global_position
+	prevpos=dikkeRon.global_position
 	
 	for i in points:
-		i[2]+=dif
+		i[2]+=  Vector2.ONE * delta
 		
 	for i in range(len(points)-1,-1,-1):
 		if i==0:
@@ -64,6 +68,7 @@ func EnableDragmode() -> void:
 	
 func DisableDragmode() -> void:
 	sprite.offset=spriteLocBeforeMove
+	highlight.offset=spriteLocBeforeMove
 	DragMode = false
 	#points.remove_at(len(points)-1)
 	points.reverse()

@@ -6,18 +6,18 @@ extends CharacterBody2D
 @onready var highlight: Sprite2D = $Sprite2D/Highlight
 @onready var sprite: Sprite2D = $Sprite2D
 
+@onready var hair: Node2D = $Sprite2D/Hair
+
 var selected := false
 var pickable := true
 
 signal helpIkBenGeselecteerd(who: DikkeRon)
 signal neverMindIkBenGedeselect(who: DikkeRon)
 
-
-var BeingDragged: bool=false
+var dead = false
 
 func _ready():
 	animations.play("run", -1, 1.1)
-
 
 
 func isMouseInDaHouse():
@@ -26,7 +26,7 @@ func isMouseInDaHouse():
 
 
 func _physics_process(_delta: float) -> void:
-	if isMouseInDaHouse() and not BeingDragged:
+	if isMouseInDaHouse():
 		highlight.show()
 		helpIkBenGeselecteerd.emit(self)
 		selected = true
@@ -36,7 +36,7 @@ func _physics_process(_delta: float) -> void:
 		selected = false
 		
 	velocity.x = -10
-	velocity.y = randf_range(-20.0, 20.0)
+	#velocity.y = randf_range(-20.0, 20.0)
 	move_and_slide()
 	
 func startDrag() -> void:
@@ -44,10 +44,8 @@ func startDrag() -> void:
 	set_collision_layer_value(1, false)	# no longer interact with others
 	
 	set_collision_mask_value(1, false)
-	
-	
-	BeingDragged=true
-	$Hair.EnableDragmode()
+
+	hair.EnableDragmode()
 	$AnimationPlayer.play("RESET")
 	
 func endDrag() -> void:
@@ -55,12 +53,14 @@ func endDrag() -> void:
 	set_collision_layer_value(1, true)	# interact with others again
 	
 	set_collision_mask_value(1, true)
-	BeingDragged=false
-	$Hair.DisableDragmode()
-	$AnimationPlayer.play("run")
+	hair.DisableDragmode()
+	
+	if not dead:
+		animations.play("run")
 
 
 func die():
+	dead = true
 	animations.animation_finished.connect(
 		func(_anim): queue_free(), CONNECT_ONE_SHOT
 	)

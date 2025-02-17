@@ -1,7 +1,8 @@
-[gd_scene load_steps=12 format=3 uid="uid://dylnvnx8f0goe"]
+[gd_scene load_steps=13 format=3 uid="uid://dylnvnx8f0goe"]
 
 [ext_resource type="Texture2D" uid="uid://jlkwma0oc7sl" path="res://Textures/dikke_ron.png" id="1_jhau4"]
 [ext_resource type="Script" path="res://entities/scripts/EntityAILearning.gd" id="1_nkst8"]
+[ext_resource type="PackedScene" uid="uid://sa773o5v8h1g" path="res://decorations/Speechbubble.tscn" id="2_joovv"]
 [ext_resource type="Texture2D" uid="uid://c5usasxqp6b3k" path="res://Textures/dikke_ron_wit.png" id="3_67qvq"]
 [ext_resource type="Script" path="res://entities/hair.gd" id="3_jracq"]
 [ext_resource type="Script" path="res://entities/scripts/state_manager.gd" id="5_gy3v6"]
@@ -189,6 +190,9 @@ autoplay = "run"
 script = ExtResource("5_gy3v6")
 characterBody = NodePath("..")
 navigationAgent = NodePath("../NavigationAgent2D")
+
+[node name="Speechbubble" parent="." instance=ExtResource("2_joovv")]
+position = Vector2(7, -33)
 
 [connection signal="link_reached" from="NavigationAgent2D" to="StateManager" method="_on_navigation_agent_2d_link_reached"]
 [connection signal="target_reached" from="NavigationAgent2D" to="StateManager" method="_on_navigation_agent_2d_target_reached"]

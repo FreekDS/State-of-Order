@@ -5,7 +5,15 @@ extends Node2D
 @export var navigationAgent: NavigationAgent2D
 
 enum STATE {
-	WANDER_AIMLESS
+	WANDER_AIMLESS,
+	SHOOT_SOMEONE,
+	HIT_SOMEONE,
+	SMOKING,
+	WATCH_TV,
+	SWIM_IN_FONTAIN,
+	PROTEST,
+	RUN,
+	USE_TRAIN,
 }
 
 

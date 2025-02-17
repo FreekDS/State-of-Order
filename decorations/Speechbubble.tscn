@@ -1,0 +1,91 @@
+[gd_scene load_steps=6 format=3 uid="uid://sa773o5v8h1g"]
+
+[ext_resource type="Texture2D" uid="uid://41aeqrt1enhu" path="res://Textures/speechbubble.png" id="1_7hfco"]
+[ext_resource type="Script" path="res://decorations/speechbubble.gd" id="2_2p0fv"]
+
+[sub_resource type="Animation" id="Animation_bf2o5"]
+resource_name = "show"
+length = 1.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:region_rect")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.966667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Rect2(0, 0, 16, 0), Rect2(0, 0, 16, 19)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("RichTextLabel:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.9, 0.933333),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, false, true]
+}
+
+[sub_resource type="Animation" id="Animation_0nyiv"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Rect2(0, 0, 16, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("RichTextLabel:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_t4tnm"]
+_data = {
+"RESET": SubResource("Animation_0nyiv"),
+"show": SubResource("Animation_bf2o5")
+}
+
+[node name="Speechbubble" type="Sprite2D"]
+texture = ExtResource("1_7hfco")
+region_enabled = true
+region_rect = Rect2(0, 0, 16, 0)
+script = ExtResource("2_2p0fv")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+visible = false
+offset_left = -4.38147
+offset_top = -8.07056
+offset_right = 17.6185
+offset_bottom = 18.9294
+scale = Vector2(0.35, 0.35)
+bbcode_enabled = true
+text = "
+[shake]😠"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_t4tnm")
+}
+autoplay = "RESET"

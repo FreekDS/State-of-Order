@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://vfkensc2u1h1"]
+[gd_scene load_steps=13 format=3 uid="uid://vfkensc2u1h1"]
 
 [ext_resource type="Texture2D" uid="uid://dsjsjlqxhrgh3" path="res://Textures/cctv_edge.png" id="1_2c7po"]
 [ext_resource type="PackedScene" uid="uid://hvdvrpklbt7" path="res://UI/components/RichPopText.tscn" id="1_3qqxu"]
@@ -8,6 +8,132 @@
 [ext_resource type="Texture2D" uid="uid://gb1m4k26j12t" path="res://Textures/cctv_arrow.png" id="5_itdhl"]
 [ext_resource type="Script" path="res://UI/scripts/pan_arrows.gd" id="5_vjd77"]
 [ext_resource type="Script" path="res://UI/dramatische_tekst.gd" id="8_r16nk"]
+
+[sub_resource type="Animation" id="Animation_drxye"]
+resource_name = "RESET"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.1),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CenterContainer/HBoxContainer/1:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CenterContainer/HBoxContainer/2:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CenterContainer/HBoxContainer/3:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_ai1kl"]
+resource_name = "fade"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.1, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_jlal2"]
+resource_name = "appear"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CenterContainer/HBoxContainer/1:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CenterContainer/HBoxContainer/2:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.33333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CenterContainer/HBoxContainer/3:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 2.33333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.0333333),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5cvw7"]
+_data = {
+"RESET": SubResource("Animation_drxye"),
+"appear": SubResource("Animation_jlal2"),
+"fade": SubResource("Animation_ai1kl")
+}
 
 [node name="GameUI" type="Control" node_paths=PackedStringArray("arrowVisualizer")]
 layout_mode = 3
@@ -299,7 +425,9 @@ text = "- Bottom text"
 fit_content = true
 autowrap_mode = 0
 
-[node name="Timer" type="Timer" parent="DramatischeTekst"]
-one_shot = true
+[node name="AnimationPlayer" type="AnimationPlayer" parent="DramatischeTekst"]
+libraries = {
+"": SubResource("AnimationLibrary_5cvw7")
+}
 
-[connection signal="timeout" from="DramatischeTekst/Timer" to="DramatischeTekst" method="_on_timer_timeout"]
+[connection signal="animation_finished" from="DramatischeTekst/AnimationPlayer" to="DramatischeTekst" method="_on_animation_player_animation_finished"]

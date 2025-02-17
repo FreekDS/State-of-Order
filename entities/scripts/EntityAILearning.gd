@@ -26,7 +26,7 @@ func isMouseInDaHouse():
 
 
 func _physics_process(_delta: float) -> void:
-	if isMouseInDaHouse():
+	if isMouseInDaHouse() and not BeingDragged:
 		highlight.show()
 		helpIkBenGeselecteerd.emit(self)
 		selected = true
@@ -48,6 +48,7 @@ func startDrag() -> void:
 	
 	BeingDragged=true
 	$Hair.EnableDragmode()
+	$AnimationPlayer.play("RESET")
 	
 func endDrag() -> void:
 	set_collision_layer_value(2, false)	# no longer interact with police
@@ -56,6 +57,7 @@ func endDrag() -> void:
 	set_collision_mask_value(1, true)
 	BeingDragged=false
 	$Hair.DisableDragmode()
+	$AnimationPlayer.play("run")
 
 
 func die():

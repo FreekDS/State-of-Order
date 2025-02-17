@@ -205,5 +205,10 @@ libraries = {
 }
 autoplay = "run"
 
+[node name="Hair" type="Node2D" parent="." node_paths=PackedStringArray("sprite")]
+position = Vector2(0, -20)
+script = ExtResource("3_jracq")
+sprite = NodePath("../Sprite2D")
+
 [node name="StateManager" type="Node2D" parent="."]
 script = ExtResource("5_gy3v6")

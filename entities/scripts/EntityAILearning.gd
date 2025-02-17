@@ -13,6 +13,8 @@ signal helpIkBenGeselecteerd(who: DikkeRon)
 signal neverMindIkBenGedeselect(who: DikkeRon)
 
 
+var BeingDragged: bool=false
+
 func _ready():
 	animations.play("run", -1, 1.1)
 
@@ -44,12 +46,16 @@ func startDrag() -> void:
 	set_collision_mask_value(1, false)
 	
 	
+	BeingDragged=true
+	$Hair.EnableDragmode()
 	
 func endDrag() -> void:
 	set_collision_layer_value(2, false)	# no longer interact with police
 	set_collision_layer_value(1, true)	# interact with others again
 	
 	set_collision_mask_value(1, true)
+	BeingDragged=false
+	$Hair.DisableDragmode()
 
 
 func die():
@@ -57,4 +63,5 @@ func die():
 		func(_anim): queue_free(), CONNECT_ONE_SHOT
 	)
 	animations.play("die", -1, 1.5)
+	
 	

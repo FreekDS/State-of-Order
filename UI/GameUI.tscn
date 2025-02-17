@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://vfkensc2u1h1"]
+[gd_scene load_steps=9 format=3 uid="uid://vfkensc2u1h1"]
 
 [ext_resource type="Texture2D" uid="uid://dsjsjlqxhrgh3" path="res://Textures/cctv_edge.png" id="1_2c7po"]
 [ext_resource type="PackedScene" uid="uid://hvdvrpklbt7" path="res://UI/components/RichPopText.tscn" id="1_3qqxu"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://UI/scripts/Score.gd" id="3_305f0"]
 [ext_resource type="Texture2D" uid="uid://gb1m4k26j12t" path="res://Textures/cctv_arrow.png" id="5_itdhl"]
 [ext_resource type="Script" path="res://UI/scripts/pan_arrows.gd" id="5_vjd77"]
+[ext_resource type="Script" path="res://UI/dramatische_tekst.gd" id="8_r16nk"]
 
 [node name="GameUI" type="Control" node_paths=PackedStringArray("arrowVisualizer")]
 layout_mode = 3
@@ -258,3 +259,47 @@ rotation = 1.5708
 scale = Vector2(0.3, 0.3)
 pivot_offset = Vector2(20, 20)
 texture = ExtResource("5_itdhl")
+
+[node name="DramatischeTekst" type="MarginContainer" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -641.0
+offset_top = -1.0
+offset_bottom = 365.0
+grow_horizontal = 0
+script = ExtResource("8_r16nk")
+
+[node name="CenterContainer" type="CenterContainer" parent="DramatischeTekst"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="DramatischeTekst/CenterContainer"]
+layout_mode = 2
+
+[node name="1" type="RichTextLabel" parent="DramatischeTekst/CenterContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 32
+text = "DAG"
+fit_content = true
+autowrap_mode = 0
+
+[node name="2" type="RichTextLabel" parent="DramatischeTekst/CenterContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 32
+text = "1"
+fit_content = true
+autowrap_mode = 0
+
+[node name="3" type="RichTextLabel" parent="DramatischeTekst/CenterContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 32
+text = "- Bottom text"
+fit_content = true
+autowrap_mode = 0
+
+[node name="Timer" type="Timer" parent="DramatischeTekst"]
+one_shot = true
+
+[connection signal="timeout" from="DramatischeTekst/Timer" to="DramatischeTekst" method="_on_timer_timeout"]

@@ -11,6 +11,7 @@ extends CharacterBody2D
 
 var selected := false
 var pickable := true
+var pickedUp := false
 
 signal helpIkBenGeselecteerd(who: DikkeRon)
 signal neverMindIkBenGedeselect(who: DikkeRon)
@@ -35,10 +36,9 @@ func _physics_process(_delta: float) -> void:
 		highlight.show()
 		helpIkBenGeselecteerd.emit(self)
 		selected = true
-	else:
+	elif not pickedUp:
 		highlight.hide()
 		neverMindIkBenGedeselect.emit(self)
-		selected = false
 		
 
 	move_and_slide()
@@ -50,6 +50,7 @@ func startDrag() -> void:
 	set_collision_mask_value(1, false)
 
 	hair.EnableDragmode()
+	pickedUp=true
 	$AnimationPlayer.play("RESET")
 	
 func endDrag() -> void:
@@ -58,7 +59,7 @@ func endDrag() -> void:
 	
 	set_collision_mask_value(1, true)
 	hair.DisableDragmode()
-	
+	pickedUp=false
 	if not dead:
 		animations.play("run")
 

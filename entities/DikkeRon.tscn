@@ -13,7 +13,7 @@ outline_color = Color(0, 0, 0, 1)
 shadow_size = 0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jm8sb"]
-size = Vector2(7, 2)
+size = Vector2(7, 22)
 
 [sub_resource type="Animation" id="Animation_fiwkm"]
 length = 0.001
@@ -157,7 +157,7 @@ label_settings = SubResource("LabelSettings_x6ajt")
 horizontal_alignment = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0.5, -1)
+position = Vector2(0.5, -11)
 shape = SubResource("RectangleShape2D_jm8sb")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

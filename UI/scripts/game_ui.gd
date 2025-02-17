@@ -4,7 +4,7 @@ extends Control
 @onready var score: RichPopText = %Score
 @onready var dayCounter: RichTextLabel = %DayCounter
 @onready var timeLabel: RichPopText = %Time
-
+@onready var drama= $DramatischeTekst
 
 @export var arrowVisualizer: PanArrowVisualizer = null
 
@@ -21,6 +21,7 @@ func _ready() -> void:
 			timeLabel.text = str(newTime).lpad(2, '0') + ":00"
 			timeLabel.doPop()
 	)
+	drama.dramatiek()
 
 
 #func _input(event: InputEvent) -> void:

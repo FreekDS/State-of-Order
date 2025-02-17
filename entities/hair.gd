@@ -29,10 +29,8 @@ func _physics_process(delta: float) -> void:
 	queue_redraw()
 	
 func updatePointsNormal(delta) -> void:
-	
 	var dif = prevpos-dikkeRon.global_position
 	prevpos=dikkeRon.global_position
-	print(dif)
 	
 	for i in points:
 		i[2]+=dif

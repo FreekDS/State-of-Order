@@ -19,7 +19,7 @@ var DragMode : bool = false
 var spriteLocBeforeMove : Vector2= Vector2(0,0)
 
 
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	if( not DragMode):
 		updatePointsNormal(delta)
 	else:
@@ -29,11 +29,13 @@ func _process(delta: float) -> void:
 	queue_redraw()
 	
 func updatePointsNormal(delta) -> void:
+	
 	var dif = prevpos-dikkeRon.global_position
 	prevpos=dikkeRon.global_position
+	print(dif)
 	
 	for i in points:
-		i[2]+=  Vector2.ONE * delta
+		i[2]+=dif
 		
 	for i in range(len(points)-1,-1,-1):
 		if i==0:

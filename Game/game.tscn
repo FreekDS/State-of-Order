@@ -46,6 +46,7 @@ dayDuration = 60
 one_shot = true
 
 [node name="NavigationRegion" type="NavigationRegion2D" parent="."]
+y_sort_enabled = true
 navigation_polygon = SubResource("NavigationPolygon_8kfe2")
 
 [node name="Grond" type="Sprite2D" parent="NavigationRegion"]
@@ -102,7 +103,7 @@ script = ExtResource("1_iuers")
 navigationRegion = NodePath("..")
 
 [node name="DikkeRon" parent="NavigationRegion/Characters" instance=ExtResource("3_gqgcv")]
-position = Vector2(88, -53)
+position = Vector2(110, -59)
 
 [node name="Politiezone Klein Brabant" type="Node2D" parent="NavigationRegion"]
 script = ExtResource("7_tagq4")

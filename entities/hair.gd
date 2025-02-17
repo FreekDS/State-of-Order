@@ -3,14 +3,15 @@ extends Node2D
 @export var dikkeRon:DikkeRon
 @export var sprite:Sprite2D
 @export var highlight: Sprite2D
+@export var bouncyness:float
 
 # wanted offset, max distance, actual pos, radius
 var points = [
-	[Vector2(0,-1),0,Vector2(0,0),5],
-	[Vector2(0,0),2,Vector2(0,0),5],
+	[Vector2(0,-1),10,Vector2(0,0),5],
+	[Vector2(0,0),10,Vector2(0,0),5],
 	[Vector2(0,2),2,Vector2(0,0),4],
 	[Vector2(0,4),2,Vector2(0,0),2],
-	[Vector2(0,3),2,Vector2(0,0),3],
+	#[Vector2(0,3),2,Vector2(0,0),3],
 	]
 var prevpos:Vector2=Vector2(0,0)
 
@@ -39,7 +40,7 @@ func updatePointsNormal(delta) -> void:
 		if i==0:
 			points[i][2]=Vector2(0,0)
 			continue
-		points[i][2]=(points[i][0]+points[i][2]+points[i-1][2])/2
+		points[i][2]=(points[i][0]+points[i][2]+points[i-1][2])/bouncyness
 		
 	for i in range(len(points)):
 		if i == 0:

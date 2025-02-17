@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://pt2mjgd7kydv"]
+[gd_scene load_steps=7 format=3 uid="uid://pt2mjgd7kydv"]
 
 [ext_resource type="Texture2D" uid="uid://y51npkxtkllt" path="res://Textures/televies.png" id="1_7laia"]
+[ext_resource type="Script" path="res://decorations/scripts/televies.gd" id="2_0fm4b"]
 [ext_resource type="PackedScene" uid="uid://dljhjm15tr0we" path="res://Misc/DeRik.tscn" id="2_axmd7"]
 
 [sub_resource type="Animation" id="Animation_modm7"]
@@ -45,7 +46,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(0.48, 0.48)]
+"values": [Vector2(0, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_e5kdf"]
@@ -55,15 +56,16 @@ _data = {
 }
 
 [node name="Televies" type="Sprite2D"]
-position = Vector2(11, 7)
 texture = ExtResource("1_7laia")
+script = ExtResource("2_0fm4b")
 
 [node name="DeRik" parent="." instance=ExtResource("2_axmd7")]
 position = Vector2(3.57628e-07, 2.5)
-scale = Vector2(0.48, 0.48)
-frame = 0
+scale = Vector2(1e-05, 1e-05)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_e5kdf")
 }
+
+[editable path="DeRik"]

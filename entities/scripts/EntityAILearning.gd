@@ -1,7 +1,6 @@
 class_name DikkeRon
 extends CharacterBody2D
 
-
 @onready var animations: AnimationPlayer = $AnimationPlayer
 @onready var collision: CollisionShape2D = $CollisionShape2D
 @onready var highlight: Sprite2D = $Sprite2D/Highlight
@@ -24,7 +23,7 @@ func isMouseInDaHouse():
 	return sprite.get_rect().has_point(mousePos) and pickable
 
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if isMouseInDaHouse():
 		highlight.show()
 		helpIkBenGeselecteerd.emit(self)

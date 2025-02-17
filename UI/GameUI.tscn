@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://vfkensc2u1h1"]
+[gd_scene load_steps=8 format=3 uid="uid://vfkensc2u1h1"]
 
 [ext_resource type="Texture2D" uid="uid://dsjsjlqxhrgh3" path="res://Textures/cctv_edge.png" id="1_2c7po"]
 [ext_resource type="PackedScene" uid="uid://hvdvrpklbt7" path="res://UI/components/RichPopText.tscn" id="1_3qqxu"]
 [ext_resource type="Script" path="res://UI/scripts/game_ui.gd" id="1_7r5vt"]
+[ext_resource type="Script" path="res://UI/components/scripts/RichPopText.gd" id="2_m0ywh"]
 [ext_resource type="Script" path="res://UI/scripts/Score.gd" id="3_305f0"]
 [ext_resource type="Texture2D" uid="uid://gb1m4k26j12t" path="res://Textures/cctv_arrow.png" id="5_itdhl"]
 [ext_resource type="Script" path="res://UI/scripts/pan_arrows.gd" id="5_vjd77"]
@@ -57,6 +58,7 @@ layout_mode = 2
 text = "00:00"
 fit_content = true
 autowrap_mode = 0
+script = ExtResource("2_m0ywh")
 
 [node name="ChannelContainer" type="MarginContainer" parent="."]
 layout_mode = 1

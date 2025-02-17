@@ -1,7 +1,8 @@
-[gd_scene load_steps=16 format=4 uid="uid://dkydrawijeyqe"]
+[gd_scene load_steps=17 format=4 uid="uid://dkydrawijeyqe"]
 
 [ext_resource type="PackedScene" uid="uid://vfkensc2u1h1" path="res://UI/GameUI.tscn" id="1_2ob6e"]
 [ext_resource type="Texture2D" uid="uid://b2e1b5mebsvuf" path="res://Textures/tile_placeholder.png" id="1_2xgih"]
+[ext_resource type="Script" path="res://Game/scripts/time_manager.gd" id="1_5ff1s"]
 [ext_resource type="Script" path="res://Game/CameraController.gd" id="1_hw18y"]
 [ext_resource type="Script" path="res://Game/scripts/CharacterPicker.gd" id="1_iuers"]
 [ext_resource type="Texture2D" uid="uid://xjnhaqsrm5xk" path="res://Textures/grond.png" id="1_n0ep5"]
@@ -32,7 +33,14 @@ sources/0 = SubResource("TileSetAtlasSource_qix1t")
 [node name="Game" type="Node2D"]
 y_sort_enabled = true
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="TimeManager" type="Node" parent="."]
+script = ExtResource("1_5ff1s")
+dayDuration = 60
+
+[node name="Timer" type="Timer" parent="TimeManager"]
+one_shot = true
+
+[node name="Grond" type="Sprite2D" parent="."]
 z_index = -1
 texture_repeat = 2
 texture = ExtResource("1_n0ep5")
@@ -166,6 +174,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 mouse_filter = 1
 
+[connection signal="timeout" from="TimeManager/Timer" to="TimeManager" method="_on_timer_timeout"]
 [connection signal="guyDragged" from="Characters" to="Politiezone Klein Brabant" method="_on_characters_guy_dragged"]
 [connection signal="edgeNoLongerHit" from="Camera" to="UILayer/GameUI" method="_on_camera_edge_no_longer_hit"]
 [connection signal="hitEdge" from="Camera" to="UILayer/GameUI" method="_on_camera_hit_edge"]

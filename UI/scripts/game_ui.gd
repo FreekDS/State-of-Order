@@ -3,7 +3,7 @@ extends Control
 
 @onready var score: RichPopText = %Score
 @onready var dayCounter: RichTextLabel = %DayCounter
-@onready var timeLabel: RichTextLabel = %Time
+@onready var timeLabel: RichPopText = %Time
 
 
 @export var arrowVisualizer: PanArrowVisualizer = null
@@ -15,13 +15,19 @@ func _ready() -> void:
 	EventBus.guyCaptured.connect(
 		func(_guy): score.updateScore(1)
 	)
+	
+	EventBus.timeUpdated.connect(
+		func(newTime: int):
+			timeLabel.text = str(newTime).lpad(2, '0') + ":00"
+			timeLabel.doPop()
+	)
 
-# TODO: change to score update
-func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("pan_camera_up"):
-		score.updateScore(1)
-	if event.is_action_pressed("pan_camera_down"):
-		score.updateScore(-1)
+
+#func _input(event: InputEvent) -> void:
+	#if event.is_action_pressed("pan_camera_up"):
+		#score.updateScore(1)
+	#if event.is_action_pressed("pan_camera_down"):
+		#score.updateScore(-1)
 
 
 func _on_camera_hit_edge(where: Vector2i) -> void:

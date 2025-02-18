@@ -165,6 +165,9 @@ navigationRegion = NodePath("..")
 [node name="DikkeRon" parent="NavigationRegion/Characters" instance=ExtResource("3_gqgcv")]
 position = Vector2(110, -59)
 
+[node name="DikkeRon2" parent="NavigationRegion/Characters" instance=ExtResource("3_gqgcv")]
+position = Vector2(63, -57)
+
 [node name="Politiezone Klein Brabant" type="Node2D" parent="NavigationRegion"]
 script = ExtResource("7_tagq4")
 

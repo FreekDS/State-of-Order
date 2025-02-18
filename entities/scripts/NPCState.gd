@@ -1,7 +1,7 @@
 class_name NPCState
 extends Node
 
-signal switchState(oldState: NPCState, requestedState: NPCStateManager.STATE)
+signal switchState(oldState: NPCState)
 
 @export var character : CharacterBody2D
 @export var animations : AnimationPlayer
@@ -30,3 +30,6 @@ func tick():
 
 func exit():
 	pass
+	
+func checkViable()->bool:
+	return true

@@ -25,7 +25,8 @@ var active = false
 func _ready() -> void:
 	possibleNextStates = [
 		NPCStateManager.STATE.STANDSTILL, 
-		NPCStateManager.STATE.WANDER_AIMLESS
+		NPCStateManager.STATE.WANDER_AIMLESS,
+		NPCStateManager.STATE.TALK_TO_SOMEONE
 	]
 
 
@@ -42,7 +43,6 @@ func tick():
 	character.velocity = Vector2.ZERO
 
 
-
 func exit():
 	active = false
 	idleEffectTimer.stop()
@@ -52,11 +52,15 @@ func exit():
 
 
 func _on_idle_time_timeout() -> void:
-	var nextState = possibleNextStates.pick_random()
-	if nextState != NPCStateManager.STATE.STANDSTILL:
-		switchState.emit(self, nextState)
-		return
-	idle_time.start(randf_range(minIdleTime, maxIdleTime))
+	switchState.emit(self)
+	#var nextState = possibleNextStates.pick_random()
+	#while not nextState.checkViable():
+		#nextState = possibleNextStates.pick_random()
+		
+	#if nextState != NPCStateManager.STATE.STANDSTILL:
+		#switchState.emit(self, nextState)
+		#return
+	#idle_time.start(randf_range(minIdleTime, maxIdleTime))
 	
 
 

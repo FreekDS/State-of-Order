@@ -64,6 +64,8 @@ func _draw() -> void:
 		draw_circle(point[2],point[3],Color.RED)
 	
 func EnableDragmode() -> void:
+	if DragMode:
+		return
 	spriteLocBeforeMove=sprite.offset
 	#reverse of the points + extra last one indicating the user
 	points.reverse()
@@ -71,6 +73,8 @@ func EnableDragmode() -> void:
 	DragMode = true
 	
 func DisableDragmode() -> void:
+	if not DragMode:
+		return
 	applyOffset(spriteLocBeforeMove)
 	
 	DragMode = false

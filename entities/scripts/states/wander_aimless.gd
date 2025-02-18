@@ -7,6 +7,13 @@ var targetPoint = Vector2.ZERO
 
 var speed = 35
 
+func _ready():
+	possibleNextStates = [
+		NPCStateManager.STATE.STANDSTILL, 
+		NPCStateManager.STATE.WANDER_AIMLESS,
+		NPCStateManager.STATE.TALK_TO_SOMEONE
+	]
+
 func enter():
 	debug.text = "WALK"
 	navAgent.navigation_finished.connect(_on_navigation_agent_2d_target_reached)
@@ -31,11 +38,14 @@ func exit():
 
 
 func _on_navigation_agent_2d_target_reached() -> void:
-	var options = [NPCStateManager.STATE.WANDER_AIMLESS, NPCStateManager.STATE.STANDSTILL]
-	var next = options.pick_random()
-	
-	if next != NPCStateManager.STATE.WANDER_AIMLESS:
-		switchState.emit(self, next)
+	switchState.emit(self)
+	#var options = [NPCStateManager.STATE.WANDER_AIMLESS, NPCStateManager.STATE.STANDSTILL,NPCStateManager.STATE.TALK_TO_SOMEONE]
+	#var nextState = options.pick_random()
+	#while not nextState.checkViable():
+		#nextState = options.pick_random()
+	#
+	#if nextState != NPCStateManager.STATE.WANDER_AIMLESS:
+		#switchState.emit(self, nextState)
 
 
 func _on_max_single_dir_time_timeout() -> void:

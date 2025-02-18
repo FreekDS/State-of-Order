@@ -98,4 +98,3 @@ func die():
 	)
 	animations.play("die", -1, 1.5)
 	
-	

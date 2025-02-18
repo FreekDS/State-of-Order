@@ -176,10 +176,15 @@ script = ExtResource("3_6e7u3")
 wait_time = 3.0
 autostart = true
 
-[node name="IDLE" type="Node" parent="StateManager"]
+[node name="IDLE" type="Node" parent="StateManager" node_paths=PackedStringArray("speechBubble")]
 script = ExtResource("4_jylb0")
+speechBubble = NodePath("../../Speechbubble")
 
 [node name="IdleTime" type="Timer" parent="StateManager/IDLE"]
+one_shot = true
+
+[node name="IdleEffect" type="Timer" parent="StateManager/IDLE"]
+wait_time = 2.0
 one_shot = true
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
@@ -234,4 +239,5 @@ script = ExtResource("7_ay147")
 
 [connection signal="timeout" from="StateManager/WANDER_AIMLESS/MaxSingleDirTime" to="StateManager/WANDER_AIMLESS" method="_on_max_single_dir_time_timeout"]
 [connection signal="timeout" from="StateManager/IDLE/IdleTime" to="StateManager/IDLE" method="_on_idle_time_timeout"]
+[connection signal="timeout" from="StateManager/IDLE/IdleEffect" to="StateManager/IDLE" method="_on_idle_effect_timeout"]
 [connection signal="target_reached" from="NavigationAgent2D" to="StateManager" method="_on_navigation_agent_2d_target_reached"]

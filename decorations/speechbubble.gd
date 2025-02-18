@@ -6,14 +6,16 @@ const options : Dictionary = {
 	"scared": "[shake]😨"
 }
 
-@export_enum(
-	"[shake]😠",
-	"...",
-	"♥",
-	"🙂",
-	"💲",
-	"[shake]😨"
-) var option : String = "[shake]😠"
+#@export_enum(
+	#"[shake]😠",
+	#"...",
+	#"♥",
+	#"🙂",
+	#"💲",
+	#"💤",
+	#"🐱‍🐉",
+	#"[shake]😨"
+@export var option : String = "[shake]😠"
 
 @onready var label: RichTextLabel = $RichTextLabel
 @onready var animations: AnimationPlayer = $AnimationPlayer
@@ -32,6 +34,7 @@ func _ready() -> void:
 	label.text = "\n" + option
 
 func open():
+	label.text = "\n" + option
 	if not isOpen:
 		animations.play("show", -1, 4)
 	isOpen = true

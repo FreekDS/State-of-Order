@@ -12,8 +12,11 @@ var _hitEdges : Array[Vector2i] = []
 var _highlighted : Array[Vector2i] = []
 
 func _ready() -> void:
-	EventBus.guyCaptured.connect(
-		func(_guy): score.updateScore(1)
+	EventBus.successfulCapture.connect(
+		func(_guy, score): score.updateScore(score)
+	)
+	EventBus.wrongCapture.connect(
+		func(_guy, score): score.updateScore(score)
 	)
 	
 	EventBus.timeUpdated.connect(

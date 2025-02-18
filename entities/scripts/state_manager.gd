@@ -42,6 +42,8 @@ var _targetState : STATE = STATE.WANDER_AIMLESS
 var navigationMap : RID
 
 var _state : NPCState = null
+var _stateType := STATE.WANDER_AIMLESS
+
 var speed = 50
 var targetPoint := Vector2.ZERO
 
@@ -71,6 +73,7 @@ func _on_state_switch_requested(oldState: NPCState, newState: STATE):
 	oldState.exit()
 	_state = stateMap[newState]
 	_state.enter()
+	_stateType = newState
 
 
 func _physics_process(_delta: float) -> void:
@@ -81,7 +84,8 @@ func recalculateRoute():
 	navigationAgent.target_position = navigationAgent.target_position
 	
 
-
+func getStates() -> Array[STATE]:
+	return [_stateType]
 
 
 

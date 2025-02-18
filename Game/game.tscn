@@ -1,7 +1,8 @@
-[gd_scene load_steps=15 format=3 uid="uid://dkydrawijeyqe"]
+[gd_scene load_steps=16 format=3 uid="uid://dkydrawijeyqe"]
 
 [ext_resource type="PackedScene" uid="uid://vfkensc2u1h1" path="res://UI/GameUI.tscn" id="1_2ob6e"]
 [ext_resource type="Script" path="res://Game/scripts/time_manager.gd" id="1_5ff1s"]
+[ext_resource type="Script" path="res://Game/scripts/roel_manager.gd" id="1_d20kw"]
 [ext_resource type="Script" path="res://Game/CameraController.gd" id="1_hw18y"]
 [ext_resource type="Script" path="res://Game/scripts/CharacterPicker.gd" id="1_iuers"]
 [ext_resource type="Texture2D" uid="uid://xjnhaqsrm5xk" path="res://Textures/grond.png" id="1_n0ep5"]
@@ -22,6 +23,9 @@ shader_parameter/vignette_rgb = Color(0, 0, 0, 1)
 
 [node name="Game" type="Node2D"]
 y_sort_enabled = true
+
+[node name="RoelManager" type="Node" parent="."]
+script = ExtResource("1_d20kw")
 
 [node name="TimeManager" type="Node" parent="."]
 script = ExtResource("1_5ff1s")

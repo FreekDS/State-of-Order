@@ -10,10 +10,12 @@ var _mouseDown : bool = false
 signal guyDragged(who: DikkeRon)
 
 func _ready() -> void:
-	
+	Globals.allNpcs.clear()
 	for child : DikkeRon in get_children():
 		if child is not DikkeRon:
 			continue
+			
+		Globals.allNpcs.append(child)
 		
 		child.setup(navigationRegion.get_navigation_map())
 		

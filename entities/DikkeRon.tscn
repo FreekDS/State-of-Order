@@ -1,12 +1,17 @@
-[gd_scene load_steps=14 format=3 uid="uid://dylnvnx8f0goe"]
+[gd_scene load_steps=18 format=3 uid="uid://dylnvnx8f0goe"]
 
 [ext_resource type="Texture2D" uid="uid://jlkwma0oc7sl" path="res://Textures/dikke_ron.png" id="1_jhau4"]
 [ext_resource type="Script" path="res://entities/scripts/EntityAILearning.gd" id="1_nkst8"]
 [ext_resource type="PackedScene" uid="uid://sa773o5v8h1g" path="res://decorations/Speechbubble.tscn" id="2_joovv"]
+[ext_resource type="Script" path="res://entities/scripts/states/wander_aimless.gd" id="3_6e7u3"]
 [ext_resource type="Texture2D" uid="uid://c5usasxqp6b3k" path="res://Textures/dikke_ron_wit.png" id="3_67qvq"]
 [ext_resource type="Script" path="res://entities/hair.gd" id="3_jracq"]
+[ext_resource type="Script" path="res://entities/scripts/states/idle.gd" id="4_jylb0"]
 [ext_resource type="Script" path="res://entities/scripts/state_manager.gd" id="5_gy3v6"]
 [ext_resource type="Script" path="res://entities/trait_manager.gd" id="7_ay147"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hrdx7"]
+radius = 94.6414
 
 [sub_resource type="LabelSettings" id="LabelSettings_x6ajt"]
 font_color = Color(1, 1, 1, 0.431373)
@@ -124,24 +129,68 @@ tracks/1/keys = {
 "values": [Vector2(0, 0), Vector2(0, -3), Vector2(0, 0), Vector2(0, -3), Vector2(0, 0)]
 }
 
+[sub_resource type="Animation" id="Animation_fue2l"]
+resource_name = "idle"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(-0.0333334, 0.466667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1, 0.95)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_vpypy"]
 _data = {
 "RESET": SubResource("Animation_fiwkm"),
 "die": SubResource("Animation_doqkt"),
+"idle": SubResource("Animation_fue2l"),
 "run": SubResource("Animation_ce6m8")
 }
 
 [node name="DikkeRon" type="CharacterBody2D"]
 script = ExtResource("1_nkst8")
 
+[node name="DetectOthers" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectOthers"]
+position = Vector2(0, -12)
+shape = SubResource("CircleShape2D_hrdx7")
+
+[node name="StateManager" type="Node2D" parent="." node_paths=PackedStringArray("characterBody", "navigationAgent", "animations", "debug")]
+script = ExtResource("5_gy3v6")
+characterBody = NodePath("..")
+navigationAgent = NodePath("../NavigationAgent2D")
+animations = NodePath("../AnimationPlayer")
+debug = NodePath("../DEBUG")
+
+[node name="WANDER_AIMLESS" type="Node" parent="StateManager"]
+script = ExtResource("3_6e7u3")
+
+[node name="MaxSingleDirTime" type="Timer" parent="StateManager/WANDER_AIMLESS"]
+wait_time = 3.0
+autostart = true
+
+[node name="IDLE" type="Node" parent="StateManager"]
+script = ExtResource("4_jylb0")
+
+[node name="IdleTime" type="Timer" parent="StateManager/IDLE"]
+one_shot = true
+
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+debug_enabled = true
 
 [node name="DEBUG" type="Label" parent="."]
 offset_left = -20.0
 offset_top = -34.0
 offset_right = 20.0
 offset_bottom = -23.0
-text = "IDLE"
+text = "NOT SET"
 label_settings = SubResource("LabelSettings_x6ajt")
 horizontal_alignment = 1
 
@@ -180,11 +229,9 @@ libraries = {
 }
 autoplay = "run"
 
-[node name="StateManager" type="Node2D" parent="." node_paths=PackedStringArray("characterBody", "navigationAgent", "debug")]
-script = ExtResource("5_gy3v6")
-characterBody = NodePath("..")
-navigationAgent = NodePath("../NavigationAgent2D")
-debug = NodePath("../DEBUG")
-
 [node name="TraitManager" type="Node2D" parent="."]
 script = ExtResource("7_ay147")
+
+[connection signal="timeout" from="StateManager/WANDER_AIMLESS/MaxSingleDirTime" to="StateManager/WANDER_AIMLESS" method="_on_max_single_dir_time_timeout"]
+[connection signal="timeout" from="StateManager/IDLE/IdleTime" to="StateManager/IDLE" method="_on_idle_time_timeout"]
+[connection signal="target_reached" from="NavigationAgent2D" to="StateManager" method="_on_navigation_agent_2d_target_reached"]

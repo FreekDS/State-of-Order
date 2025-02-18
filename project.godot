@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 TransitionAnimations="*res://UI/components/TransitionAnimations.tscn"
 EventBus="*res://Game/scripts/EventBus.gd"
+Globals="*res://Game/scripts/Globals.gd"
 
 [display]
 

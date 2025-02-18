@@ -3,11 +3,21 @@ extends Node2D
 
 @export var characterBody : CharacterBody2D
 @export var navigationAgent: NavigationAgent2D
+@export var animations : AnimationPlayer
+
+@onready var detectOthers : Area2D = $"../DetectOthers"
 
 @export var debug: Label
 
+
 enum STATE {
+	
+	
 	WANDER_AIMLESS,
+	TALK_TO_SOMEONE,
+	STANDSTILL,
+	GO_AWAY,
+	
 	SHOOT_SOMEONE,
 	HIT_SOMEONE,
 	SMOKING,
@@ -18,41 +28,62 @@ enum STATE {
 	USE_TRAIN,
 }
 
+@onready var stateMap = {
+	STATE.WANDER_AIMLESS: $WANDER_AIMLESS,
+	STATE.STANDSTILL: $IDLE,
+}
+
+
+var _targetState : STATE = STATE.WANDER_AIMLESS
+
 
 var navigationMap : RID
 
-var _state : STATE = STATE.WANDER_AIMLESS
-
-
+var _state : NPCState = null
 var speed = 50
-
 var targetPoint := Vector2.ZERO
 
 
 func _ready():
+
+	for child in get_children():
+		if child is NPCState:
+			child.setup(
+				characterBody,
+				animations,
+				navigationAgent,
+				debug
+			)
+			child.switchState.connect(_on_state_switch_requested)
+	
+	# Make sure nav map is available with the following hack
 	set_physics_process(false)
 	set_physics_process.call_deferred(true)
+	
+	_state = stateMap[STATE.WANDER_AIMLESS]
+	_state.enter()
+
+
+
+func _on_state_switch_requested(oldState: NPCState, newState: STATE):
+	oldState.exit()
+	_state = stateMap[newState]
+	_state.enter()
+
 
 func _physics_process(_delta: float) -> void:
-	
-	match _state:
-		STATE.WANDER_AIMLESS:
-			debug.text = "WALK"
-			if navigationAgent.is_navigation_finished() or targetPoint.is_equal_approx(Vector2.ZERO):
-				navigationAgent.target_position = NavigationServer2D.map_get_random_point(navigationMap, 1, true)
-				targetPoint = navigationAgent.get_next_path_position()
-			
-			targetPoint = navigationAgent.get_next_path_position()
-			
-			var direction = (targetPoint - global_position).normalized() * speed
-			
-			characterBody.velocity = direction
-			
+	if _state != null:
+		_state.tick()
 
 func recalculateRoute():
 	navigationAgent.target_position = navigationAgent.target_position
 	
-	
+
+
+
+
+
+
 # Mogelijke states:
 #	NORMAL, gewoon wat rondwandelen op het plein. Mss kunnen we versch behaviors proberen makne?
 #				- bv: gaat nr markt, wandelt door het park, wandelt doelloos rond, zo'n dingen
@@ -71,9 +102,3 @@ func recalculateRoute():
 #		- Hond zonder leiband
 #	
 #	Na een actie lopen de guys mss gewoon weg? Guys die actie verricht hebben moogt ge ook nog pakken vr punten
-#	
-
-func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("ui_accept"):
-		navigationAgent.target_position = NavigationServer2D.map_get_random_point(navigationMap, 1, true)
-		targetPoint = navigationAgent.get_next_path_position()

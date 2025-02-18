@@ -8,6 +8,7 @@ extends CharacterBody2D
 
 @onready var hair: Node2D = $Sprite2D/Hair
 @onready var stateManager: NPCStateManager = $StateManager
+@onready var traitManager: NPCTraitManager = $TraitManager
 @onready var speechbubble: SpeechBubble = $Speechbubble
 
 var selected := false
@@ -97,4 +98,12 @@ func die():
 		func(_anim): queue_free(), CONNECT_ONE_SHOT
 	)
 	animations.play("die", -1, 1.5)
-	
+
+
+
+func obtainTraits() -> Array[NPCTraitManager.TRAIT]:
+	return traitManager.getTraits()
+
+
+func obtainCurrentStates() -> Array[NPCStateManager.STATE]:
+	return stateManager.getStates()

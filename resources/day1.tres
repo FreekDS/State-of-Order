@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="DayResource" load_steps=2 format=3 uid="uid://815ki2igdjnh"]
+
+[ext_resource type="Script" path="res://resources/DayRuleResource.gd" id="1_4ate5"]
+
+[resource]
+script = ExtResource("1_4ate5")
+dayNumber = 1
+disallowedActions = Array[int]([0])
+disallowedTraits = Array[int]([0])
+score = 1

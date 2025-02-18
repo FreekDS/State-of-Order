@@ -1,0 +1,97 @@
+[gd_scene load_steps=7 format=3 uid="uid://bq1e5kfxn4lle"]
+
+[ext_resource type="Texture2D" uid="uid://b4ign1b641blw" path="res://Textures/hek.png" id="1_r8yrr"]
+[ext_resource type="Texture2D" uid="uid://b8aleu22bhuaq" path="res://Textures/lamp.png" id="2_w4b0i"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_m74mk"]
+size = Vector2(24, 2.5)
+
+[sub_resource type="Animation" id="Animation_ny2i6"]
+resource_name = "hekkerman"
+length = 3.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PointLight2D2:enabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.53333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PointLight2D:enabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+
+[sub_resource type="Animation" id="Animation_kua0x"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PointLight2D2:enabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PointLight2D:enabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6h1h1"]
+_data = {
+"RESET": SubResource("Animation_kua0x"),
+"hekkerman": SubResource("Animation_ny2i6")
+}
+
+[node name="Hekker" type="StaticBody2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_r8yrr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 10.25)
+shape = SubResource("RectangleShape2D_m74mk")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(-8, -9)
+enabled = false
+color = Color(0.520323, 0, 0.00241876, 1)
+texture = ExtResource("2_w4b0i")
+
+[node name="PointLight2D2" type="PointLight2D" parent="."]
+position = Vector2(8, -9)
+enabled = false
+color = Color(0.520323, 0, 0.00241876, 1)
+texture = ExtResource("2_w4b0i")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_6h1h1")
+}
+autoplay = "hekkerman"

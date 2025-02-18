@@ -9,3 +9,9 @@ signal timeUpdated(hour: int)
 
 @warning_ignore("unused_signal")
 signal timesUp
+
+@warning_ignore("unused_signal")
+signal successfulCapture(who: DikkeRon, score: int)
+
+@warning_ignore("unused_signal")
+signal wrongCapture(who: DikkeRon, score: int)

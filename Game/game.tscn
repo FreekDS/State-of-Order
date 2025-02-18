@@ -1,15 +1,18 @@
-[gd_scene load_steps=15 format=3 uid="uid://dkydrawijeyqe"]
+[gd_scene load_steps=18 format=3 uid="uid://dkydrawijeyqe"]
 
 [ext_resource type="PackedScene" uid="uid://vfkensc2u1h1" path="res://UI/GameUI.tscn" id="1_2ob6e"]
 [ext_resource type="Script" path="res://Game/scripts/time_manager.gd" id="1_5ff1s"]
+[ext_resource type="Script" path="res://Game/scripts/roel_manager.gd" id="1_d20kw"]
 [ext_resource type="Script" path="res://Game/CameraController.gd" id="1_hw18y"]
 [ext_resource type="Script" path="res://Game/scripts/CharacterPicker.gd" id="1_iuers"]
 [ext_resource type="Texture2D" uid="uid://xjnhaqsrm5xk" path="res://Textures/grond.png" id="1_n0ep5"]
+[ext_resource type="Resource" uid="uid://815ki2igdjnh" path="res://resources/day1.tres" id="2_1wdd8"]
 [ext_resource type="NavigationPolygon" uid="uid://nxn7qiavic2y" path="res://Game/navigation/navigationPolygon.tres" id="2_va8h4"]
 [ext_resource type="PackedScene" uid="uid://dylnvnx8f0goe" path="res://entities/DikkeRon.tscn" id="3_gqgcv"]
 [ext_resource type="Shader" path="res://Game/shaders/vignette.gdshader" id="5_r6mn3"]
 [ext_resource type="Script" path="res://Game/scripts/politiezone_klein_brabant.gd" id="7_tagq4"]
 [ext_resource type="PackedScene" uid="uid://ilr4hbnewu7c" path="res://entities/dePolies/Politie.tscn" id="8_w3de5"]
+[ext_resource type="PackedScene" uid="uid://bq1e5kfxn4lle" path="res://decorations/hekker.tscn" id="9_s70as"]
 [ext_resource type="PackedScene" uid="uid://c0nf64sqguqsh" path="res://decorations/Tree1.tscn" id="10_fhypo"]
 [ext_resource type="Texture2D" uid="uid://dcv03si8yomb3" path="res://Textures/buldings_1.png" id="12_rcx3c"]
 [ext_resource type="Texture2D" uid="uid://balnyvlsal5gi" path="res://Textures/buldings_2.png" id="13_tv7ae"]
@@ -22,6 +25,10 @@ shader_parameter/vignette_rgb = Color(0, 0, 0, 1)
 
 [node name="Game" type="Node2D"]
 y_sort_enabled = true
+
+[node name="RoelManager" type="Node" parent="."]
+script = ExtResource("1_d20kw")
+dayRules = ExtResource("2_1wdd8")
 
 [node name="TimeManager" type="Node" parent="."]
 script = ExtResource("1_5ff1s")
@@ -131,6 +138,113 @@ grow_vertical = 2
 [node name="decorations" type="Node2D" parent="NavigationRegion"]
 y_sort_enabled = true
 position = Vector2(-1, 4)
+
+[node name="HerasHekken" type="Node2D" parent="NavigationRegion/decorations"]
+
+[node name="Hekker" parent="NavigationRegion/decorations/HerasHekken" instance=ExtResource("9_s70as")]
+position = Vector2(-450, -527)
+
+[node name="Hekker2" parent="NavigationRegion/decorations/HerasHekken" instance=ExtResource("9_s70as")]
+position = Vector2(-387, -527)
+
+[node name="Hekker3" parent="NavigationRegion/decorations/HerasHekken" instance=ExtResource("9_s70as")]
+position = Vector2(-358, -527)
+
+[node name="Hekker4" parent="NavigationRegion/decorations/HerasHekken" instance=ExtResource("9_s70as")]
+position = Vector2(-327, -527)
+
+[node name="Hekker5" parent="NavigationRegion/decorations/HerasHekken" instance=ExtResource("9_s70as")]
+position = Vector2(-294, -527)
+
+[node name="Hekker6" parent="NavigationRegion/decorations/HerasHekken" instance=ExtResource("9_s70as")]
+position = Vector2(-263, -527)
+
+[node name="Hekker7" parent="NavigationRegion/decorations/HerasHekken" instance=ExtResource("9_s70as")]
+position = Vector2(-235, -527)
+
+[node name="Hekker8" parent="NavigationRegion/decorations/HerasHekken" instance=ExtResource("9_s70as")]
+position = Vector2(-204, -527)
+
+[node name="Hekker9" parent="NavigationRegion/decorations/HerasHekken" instance=ExtResource("9_s70as")]
+position = Vector2(-184, -511)
+
+[node name="Hekker10" parent="NavigationRegion/decorations/HerasHekken" instance=ExtResource("9_s70as")]
+position = Vector2(-153, -511)
+
+[node name="Hekker11" parent="NavigationRegion/decorations/HerasHekken" instance=ExtResource("9_s70as")]
+position = Vector2(-124, -511)
+
+[node name="Hekker12" parent="NavigationRegion/decorations/HerasHekken" instance=ExtResource("9_s70as")]
+position = Vector2(-93, -511)
+
+[node name="Hekker13" parent="NavigationRegion/decorations/HerasHekken" instance=ExtResource("9_s70as")]
+position = Vector2(-60, -511)
+
+[node name="Hekker14" parent="NavigationRegion/decorations/HerasHekken" instance=ExtResource("9_s70as")]
+position = Vector2(-29, -511)
+
+[node name="Hekker15" parent="NavigationRegion/decorations/HerasHekken" instance=ExtResource("9_s70as")]
+position = Vector2(0, -511)
+
+[node name="Hekker16" parent="NavigationRegion/decorations/HerasHekken" instance=ExtResource("9_s70as")]
+position = Vector2(31, -511)
+
+[node name="Hekker17" parent="NavigationRegion/decorations/HerasHekken" instance=ExtResource("9_s70as")]
+position = Vector2(62, -511)
+
+[node name="Hekker18" parent="NavigationRegion/decorations/HerasHekken" instance=ExtResource("9_s70as")]
+position = Vector2(93, -511)
+
+[node name="Hekker19" parent="NavigationRegion/decorations/HerasHekken" instance=ExtResource("9_s70as")]
+position = Vector2(122, -511)
+
+[node name="Hekker20" parent="NavigationRegion/decorations/HerasHekken" instance=ExtResource("9_s70as")]
+position = Vector2(153, -511)
+
+[node name="Hekker21" parent="NavigationRegion/decorations/HerasHekken" instance=ExtResource("9_s70as")]
+position = Vector2(186, -511)
+
+[node name="Hekker22" parent="NavigationRegion/decorations/HerasHekken" instance=ExtResource("9_s70as")]
+position = Vector2(217, -511)
+
+[node name="Hekker23" parent="NavigationRegion/decorations/HerasHekken" instance=ExtResource("9_s70as")]
+position = Vector2(246, -511)
+
+[node name="Hekker24" parent="NavigationRegion/decorations/HerasHekken" instance=ExtResource("9_s70as")]
+position = Vector2(277, -511)
+
+[node name="Hekker25" parent="NavigationRegion/decorations/HerasHekken" instance=ExtResource("9_s70as")]
+position = Vector2(298, -531)
+
+[node name="Hekker26" parent="NavigationRegion/decorations/HerasHekken" instance=ExtResource("9_s70as")]
+position = Vector2(329, -531)
+
+[node name="Hekker27" parent="NavigationRegion/decorations/HerasHekken" instance=ExtResource("9_s70as")]
+position = Vector2(358, -531)
+
+[node name="Hekker28" parent="NavigationRegion/decorations/HerasHekken" instance=ExtResource("9_s70as")]
+position = Vector2(389, -531)
+
+[node name="Hekker29" parent="NavigationRegion/decorations/HerasHekken" instance=ExtResource("9_s70as")]
+position = Vector2(422, -531)
+
+[node name="Hekker30" parent="NavigationRegion/decorations/HerasHekken" instance=ExtResource("9_s70as")]
+position = Vector2(453, -531)
+
+[node name="Hekker31" parent="NavigationRegion/decorations/HerasHekken" instance=ExtResource("9_s70as")]
+position = Vector2(482, -531)
+
+[node name="Hekker32" parent="NavigationRegion/decorations/HerasHekken" instance=ExtResource("9_s70as")]
+position = Vector2(519, -553)
+
+[node name="Hekker33" parent="NavigationRegion/decorations/HerasHekken" instance=ExtResource("9_s70as")]
+position = Vector2(-418, -527)
+
+[node name="Hekker34" parent="NavigationRegion/decorations/HerasHekken" instance=ExtResource("9_s70as")]
+position = Vector2(-476, -537)
+
+[node name="Hekker35" parent="NavigationRegion/decorations/HerasHekken" instance=ExtResource("9_s70as")]
+position = Vector2(-503, -563)
 
 [node name="Tree1" parent="NavigationRegion/decorations" instance=ExtResource("10_fhypo")]
 position = Vector2(89, -124)

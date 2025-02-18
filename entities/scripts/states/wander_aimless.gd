@@ -2,6 +2,7 @@ extends NPCState
 
 var targetPoint = Vector2.ZERO
 
+## Just to ensure guy is not running too loong in one direction
 @onready var maxSingleDirTimer: Timer = $MaxSingleDirTime
 
 var speed = 35

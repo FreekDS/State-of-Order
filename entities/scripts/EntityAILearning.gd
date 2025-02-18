@@ -52,6 +52,7 @@ func startDrag() -> void:
 	
 	speechbubble.option = "😨"
 	speechbubble.open()
+	stateManager.process_mode = Node.PROCESS_MODE_DISABLED
 	
 	hair.EnableDragmode()
 	pickedUp=true
@@ -63,6 +64,8 @@ func endDrag() -> void:
 	
 	set_collision_mask_value(1, true)
 	hair.DisableDragmode()
+	
+	stateManager.process_mode = Node.PROCESS_MODE_INHERIT
 	
 	speechbubble.close()
 	

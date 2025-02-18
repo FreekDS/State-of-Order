@@ -173,7 +173,7 @@ debug = NodePath("../DEBUG")
 script = ExtResource("3_6e7u3")
 
 [node name="MaxSingleDirTime" type="Timer" parent="StateManager/WANDER_AIMLESS"]
-wait_time = 3.0
+wait_time = 5.0
 autostart = true
 
 [node name="IDLE" type="Node" parent="StateManager" node_paths=PackedStringArray("speechBubble")]

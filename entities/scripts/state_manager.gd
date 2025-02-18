@@ -70,7 +70,6 @@ func _ready():
 	_state.enter()
 
 
-
 func _on_state_switch_requested(oldState: NPCState):
 	oldState.exit()
 	var newstate = oldState.possibleNextStates.pick_random()
@@ -78,7 +77,7 @@ func _on_state_switch_requested(oldState: NPCState):
 		newstate = oldState.possibleNextStates.pick_random()
 	_state = stateMap[newstate]
 	_state.enter()
-	_stateType = newState
+	_stateType = newstate
 
 
 func _physics_process(_delta: float) -> void:

@@ -34,12 +34,14 @@ func _ready() -> void:
 	]
 
 func enter():
-	debug.text = "PRATEN"
-	
 	if neighbourchosen:
+		print("ik forceer")
+		debug.text = "PRATEN initiate"
 		neighbourchosen.stateManager.enforceState(NPCStateManager.STATE.TALK_TO_SOMEONE)
 		talkLengthTimer.start(randf_range(minTalkTime, maxTalkTime))
 	else:
+		print("ik volg")
+		debug.text = "PRATEN follow"
 		# als ge niet initiator zijt dan  wacht ge het max
 		talkLengthTimer.start(maxTalkTime)			
 	
@@ -52,6 +54,7 @@ func tick():
 	character.velocity = Vector2.ZERO
 
 func exit():
+	print("ik stop")
 	neighbourchosen=null
 	active = false
 	talkLengthTimer.stop()
@@ -62,8 +65,6 @@ func exit():
 func checkViable() -> bool:
 	var buren = detectOthers.burenGraag()
 	for buur in buren:
-		if buur == self:
-			continue
 		if NPCStateManager.STATE.TALK_TO_SOMEONE in buur.stateManager.getViableNextStates():
 			neighbourchosen = buur
 			return true
@@ -71,6 +72,9 @@ func checkViable() -> bool:
 	return false
 
 func _on_talk_length_timer_timeout() -> void:
+	print("gedaan met babelen")
+	if not active:
+		return
 	if neighbourchosen:
 		neighbourchosen.stateManager.enforceNextState()
 	switchState.emit(self)

@@ -53,16 +53,6 @@ func exit():
 
 func _on_idle_time_timeout() -> void:
 	switchState.emit(self)
-	#var nextState = possibleNextStates.pick_random()
-	#while not nextState.checkViable():
-		#nextState = possibleNextStates.pick_random()
-		
-	#if nextState != NPCStateManager.STATE.STANDSTILL:
-		#switchState.emit(self, nextState)
-		#return
-	#idle_time.start(randf_range(minIdleTime, maxIdleTime))
-	
-
 
 func _on_idle_effect_timeout() -> void:
 	if speechBubble != null:

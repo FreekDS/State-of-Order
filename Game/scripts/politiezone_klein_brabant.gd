@@ -6,7 +6,7 @@ func _input(event: InputEvent) -> void:
 			if child is Police:
 				child.noLongerAcceptStouterik()
 
-func _on_characters_guy_dragged(who: DikkeRon) -> void:
+func _on_characters_guy_dragged(_who: DikkeRon) -> void:
 	for child in get_children():
 		if child is Police:
 			child.enableAcceptStouterik()

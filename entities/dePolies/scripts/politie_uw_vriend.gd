@@ -2,8 +2,6 @@ class_name Police
 extends Area2D
 
 
-signal stouterikCaptured(who: DikkeRon)
-
 var _canAcceptStouterik := false
 
 

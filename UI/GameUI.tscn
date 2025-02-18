@@ -460,6 +460,6 @@ libraries = {
 }
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="DramatischeTekst"]
-volume_db = -20.0
+volume_db = -40.0
 
 [connection signal="animation_finished" from="DramatischeTekst/AnimationPlayer" to="DramatischeTekst" method="_on_animation_player_animation_finished"]

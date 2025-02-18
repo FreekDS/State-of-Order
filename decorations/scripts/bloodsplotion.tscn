@@ -1,0 +1,112 @@
+[gd_scene load_steps=14 format=3 uid="uid://dvtglnlceofpm"]
+
+[ext_resource type="Script" path="res://decorations/scripts/CombinedParticle.gd" id="1_jpvlu"]
+
+[sub_resource type="Curve" id="Curve_qig5f"]
+min_value = -100.0
+max_value = 100.0
+bake_resolution = 150
+_data = [Vector2(0, -100), 0.0, 0.0, 0, 0, Vector2(0.0394432, 100), 0.0, 0.0, 0, 0, Vector2(0.06, 0), 0.0, 0.0, 0, 0, Vector2(0.5, 100), -3192.99, -3192.99, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_exfua"]
+curve_y = SubResource("Curve_qig5f")
+
+[sub_resource type="Curve" id="Curve_7smvj"]
+max_value = 200.0
+_data = [Vector2(0, 200), 0.0, 0.0, 0, 0, Vector2(0.1, 0), -2000.0, 0.0, 1, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_anogo"]
+curve = SubResource("Curve_7smvj")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_m85no"]
+lifetime_randomness = 0.1
+particle_flag_rotate_y = true
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(2, 2, 2)
+angle_min = -9.99999
+angle_max = 30.0
+direction = Vector3(0, 1, 0)
+spread = 180.0
+initial_velocity_min = 1.0
+initial_velocity_max = 5.0
+directional_velocity_min = 1.0
+directional_velocity_max = 1.0
+directional_velocity_curve = SubResource("CurveXYZTexture_exfua")
+velocity_limit_curve = SubResource("CurveTexture_anogo")
+gravity = Vector3(0, 0, 0)
+scale_min = 0.5
+color = Color(0.679887, 0.0734577, 0, 1)
+turbulence_noise_strength = 5.43
+turbulence_noise_speed = Vector3(0, 0.65, 0)
+
+[sub_resource type="Curve" id="Curve_24g1h"]
+min_value = -100.0
+max_value = 100.0
+bake_resolution = 150
+_data = [Vector2(0, -100), 0.0, 0.0, 0, 0, Vector2(0.0394432, 100), 0.0, 0.0, 0, 0, Vector2(0.06, 0), 0.0, 0.0, 0, 0, Vector2(0.5, 100), -3192.99, -3192.99, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_2tc8u"]
+curve_y = SubResource("Curve_24g1h")
+
+[sub_resource type="Curve" id="Curve_fwx16"]
+max_value = 1.5
+_data = [Vector2(0, 1.5), 0.0, 0.0, 0, 0, Vector2(0.598608, 1.055), 0.0, 0.0, 0, 0, Vector2(0.903712, 0.974815), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_xrx70"]
+curve = SubResource("Curve_fwx16")
+
+[sub_resource type="Curve" id="Curve_xnp3a"]
+max_value = 200.0
+_data = [Vector2(0, 200), 0.0, 0.0, 0, 0, Vector2(0.1, 0), -2000.0, 0.0, 1, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_o1kil"]
+curve = SubResource("Curve_xnp3a")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_e05ot"]
+lifetime_randomness = 0.1
+particle_flag_rotate_y = true
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(2, 2, 2)
+angle_min = -9.99999
+angle_max = 30.0
+direction = Vector3(0, 1, 0)
+spread = 180.0
+initial_velocity_min = 1.0
+initial_velocity_max = 5.0
+directional_velocity_min = 1.0
+directional_velocity_max = 1.0
+directional_velocity_curve = SubResource("CurveXYZTexture_2tc8u")
+velocity_limit_curve = SubResource("CurveTexture_o1kil")
+gravity = Vector3(0, 0, 0)
+scale_min = 0.5
+scale_curve = SubResource("CurveTexture_xrx70")
+color = Color(0.679887, 0.0734577, 0, 1)
+turbulence_noise_strength = 5.43
+turbulence_noise_speed = Vector3(0, 0.65, 0)
+sub_emitter_mode = 2
+sub_emitter_amount_at_end = 1
+
+[node name="Bloodsplotion" type="Node2D"]
+script = ExtResource("1_jpvlu")
+
+[node name="blood trail" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 100
+process_material = SubResource("ParticleProcessMaterial_m85no")
+lifetime = 5.0
+explosiveness = 1.0
+trail_enabled = true
+
+[node name="Bloodsplotion" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 30
+process_material = SubResource("ParticleProcessMaterial_e05ot")
+lifetime = 5.0
+explosiveness = 1.0

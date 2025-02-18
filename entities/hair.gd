@@ -32,7 +32,7 @@ func _physics_process(delta: float) -> void:
 		applyOffset(points.back()[2]+Vector2(0,-10))
 	queue_redraw()
 	
-func updatePointsNormal(delta) -> void:
+func updatePointsNormal(_delta) -> void:
 	var dif = prevpos-dikkeRon.global_position
 	prevpos=dikkeRon.global_position
 	
@@ -79,11 +79,11 @@ func DisableDragmode() -> void:
 	
 
 func applyOffset(newOffset):
-	for sprite in nodesToOffset:
-		if sprite == null:
+	for spr in nodesToOffset:
+		if spr == null:
 			continue
 		
-		if sprite is SpeechBubble:
-			sprite.position = newOffset + Vector2(0, -19) # size of speechbubble
+		if spr is SpeechBubble:
+			spr.position = newOffset + Vector2(0, -19) # size of speechbubble
 		else:
-			sprite.offset = newOffset
+			spr.offset = newOffset

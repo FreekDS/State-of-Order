@@ -55,7 +55,7 @@ func startDrag() -> void:
 	
 	hair.EnableDragmode()
 	pickedUp=true
-	animations.play("RESET")
+	animations.play("run", -1, 5.0)
 	
 func endDrag() -> void:
 	set_collision_layer_value(2, false)	# no longer interact with police
@@ -69,6 +69,23 @@ func endDrag() -> void:
 	pickedUp=false
 	if not dead:
 		animations.play("run")
+		
+		# Check if we dropped in the navigation map, if not, move character back in
+		var closestMapPoint = NavigationServer2D.map_get_closest_point(stateManager.navigationMap, global_position)
+		if not closestMapPoint.is_equal_approx(global_position):
+			set_physics_process(false)
+			
+			var direction = (closestMapPoint - global_position).normalized()
+			
+			var tween := create_tween()
+			tween.tween_property(
+				self, "global_position", closestMapPoint + direction * 30, 1.0
+			)
+			tween.finished.connect(func(): 
+				set_physics_process(true)
+				stateManager.recalculateRoute()
+			)
+			tween.play()
 
 
 func die():

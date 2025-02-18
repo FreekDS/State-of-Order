@@ -4,6 +4,8 @@ extends Node2D
 @export var characterBody : CharacterBody2D
 @export var navigationAgent: NavigationAgent2D
 
+@export var debug: Label
+
 enum STATE {
 	WANDER_AIMLESS,
 	SHOOT_SOMEONE,
@@ -31,10 +33,11 @@ func _ready():
 	set_physics_process(false)
 	set_physics_process.call_deferred(true)
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	
 	match _state:
 		STATE.WANDER_AIMLESS:
+			debug.text = "WALK"
 			if navigationAgent.is_navigation_finished() or targetPoint.is_equal_approx(Vector2.ZERO):
 				navigationAgent.target_position = NavigationServer2D.map_get_random_point(navigationMap, 1, true)
 				targetPoint = navigationAgent.get_next_path_position()
@@ -46,7 +49,10 @@ func _physics_process(delta: float) -> void:
 			characterBody.velocity = direction
 			
 
-
+func recalculateRoute():
+	navigationAgent.target_position = navigationAgent.target_position
+	
+	
 # Mogelijke states:
 #	NORMAL, gewoon wat rondwandelen op het plein. Mss kunnen we versch behaviors proberen makne?
 #				- bv: gaat nr markt, wandelt door het park, wandelt doelloos rond, zo'n dingen

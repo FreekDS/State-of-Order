@@ -21,7 +21,7 @@ func _ready() -> void:
 		child.neverMindIkBenGedeselect.connect(_on_deselect)
 
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if _selected and _mouseDown:
 		_selected.global_position = get_global_mouse_position() + Vector2(0, 16)
 	

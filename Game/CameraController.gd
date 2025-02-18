@@ -9,8 +9,8 @@ signal stationary
 
 @onready var startPoint := global_position
 
-@export var _topLeft = Vector2(-400,-200)
-@export var _botRight = Vector2(400,200)
+#@export var _topLeft = Vector2(-400,-200)
+#@export var _botRight = Vector2(400,200)
 
 
 @export var cameraSpeed : float = 5.0
@@ -21,7 +21,7 @@ signal stationary
 @export var minZoom : float = .5
 
 ## Size that must be reached before moving the camera is possible
-@export var startMoveTreshold : float = 100
+@export var edgeHitThreshold : float = 10
 
 var _moveDirection : Vector2 = Vector2.ZERO
 
@@ -57,31 +57,25 @@ func _isMouseOnEdge(mousePos: Vector2, edge: PanelContainer) -> bool:
 	return Rect2(edge.position, edge.size).has_point(mousePos)
 	
 	
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	
 	var mousePos := get_viewport().get_mouse_position()
 	
-	if _isMouseOnEdge(mousePos, leftEdge) or Input.is_action_pressed("pan_camera_left"):
-		_moveDirection.x = -1
-	elif _isMouseOnEdge(mousePos, rightEdge) or Input.is_action_pressed("pan_camera_right"):
-		_moveDirection.x = 1
-	else:
-		_moveDirection.x = 0
-		
-	if _isMouseOnEdge(mousePos, topEdge) or Input.is_action_pressed("pan_camera_up"):
-		_moveDirection.y = -1
-	elif _isMouseOnEdge(mousePos, botEdge) or Input.is_action_pressed("pan_camera_down"):
-		_moveDirection.y = 1
-	else:
-		_moveDirection.y = 0
+	_moveDirection = Vector2(
+		_leftContribution(mousePos) + _rightContribution(mousePos),
+		_upContribution(mousePos) + _downContribution(mousePos)
+	)
 	
-	
+	_sendEdgeSignals()
+
 	if not _shouldMove(): 
 		stationary.emit()
 		return
 	
 	if abs(_moveDirection) == Vector2.ONE:
+		@warning_ignore("narrowing_conversion")
 		moving.emit(Vector2i(_moveDirection.x, 0))
+		@warning_ignore("narrowing_conversion")
 		moving.emit(Vector2i(0, _moveDirection.y))
 	else:
 		moving.emit(_moveDirection)
@@ -89,31 +83,79 @@ func _physics_process(delta: float) -> void:
 	global_translate(
 		Vector2(_moveDirection.x, _moveDirection.y).normalized() * cameraSpeed 
 	)
-	
-	global_position.x = clamp(global_position.x, _topLeft.x, _botRight.x)
-	global_position.y = clamp(global_position.y, _topLeft.y, _botRight.y)
 
-	# Mess TODO: this is contantly emitting, not sure if that is ideal...
-	if global_position.x == _topLeft.x:
+
+func _sendEdgeSignals():
+	if _isOnLeftLimit():
 		hitEdge.emit(Vector2.LEFT)
 	else:
 		edgeNoLongerHit.emit(Vector2.LEFT)
 		
-	if global_position.x == _botRight.x:
+	if _isOnRightLimit():
 		hitEdge.emit(Vector2.RIGHT)
 	else:
 		edgeNoLongerHit.emit(Vector2.RIGHT)
 	
-	if global_position.y == _botRight.y:
+	if _isOnBotLimit():
 		hitEdge.emit(Vector2.DOWN)
 	else:
 		edgeNoLongerHit.emit(Vector2.DOWN)
 		
-	if global_position.y == _topLeft.y:
+	if _isOnTopLimit():
 		hitEdge.emit(Vector2.UP)
 	else:
 		edgeNoLongerHit.emit(Vector2.UP)
+
+
+func _isOnLeftLimit() -> bool:
+	return abs(_zoomedTopLeft().x - limit_left) < 10
 	
+func _isOnRightLimit() -> bool:
+	return abs(_zoomedBotRight().x - limit_right) < 10
+	
+func _isOnTopLimit() -> bool:
+	return abs(_zoomedTopLeft().y - limit_top) < 10
+	
+func _isOnBotLimit() -> bool:
+	return abs(_zoomedBotRight().y - limit_bottom) < 10
+
+
+func _leftContribution(mousePos: Vector2) -> int:
+	if _isOnLeftLimit():
+		return 0
+	if _isMouseOnEdge(mousePos, leftEdge) or Input.is_action_pressed("pan_camera_left"):
+		return -1
+	return 0
+
+func _rightContribution(mousePos: Vector2) -> int:
+	if _isOnRightLimit():
+		return 0
+	if _isMouseOnEdge(mousePos, rightEdge) or Input.is_action_pressed("pan_camera_right"):
+		return 1
+	return 0
+
+
+func _upContribution(mousePos: Vector2) -> int:
+	if _isOnTopLimit():
+		return 0
+	if _isMouseOnEdge(mousePos, topEdge) or Input.is_action_pressed("pan_camera_up"):
+		return -1
+	return 0
+
+
+func _downContribution(mousePos: Vector2) -> int:
+	if _isOnBotLimit():
+		return 0
+	if _isMouseOnEdge(mousePos, botEdge) or Input.is_action_pressed("pan_camera_down"):
+		return 1
+	return 0
+
+
+func _zoomedTopLeft() -> Vector2:
+	return get_screen_center_position() - get_viewport_rect().size  / zoom / 2.0
+
+func _zoomedBotRight() -> Vector2:
+	return get_screen_center_position() + get_viewport_rect().size  / zoom / 2.0
 
 func zoomIn():
 	zoom -= Vector2(zoomIncrement, zoomIncrement)

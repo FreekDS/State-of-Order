@@ -12,7 +12,7 @@
 [ext_resource type="Shader" path="res://Game/shaders/vignette.gdshader" id="5_r6mn3"]
 [ext_resource type="Script" path="res://Game/scripts/politiezone_klein_brabant.gd" id="7_tagq4"]
 [ext_resource type="PackedScene" uid="uid://ilr4hbnewu7c" path="res://entities/dePolies/Politie.tscn" id="8_w3de5"]
-[ext_resource type="PackedScene" uid="uid://bq1e5kfxn4lle" path="res://decorations/hekker.tscn" id="9_s70as"]
+[ext_resource type="PackedScene" path="res://decorations/hekker.tscn" id="9_s70as"]
 [ext_resource type="PackedScene" uid="uid://c0nf64sqguqsh" path="res://decorations/Tree1.tscn" id="10_fhypo"]
 [ext_resource type="Texture2D" uid="uid://dcv03si8yomb3" path="res://Textures/buldings_1.png" id="12_rcx3c"]
 [ext_resource type="Texture2D" uid="uid://balnyvlsal5gi" path="res://Textures/buldings_2.png" id="13_tv7ae"]

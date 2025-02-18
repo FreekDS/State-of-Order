@@ -158,8 +158,9 @@ _data = {
 [node name="DikkeRon" type="CharacterBody2D"]
 script = ExtResource("1_nkst8")
 
-[node name="DetectOthers" type="Area2D" parent="."]
+[node name="DetectOthers" type="Area2D" parent="." node_paths=PackedStringArray("parent")]
 script = ExtResource("2_n1thc")
+parent = NodePath("..")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectOthers"]
 position = Vector2(0, -12)

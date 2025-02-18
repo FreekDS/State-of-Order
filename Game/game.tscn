@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=4 uid="uid://dkydrawijeyqe"]
+[gd_scene load_steps=20 format=4 uid="uid://dkydrawijeyqe"]
 
 [ext_resource type="PackedScene" uid="uid://vfkensc2u1h1" path="res://UI/GameUI.tscn" id="1_2ob6e"]
 [ext_resource type="Texture2D" uid="uid://b2e1b5mebsvuf" path="res://Textures/tile_placeholder.png" id="1_2xgih"]
@@ -7,15 +7,13 @@
 [ext_resource type="Script" path="res://Game/scripts/CharacterPicker.gd" id="1_iuers"]
 [ext_resource type="Texture2D" uid="uid://xjnhaqsrm5xk" path="res://Textures/grond.png" id="1_n0ep5"]
 [ext_resource type="Shader" path="res://Game/shaders/distortionachtig.gdshader" id="2_lj816"]
+[ext_resource type="NavigationPolygon" uid="uid://nxn7qiavic2y" path="res://Game/navigation/navigationPolygon.tres" id="2_va8h4"]
 [ext_resource type="PackedScene" uid="uid://dylnvnx8f0goe" path="res://entities/DikkeRon.tscn" id="3_gqgcv"]
 [ext_resource type="Script" path="res://Game/scripts/politiezone_klein_brabant.gd" id="7_tagq4"]
 [ext_resource type="PackedScene" uid="uid://ilr4hbnewu7c" path="res://entities/dePolies/Politie.tscn" id="8_w3de5"]
 [ext_resource type="PackedScene" uid="uid://c0nf64sqguqsh" path="res://decorations/Tree1.tscn" id="10_fhypo"]
-
-[sub_resource type="NavigationPolygon" id="NavigationPolygon_8kfe2"]
-vertices = PackedVector2Array(184, -44, 184, -78, 270.258, -150, 277.727, 134.281, 184, -108, -254, 149.703, 124, -44, 117, -44, 57, -44, -254, -150, 57, -78, 184, -142, 124, -142, 124, -108, 120, -108, 120, -142, 60, -142, 60, -108, 117, -78, 124, -78)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 2, 1), PackedInt32Array(0, 3, 5, 6), PackedInt32Array(7, 6, 5), PackedInt32Array(8, 7, 5), PackedInt32Array(8, 5, 9, 10), PackedInt32Array(2, 4, 11), PackedInt32Array(9, 2, 11, 12), PackedInt32Array(12, 13, 14, 15), PackedInt32Array(9, 12, 15), PackedInt32Array(9, 15, 16), PackedInt32Array(10, 9, 16, 17), PackedInt32Array(18, 10, 17, 14), PackedInt32Array(13, 4, 1, 19), PackedInt32Array(14, 13, 19, 18), PackedInt32Array(18, 19, 6, 7)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(-264, 160, -264, -160, 280, -160, 288, 144)])
+[ext_resource type="Texture2D" uid="uid://dcv03si8yomb3" path="res://Textures/buldings_1.png" id="12_rcx3c"]
+[ext_resource type="Texture2D" uid="uid://balnyvlsal5gi" path="res://Textures/buldings_2.png" id="13_tv7ae"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_oerhl"]
 frequency = 1.0
@@ -47,14 +45,22 @@ one_shot = true
 
 [node name="NavigationRegion" type="NavigationRegion2D" parent="."]
 y_sort_enabled = true
-navigation_polygon = SubResource("NavigationPolygon_8kfe2")
+navigation_polygon = ExtResource("2_va8h4")
 
 [node name="Grond" type="Sprite2D" parent="NavigationRegion"]
 z_index = -1
 texture_repeat = 2
 texture = ExtResource("1_n0ep5")
 region_enabled = true
-region_rect = Rect2(0, 0, 1800, 900)
+region_rect = Rect2(0, 0, 1200, 1300)
+
+[node name="Grond" type="Sprite2D" parent="NavigationRegion/Grond"]
+modulate = Color(0.485703, 0.485704, 0.485703, 1)
+z_index = -1
+texture_repeat = 2
+texture = ExtResource("1_n0ep5")
+region_enabled = true
+region_rect = Rect2(0, 0, 1800, 1300)
 
 [node name="UILayer" type="CanvasLayer" parent="NavigationRegion"]
 
@@ -118,7 +124,16 @@ position = Vector2(-227, 71)
 position = Vector2(396, -93)
 
 [node name="Camera" type="Camera2D" parent="NavigationRegion"]
+limit_left = -700
+limit_top = -600
+limit_right = 700
+limit_bottom = 600
+limit_smoothed = true
+position_smoothing_enabled = true
+position_smoothing_speed = 15.0
 script = ExtResource("1_hw18y")
+_topLeft = Vector2(-380, -380)
+_botRight = Vector2(380, 380)
 minZoom = 0.75
 
 [node name="CanvasLayer" type="CanvasLayer" parent="NavigationRegion/Camera"]
@@ -168,6 +183,14 @@ grow_vertical = 0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 mouse_filter = 1
+
+[node name="buldingsR" type="Sprite2D" parent="."]
+position = Vector2(600, 0)
+texture = ExtResource("12_rcx3c")
+
+[node name="buldingsL" type="Sprite2D" parent="."]
+position = Vector2(-600, 0)
+texture = ExtResource("13_tv7ae")
 
 [connection signal="timeout" from="TimeManager/Timer" to="TimeManager" method="_on_timer_timeout"]
 [connection signal="guyDragged" from="NavigationRegion/Characters" to="NavigationRegion/Politiezone Klein Brabant" method="_on_characters_guy_dragged"]

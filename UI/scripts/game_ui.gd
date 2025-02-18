@@ -31,6 +31,9 @@ func _ready() -> void:
 		#score.updateScore(-1)
 
 
+#func _process(delta: float) -> void:
+	#timeLabel.text = "FPS:" + str(Engine.get_frames_per_second())
+
 func _on_camera_hit_edge(where: Vector2i) -> void:
 	if _hitEdges.has(where):
 		return

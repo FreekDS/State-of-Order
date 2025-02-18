@@ -37,7 +37,6 @@ func _physics_process(delta: float) -> void:
 		STATE.WANDER_AIMLESS:
 			if navigationAgent.is_navigation_finished() or targetPoint.is_equal_approx(Vector2.ZERO):
 				navigationAgent.target_position = NavigationServer2D.map_get_random_point(navigationMap, 1, true)
-				print("Ik ben dikke ron en ik loop naar", navigationAgent.target_position)
 				targetPoint = navigationAgent.get_next_path_position()
 			
 			targetPoint = navigationAgent.get_next_path_position()
@@ -71,23 +70,4 @@ func _physics_process(delta: float) -> void:
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_accept"):
 		navigationAgent.target_position = NavigationServer2D.map_get_random_point(navigationMap, 1, true)
-		print("Ik ben dikke ron en ik loop naar", navigationAgent.target_position)
 		targetPoint = navigationAgent.get_next_path_position()
-
-#func _on_navigation_agent_2d_waypoint_reached(details: Dictionary) -> void:
-	#print("tussenpunt bereikt, hoera")
-	#targetPoint = navigationAgent.get_next_path_position()
-
-
-func _on_navigation_agent_2d_link_reached(details: Dictionary) -> void:
-	print("tussenpunt bereikt, hoera")
-	targetPoint = navigationAgent.get_next_path_position()
-
-
-func _on_navigation_agent_2d_target_reached() -> void:
-	print("TADAA")
-
-
-func _on_navigation_agent_2d_waypoint_reached(details: Dictionary) -> void:
-	print("waypoint")
-	

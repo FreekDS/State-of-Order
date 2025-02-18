@@ -8,6 +8,7 @@ extends CharacterBody2D
 
 @onready var hair: Node2D = $Sprite2D/Hair
 @onready var stateManager: NPCStateManager = $StateManager
+@onready var speechbubble: SpeechBubble = $Speechbubble
 
 var selected := false
 var pickable := true
@@ -40,7 +41,7 @@ func _physics_process(_delta: float) -> void:
 		highlight.hide()
 		neverMindIkBenGedeselect.emit(self)
 		
-
+	if dead: velocity = Vector2.ZERO
 	move_and_slide()
 	
 func startDrag() -> void:
@@ -48,10 +49,13 @@ func startDrag() -> void:
 	set_collision_layer_value(1, false)	# no longer interact with others
 	
 	set_collision_mask_value(1, false)
-
+	
+	speechbubble.option = "😨"
+	speechbubble.open()
+	
 	hair.EnableDragmode()
 	pickedUp=true
-	$AnimationPlayer.play("RESET")
+	animations.play("RESET")
 	
 func endDrag() -> void:
 	set_collision_layer_value(2, false)	# no longer interact with police
@@ -59,6 +63,9 @@ func endDrag() -> void:
 	
 	set_collision_mask_value(1, true)
 	hair.DisableDragmode()
+	
+	speechbubble.close()
+	
 	pickedUp=false
 	if not dead:
 		animations.play("run")

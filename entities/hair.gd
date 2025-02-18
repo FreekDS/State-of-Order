@@ -3,7 +3,11 @@ extends Node2D
 @export var dikkeRon:DikkeRon
 @export var sprite:Sprite2D
 @export var highlight: Sprite2D
+@export var speechBubble:Sprite2D
 @export var bouncyness:float
+
+@onready
+var nodesToOffset : Array[Sprite2D] = [sprite, highlight, speechBubble]
 
 # wanted offset, max distance, actual pos, radius
 var points = [
@@ -25,8 +29,7 @@ func _physics_process(delta: float) -> void:
 		updatePointsNormal(delta)
 	else:
 		updatePointsNormal(delta)
-		sprite.offset=points.back()[2]+Vector2(0,-10)
-		highlight.offset=points.back()[2]+Vector2(0,-10)
+		applyOffset(points.back()[2]+Vector2(0,-10))
 	queue_redraw()
 	
 func updatePointsNormal(delta) -> void:
@@ -68,10 +71,19 @@ func EnableDragmode() -> void:
 	DragMode = true
 	
 func DisableDragmode() -> void:
-	sprite.offset=spriteLocBeforeMove
-	highlight.offset=spriteLocBeforeMove
+	applyOffset(spriteLocBeforeMove)
+	
 	DragMode = false
 	#points.remove_at(len(points)-1)
 	points.reverse()
 	
-	
+
+func applyOffset(newOffset):
+	for sprite in nodesToOffset:
+		if sprite == null:
+			continue
+		
+		if sprite is SpeechBubble:
+			sprite.position = newOffset + Vector2(0, -19) # size of speechbubble
+		else:
+			sprite.offset = newOffset

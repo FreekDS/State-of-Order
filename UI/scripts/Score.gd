@@ -15,6 +15,7 @@ func updateScore(amount: int):
 	if amount < 0: setNegative()
 	else: setPositive()
 	if _score + amount < 0:
+		doPop()
 		return
 	_score += amount
 	_score = clamp(_score, 0, INF)

@@ -23,5 +23,5 @@ func _on_guy_captured(who: DikkeRon):
 			EventBus.successfulCapture.emit(who, dayRules.score)
 			return
 	
-	EventBus.wrongCapture.emit(who, dayRules.score)
+	EventBus.wrongCapture.emit(who, -dayRules.score)
 	

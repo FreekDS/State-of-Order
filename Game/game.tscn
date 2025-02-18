@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://dkydrawijeyqe"]
+[gd_scene load_steps=17 format=3 uid="uid://dkydrawijeyqe"]
 
 [ext_resource type="PackedScene" uid="uid://vfkensc2u1h1" path="res://UI/GameUI.tscn" id="1_2ob6e"]
 [ext_resource type="Script" path="res://Game/scripts/time_manager.gd" id="1_5ff1s"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://Game/CameraController.gd" id="1_hw18y"]
 [ext_resource type="Script" path="res://Game/scripts/CharacterPicker.gd" id="1_iuers"]
 [ext_resource type="Texture2D" uid="uid://xjnhaqsrm5xk" path="res://Textures/grond.png" id="1_n0ep5"]
+[ext_resource type="Resource" uid="uid://815ki2igdjnh" path="res://resources/day1.tres" id="2_1wdd8"]
 [ext_resource type="NavigationPolygon" uid="uid://nxn7qiavic2y" path="res://Game/navigation/navigationPolygon.tres" id="2_va8h4"]
 [ext_resource type="PackedScene" uid="uid://dylnvnx8f0goe" path="res://entities/DikkeRon.tscn" id="3_gqgcv"]
 [ext_resource type="Shader" path="res://Game/shaders/vignette.gdshader" id="5_r6mn3"]
@@ -26,6 +27,7 @@ y_sort_enabled = true
 
 [node name="RoelManager" type="Node" parent="."]
 script = ExtResource("1_d20kw")
+dayRules = ExtResource("2_1wdd8")
 
 [node name="TimeManager" type="Node" parent="."]
 script = ExtResource("1_5ff1s")
@@ -168,6 +170,9 @@ navigationRegion = NodePath("..")
 
 [node name="DikkeRon" parent="NavigationRegion/Characters" instance=ExtResource("3_gqgcv")]
 position = Vector2(110, -59)
+
+[node name="DikkeRon2" parent="NavigationRegion/Characters" instance=ExtResource("3_gqgcv")]
+position = Vector2(-44, 39)
 
 [node name="Politiezone Klein Brabant" type="Node2D" parent="NavigationRegion"]
 script = ExtResource("7_tagq4")

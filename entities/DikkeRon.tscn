@@ -10,9 +10,9 @@
 [ext_resource type="Script" path="res://entities/talk_to_someone.gd" id="5_11s4v"]
 [ext_resource type="Script" path="res://entities/scripts/state_manager.gd" id="5_gy3v6"]
 [ext_resource type="Script" path="res://entities/trait_manager.gd" id="7_ay147"]
-[ext_resource type="PackedScene" uid="uid://4fa13uf524uu" path="res://entities/DikkeRonSprites.tscn" id="12_i5n12"]
 [ext_resource type="Script" path="res://entities/hit_someone.gd" id="7_nuaoc"]
 [ext_resource type="Texture2D" uid="uid://dynwv584ldh3w" path="res://Textures/vuist.png" id="10_sod6u"]
+[ext_resource type="PackedScene" uid="uid://4fa13uf524uu" path="res://entities/DikkeRonSprites.tscn" id="12_i5n12"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_hrdx7"]
 radius = 94.6414
@@ -23,7 +23,7 @@ length = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("../../Sprite2D/Vuist:offset")
+tracks/0/path = NodePath("../../DikkeRonSprites/Vuist:offset")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -35,7 +35,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("../../Sprite2D/Vuist:visible")
+tracks/1/path = NodePath("../../DikkeRonSprites/Vuist:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -47,7 +47,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("../../Sprite2D/Vuist:position")
+tracks/2/path = NodePath("../../DikkeRonSprites/Vuist:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -63,7 +63,7 @@ length = 0.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("../../Sprite2D/Vuist:visible")
+tracks/0/path = NodePath("../../DikkeRonSprites/Vuist:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -75,7 +75,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("../../Sprite2D/Vuist:position")
+tracks/1/path = NodePath("../../DikkeRonSprites/Vuist:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -91,7 +91,7 @@ length = 0.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("../../Sprite2D/Vuist:visible")
+tracks/0/path = NodePath("../../DikkeRonSprites/Vuist:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -103,7 +103,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("../../Sprite2D/Vuist:position")
+tracks/1/path = NodePath("../../DikkeRonSprites/Vuist:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -334,6 +334,11 @@ shape = SubResource("RectangleShape2D_jm8sb")
 
 [node name="DikkeRonSprites" parent="." instance=ExtResource("12_i5n12")]
 
+[node name="Vuist" type="Sprite2D" parent="DikkeRonSprites"]
+visible = false
+position = Vector2(-13, 1)
+texture = ExtResource("10_sod6u")
+
 [node name="Hair" type="Node2D" parent="DikkeRonSprites" node_paths=PackedStringArray("dikkeRon", "sprite", "highlight", "speechBubble")]
 visible = false
 position = Vector2(0, -20)
@@ -350,11 +355,6 @@ show_behind_parent = true
 z_index = 1
 texture = ExtResource("3_67qvq")
 offset = Vector2(0, -12)
-
-[node name="Vuist" type="Sprite2D" parent="Sprite2D"]
-visible = false
-position = Vector2(-13, 1)
-texture = ExtResource("10_sod6u")
 
 [node name="Speechbubble" parent="." instance=ExtResource("2_joovv")]
 position = Vector2(7, -33)

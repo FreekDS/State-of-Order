@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://dylnvnx8f0goe"]
+[gd_scene load_steps=26 format=3 uid="uid://dylnvnx8f0goe"]
 
 [ext_resource type="Script" path="res://entities/scripts/EntityAILearning.gd" id="1_nkst8"]
 [ext_resource type="PackedScene" uid="uid://sa773o5v8h1g" path="res://decorations/Speechbubble.tscn" id="2_joovv"]
@@ -11,9 +11,114 @@
 [ext_resource type="Script" path="res://entities/scripts/state_manager.gd" id="5_gy3v6"]
 [ext_resource type="Script" path="res://entities/trait_manager.gd" id="7_ay147"]
 [ext_resource type="PackedScene" uid="uid://4fa13uf524uu" path="res://entities/DikkeRonSprites.tscn" id="12_i5n12"]
+[ext_resource type="Script" path="res://entities/hit_someone.gd" id="7_nuaoc"]
+[ext_resource type="Texture2D" uid="uid://dynwv584ldh3w" path="res://Textures/vuist.png" id="10_sod6u"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_hrdx7"]
 radius = 94.6414
+
+[sub_resource type="Animation" id="Animation_4ukmq"]
+resource_name = "RESET"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../../Sprite2D/Vuist:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../../Sprite2D/Vuist:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.0333333),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../../Sprite2D/Vuist:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-13, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_ov8wk"]
+resource_name = "hitLeft"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../../Sprite2D/Vuist:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.466667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../../Sprite2D/Vuist:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.466667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-13, 0), Vector2(-13, -27)]
+}
+
+[sub_resource type="Animation" id="Animation_7ocug"]
+resource_name = "hitRight"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../../Sprite2D/Vuist:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.466667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../../Sprite2D/Vuist:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.466667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(13, 0), Vector2(13, -27)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_whagq"]
+_data = {
+"RESET": SubResource("Animation_4ukmq"),
+"hitLeft": SubResource("Animation_ov8wk"),
+"hitRight": SubResource("Animation_7ocug")
+}
 
 [sub_resource type="LabelSettings" id="LabelSettings_x6ajt"]
 font_color = Color(1, 1, 1, 0.431373)
@@ -196,14 +301,20 @@ one_shot = true
 wait_time = 2.0
 one_shot = true
 
-[node name="TALK_TO_SOMEONE" type="Node" parent="StateManager" node_paths=PackedStringArray("detectOthers", "speechBubble")]
+[node name="TALK_TO_SOMEONE" type="Node" parent="StateManager"]
 script = ExtResource("5_11s4v")
-detectOthers = NodePath("../../DetectOthers")
-speechBubble = NodePath("../../Speechbubble")
 
 [node name="TalkLengthTimer" type="Timer" parent="StateManager/TALK_TO_SOMEONE"]
 
 [node name="TalkBubbleTimer" type="Timer" parent="StateManager/TALK_TO_SOMEONE"]
+
+[node name="HIT_SOMEONE" type="Node" parent="StateManager"]
+script = ExtResource("7_nuaoc")
+
+[node name="HitAnimationPlayer" type="AnimationPlayer" parent="StateManager/HIT_SOMEONE"]
+libraries = {
+"": SubResource("AnimationLibrary_whagq")
+}
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 debug_enabled = true
@@ -239,6 +350,11 @@ show_behind_parent = true
 z_index = 1
 texture = ExtResource("3_67qvq")
 offset = Vector2(0, -12)
+
+[node name="Vuist" type="Sprite2D" parent="Sprite2D"]
+visible = false
+position = Vector2(-13, 1)
+texture = ExtResource("10_sod6u")
 
 [node name="Speechbubble" parent="." instance=ExtResource("2_joovv")]
 position = Vector2(7, -33)

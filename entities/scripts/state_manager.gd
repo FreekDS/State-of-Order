@@ -73,12 +73,18 @@ func _ready():
 
 func _on_state_switch_requested(oldState: NPCState):
 	oldState.exit()
+	var counter=0
 	var newstate = oldState.possibleNextStates.pick_random()
 	while not stateMap[newstate].checkViable():
 		newstate = oldState.possibleNextStates.pick_random()
+		counter+=1
+		if counter > 10:
+			print("Yup tis kapot, na nen hoop trys op niets uitgekomen, wandel anders maar efkes")
+			newstate = STATE.WANDER_AIMLESS
+			break
 	_state = stateMap[newstate]
-	_state.enter()
 	_stateType = newstate
+	_state.enter()
 
 
 func _physics_process(_delta: float) -> void:

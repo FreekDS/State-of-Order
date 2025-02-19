@@ -5,7 +5,7 @@ extends MarginContainer
 @onready var TekstDrie = $"CenterContainer/HBoxContainer/3"
 @onready var anim = $AnimationPlayer
 func dramatiek() -> void:
-	if anim.active:
+	if anim.is_playing():
 		print("ellaba ik was nog dramatisch bezig")
 	# Visible changes the location/reorders, modulate is the unnoficial workaround to have the tekst keep its location
 	anim.play("appear")

@@ -28,8 +28,9 @@ var babbel_words = [
 var active = false
 func _ready() -> void:
 	possibleNextStates = [
-		NPCStateManager.STATE.STANDSTILL, 
-		NPCStateManager.STATE.WANDER_AIMLESS,
+		#NPCStateManager.STATE.STANDSTILL, 
+		#NPCStateManager.STATE.WANDER_AIMLESS,
+		NPCStateManager.STATE.HIT_SOMEONE,
 		#NPCStateManager.STATE.TALK_TO_SOMEONE
 	]
 
@@ -73,8 +74,9 @@ func checkViable() -> bool:
 func _on_talk_length_timer_timeout() -> void:
 	if not active:
 		return
-	if neighbourchosen:
-		neighbourchosen.stateManager.enforceNextState()
+	#Dit niet doen, circular dependencies paniek
+	#if neighbourchosen:
+		#neighbourchosen.stateManager.enforceNextState()
 	switchState.emit(self)
 
 

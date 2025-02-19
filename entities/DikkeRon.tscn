@@ -57,34 +57,6 @@ tracks/2/keys = {
 "values": [Vector2(-13, 1)]
 }
 
-[sub_resource type="Animation" id="Animation_ov8wk"]
-resource_name = "hitLeft"
-length = 0.5
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("../../DikkeRonSprites/Vuist:visible")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.466667),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [true, false]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("../../DikkeRonSprites/Vuist:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.466667),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(-13, 0), Vector2(-13, -27)]
-}
-
 [sub_resource type="Animation" id="Animation_7ocug"]
 resource_name = "hitRight"
 length = 0.5
@@ -113,10 +85,38 @@ tracks/1/keys = {
 "values": [Vector2(13, 0), Vector2(13, -27)]
 }
 
+[sub_resource type="Animation" id="Animation_ov8wk"]
+resource_name = "hit"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../../DikkeRonSprites/Vuist:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.466667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../../DikkeRonSprites/Vuist:offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.466667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -27)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_whagq"]
 _data = {
 "RESET": SubResource("Animation_4ukmq"),
-"hitLeft": SubResource("Animation_ov8wk"),
+"hit": SubResource("Animation_ov8wk"),
 "hitRight": SubResource("Animation_7ocug")
 }
 
@@ -301,20 +301,35 @@ one_shot = true
 wait_time = 2.0
 one_shot = true
 
-[node name="TALK_TO_SOMEONE" type="Node" parent="StateManager"]
+[node name="TALK_TO_SOMEONE" type="Node" parent="StateManager" node_paths=PackedStringArray("detectOthers", "speechBubble")]
 script = ExtResource("5_11s4v")
+detectOthers = NodePath("../../DetectOthers")
+speechBubble = NodePath("../../Speechbubble")
 
 [node name="TalkLengthTimer" type="Timer" parent="StateManager/TALK_TO_SOMEONE"]
 
 [node name="TalkBubbleTimer" type="Timer" parent="StateManager/TALK_TO_SOMEONE"]
 
-[node name="HIT_SOMEONE" type="Node" parent="StateManager"]
+[node name="HIT_SOMEONE" type="Node" parent="StateManager" node_paths=PackedStringArray("detectOthers", "speechBubble", "vuistSprite", "character", "animations", "navAgent")]
 script = ExtResource("7_nuaoc")
+detectOthers = NodePath("../../DetectOthers")
+speechBubble = NodePath("../../Speechbubble")
+vuistSprite = NodePath("../../DikkeRonSprites/Vuist")
+character = NodePath("../..")
+animations = NodePath("HitAnimationPlayer")
+navAgent = NodePath("../../NavigationAgent2D")
 
 [node name="HitAnimationPlayer" type="AnimationPlayer" parent="StateManager/HIT_SOMEONE"]
 libraries = {
 "": SubResource("AnimationLibrary_whagq")
 }
+autoplay = "hit"
+
+[node name="TalkBubbleTimer" type="Timer" parent="StateManager/HIT_SOMEONE"]
+
+[node name="FightLengthTimer" type="Timer" parent="StateManager/HIT_SOMEONE"]
+
+[node name="HitTimer" type="Timer" parent="StateManager/HIT_SOMEONE"]
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 debug_enabled = true
@@ -371,4 +386,8 @@ autoplay = "run"
 [connection signal="timeout" from="StateManager/IDLE/IdleEffect" to="StateManager/IDLE" method="_on_idle_effect_timeout"]
 [connection signal="timeout" from="StateManager/TALK_TO_SOMEONE/TalkLengthTimer" to="StateManager/TALK_TO_SOMEONE" method="_on_talk_length_timer_timeout"]
 [connection signal="timeout" from="StateManager/TALK_TO_SOMEONE/TalkBubbleTimer" to="StateManager/TALK_TO_SOMEONE" method="_on_talk_bubble_timer_timeout"]
+[connection signal="animation_finished" from="StateManager/HIT_SOMEONE/HitAnimationPlayer" to="StateManager/HIT_SOMEONE" method="_on_hit_animation_player_animation_finished"]
+[connection signal="timeout" from="StateManager/HIT_SOMEONE/TalkBubbleTimer" to="StateManager/HIT_SOMEONE" method="_on_talk_bubble_timer_timeout"]
+[connection signal="timeout" from="StateManager/HIT_SOMEONE/FightLengthTimer" to="StateManager/HIT_SOMEONE" method="_on_fight_length_timer_timeout"]
+[connection signal="timeout" from="StateManager/HIT_SOMEONE/HitTimer" to="StateManager/HIT_SOMEONE" method="_on_hit_timer_timeout"]
 [connection signal="target_reached" from="NavigationAgent2D" to="StateManager" method="_on_navigation_agent_2d_target_reached"]

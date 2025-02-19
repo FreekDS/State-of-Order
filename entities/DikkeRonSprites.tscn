@@ -1,0 +1,37 @@
+[gd_scene load_steps=4 format=3 uid="uid://4fa13uf524uu"]
+
+[ext_resource type="Texture2D" uid="uid://jlkwma0oc7sl" path="res://Textures/dikke_ron.png" id="1_5hdot"]
+[ext_resource type="Texture2D" uid="uid://cpp3iuqcr7enr" path="res://Textures/all_my_fellas.png" id="2_56j6r"]
+[ext_resource type="Script" path="res://entities/scripts/dikke_ron_sprites.gd" id="2_esm7k"]
+
+[node name="DikkeRonSprites" type="Sprite2D"]
+texture = ExtResource("1_5hdot")
+offset = Vector2(0, -12)
+script = ExtResource("2_esm7k")
+
+[node name="Pants" type="Sprite2D" parent="."]
+texture = ExtResource("2_56j6r")
+offset = Vector2(0, -12)
+hframes = 10
+vframes = 5
+frame = 40
+
+[node name="Shirt" type="Sprite2D" parent="."]
+texture = ExtResource("2_56j6r")
+offset = Vector2(0, -12)
+hframes = 10
+vframes = 5
+frame = 30
+
+[node name="Face" type="Sprite2D" parent="."]
+texture = ExtResource("2_56j6r")
+offset = Vector2(0, -12)
+hframes = 10
+vframes = 5
+frame = 10
+
+[node name="Hair" type="Sprite2D" parent="."]
+texture = ExtResource("2_56j6r")
+offset = Vector2(0, -12)
+hframes = 10
+vframes = 5

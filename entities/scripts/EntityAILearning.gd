@@ -23,7 +23,6 @@ var dead = false
 func _ready():
 	animations.play("run", -1, 1.1)
 	hair.color = sprite.getHairColor()
-	print(hair.color)
 
 
 func setup(navigationMap: RID):

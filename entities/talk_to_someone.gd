@@ -41,8 +41,10 @@ func enter():
 	else:
 		debug.text = "PRATEN follow"
 		# als ge niet initiator zijt dan  wacht ge het max
-		talkLengthTimer.start(maxTalkTime)			
+		talkLengthTimer.start(maxTalkTime)
 	
+	
+	animations.play("idle")
 	talkBubbleTimer.start(randf_range(1,2))
 	active = true
 	speechBubble.option = babbel_words.pick_random()
@@ -80,12 +82,13 @@ func _on_talk_bubble_timer_timeout() -> void:
 	if speechBubble != null:
 		speechBubble.option = babbel_words.pick_random()
 		speechBubble.open()
+		animations.play("run")
 		
 		get_tree().create_timer(4.0).timeout.connect(
 			func():
 				if speechBubble.isOpen:
 					speechBubble.close()
 				if active:
-					pass
+					animations.play("idle")
 					#idleEffectTimer.start(randf_range(2,4))
 		)

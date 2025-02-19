@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://duwfs4j1ne263"]
+
+[node name="SingleRule" type="HBoxContainer"]
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+layout_mode = 2
+theme_override_colors/default_color = Color(0.0702305, 3.27289e-06, 0.562614, 1)
+bbcode_enabled = true
+text = "Ik ben een regel"
+fit_content = true
+autowrap_mode = 0

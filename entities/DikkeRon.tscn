@@ -158,6 +158,10 @@ _data = {
 [node name="DikkeRon" type="CharacterBody2D"]
 script = ExtResource("1_nkst8")
 
+[node name="TraitManager" type="Node2D" parent="." node_paths=PackedStringArray("dikkeRonSprites")]
+script = ExtResource("7_ay147")
+dikkeRonSprites = NodePath("../DikkeRonSprites")
+
 [node name="DetectOthers" type="Area2D" parent="." node_paths=PackedStringArray("parent")]
 script = ExtResource("2_n1thc")
 parent = NodePath("..")
@@ -245,9 +249,6 @@ libraries = {
 "": SubResource("AnimationLibrary_vpypy")
 }
 autoplay = "run"
-
-[node name="TraitManager" type="Node2D" parent="."]
-script = ExtResource("7_ay147")
 
 [connection signal="timeout" from="StateManager/WANDER_AIMLESS/MaxSingleDirTime" to="StateManager/WANDER_AIMLESS" method="_on_max_single_dir_time_timeout"]
 [connection signal="timeout" from="StateManager/IDLE/IdleTime" to="StateManager/IDLE" method="_on_idle_time_timeout"]

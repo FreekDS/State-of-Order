@@ -1,6 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://brwibcdg1xhm7"]
+[gd_scene load_steps=3 format=3 uid="uid://brwibcdg1xhm7"]
 
 [ext_resource type="Script" path="res://UI/components/scripts/SingleBusVolumeSlider.gd" id="1_gfhjc"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yq8go"]
+bg_color = Color(0.654232, 0.654232, 0.654232, 1)
 
 [node name="SingleBusVolumeSlider" type="HBoxContainer"]
 offset_right = 90.0
@@ -23,6 +26,7 @@ layout_mode = 2
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 size_flags_vertical = 4
+theme_override_styles/grabber_area = SubResource("StyleBoxFlat_yq8go")
 value = 50.0
 
 [connection signal="value_changed" from="HSlider" to="." method="_on_h_slider_value_changed"]

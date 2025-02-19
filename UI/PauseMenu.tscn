@@ -1,0 +1,120 @@
+[gd_scene load_steps=10 format=3 uid="uid://dg7abm7180wkv"]
+
+[ext_resource type="Texture2D" uid="uid://c75pdmv73elb4" path="res://Textures/rule_paper.png" id="1_0k282"]
+[ext_resource type="Script" path="res://UI/scripts/pause_menu.gd" id="1_2a14r"]
+[ext_resource type="PackedScene" uid="uid://duwfs4j1ne263" path="res://UI/components/single_rule.tscn" id="3_saoxm"]
+[ext_resource type="PackedScene" uid="uid://br4o8j3bbcfll" path="res://UI/components/SettingsMenu.tscn" id="4_ayb42"]
+[ext_resource type="Texture2D" uid="uid://shinf46v20y6" path="res://Textures/settings.png" id="5_d7ct1"]
+[ext_resource type="Texture2D" uid="uid://c5y0do8spdgy0" path="res://Textures/settings_disabled.png" id="6_h10mj"]
+
+[sub_resource type="Animation" id="Animation_erma2"]
+resource_name = "show"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("RuleList:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.6, 0.766667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(70, 400), Vector2(70, 20), Vector2(70, 70)]
+}
+
+[sub_resource type="Animation" id="Animation_am7dp"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("RuleList:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(70, 400)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_cc61p"]
+_data = {
+"RESET": SubResource("Animation_am7dp"),
+"show": SubResource("Animation_erma2")
+}
+
+[node name="PauseMenu" type="Control"]
+process_mode = 3
+z_index = 10
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_2a14r")
+
+[node name="RuleList" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.242
+anchor_top = 1.0
+anchor_right = 0.242
+anchor_bottom = 1.0
+offset_left = -84.88
+offset_top = 40.0
+offset_right = 225.12
+offset_bottom = 442.0
+grow_vertical = 0
+texture = ExtResource("1_0k282")
+
+[node name="MarginContainer" type="MarginContainer" parent="RuleList"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 75
+theme_override_constants/margin_top = 20
+
+[node name="RuleList" type="VBoxContainer" parent="RuleList/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="SingleRule" parent="RuleList/MarginContainer/RuleList" instance=ExtResource("3_saoxm")]
+layout_mode = 2
+
+[node name="SingleRule2" parent="RuleList/MarginContainer/RuleList" instance=ExtResource("3_saoxm")]
+layout_mode = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+process_mode = 3
+libraries = {
+"": SubResource("AnimationLibrary_cc61p")
+}
+
+[node name="SettingsButton" type="TextureButton" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -57.0
+offset_top = -82.0
+offset_right = -2.0
+offset_bottom = -26.0
+grow_horizontal = 0
+grow_vertical = 0
+texture_normal = ExtResource("5_d7ct1")
+texture_pressed = ExtResource("6_h10mj")
+texture_hover = ExtResource("6_h10mj")
+
+[node name="Settings" parent="." instance=ExtResource("4_ayb42")]
+visible = false
+layout_mode = 1
+mouse_filter = 0
+
+[connection signal="pressed" from="SettingsButton" to="." method="_on_settings_button_pressed"]
+[connection signal="closeRequest" from="Settings" to="." method="_on_settings_close_request"]

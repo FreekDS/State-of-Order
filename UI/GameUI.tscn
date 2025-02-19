@@ -229,7 +229,9 @@ theme_override_constants/margin_bottom = 20
 
 [node name="Channel" type="RichTextLabel" parent="ChannelContainer"]
 layout_mode = 2
-text = "Channel0"
+bbcode_enabled = true
+text = "Channel0  
+[font_size=10]P to pause"
 fit_content = true
 autowrap_mode = 0
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://dkydrawijeyqe"]
+[gd_scene load_steps=20 format=3 uid="uid://dkydrawijeyqe"]
 
 [ext_resource type="PackedScene" uid="uid://vfkensc2u1h1" path="res://UI/GameUI.tscn" id="1_2ob6e"]
 [ext_resource type="Script" path="res://Game/scripts/time_manager.gd" id="1_5ff1s"]
@@ -13,9 +13,11 @@
 [ext_resource type="Script" path="res://Game/scripts/politiezone_klein_brabant.gd" id="7_tagq4"]
 [ext_resource type="PackedScene" uid="uid://ilr4hbnewu7c" path="res://entities/dePolies/Politie.tscn" id="8_w3de5"]
 [ext_resource type="PackedScene" uid="uid://bq1e5kfxn4lle" path="res://decorations/hekker.tscn" id="9_s70as"]
+[ext_resource type="PackedScene" uid="uid://dg7abm7180wkv" path="res://UI/PauseMenu.tscn" id="9_vtdpc"]
 [ext_resource type="PackedScene" uid="uid://c0nf64sqguqsh" path="res://decorations/Tree1.tscn" id="10_fhypo"]
 [ext_resource type="Texture2D" uid="uid://dcv03si8yomb3" path="res://Textures/buldings_1.png" id="12_rcx3c"]
 [ext_resource type="Texture2D" uid="uid://balnyvlsal5gi" path="res://Textures/buldings_2.png" id="13_tv7ae"]
+[ext_resource type="Script" path="res://Game/scripts/floaty_text_spawner.gd" id="18_fkr3s"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_rk6gf"]
 shader = ExtResource("5_r6mn3")
@@ -124,16 +126,10 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Distortion" type="ColorRect" parent="NavigationRegion/UILayer"]
-visible = false
-material = SubResource("ShaderMaterial_rk6gf")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
 [node name="GameUI" parent="NavigationRegion/UILayer" instance=ExtResource("1_2ob6e")]
+
+[node name="PauseMenu" parent="NavigationRegion/UILayer" instance=ExtResource("9_vtdpc")]
+visible = false
 
 [node name="decorations" type="Node2D" parent="NavigationRegion"]
 y_sort_enabled = true
@@ -293,6 +289,9 @@ position = Vector2(-227, 71)
 
 [node name="Politie3" parent="NavigationRegion/Politiezone Klein Brabant" instance=ExtResource("8_w3de5")]
 position = Vector2(396, -93)
+
+[node name="FloatyTextSpawner" type="Node2D" parent="."]
+script = ExtResource("18_fkr3s")
 
 [connection signal="timeout" from="TimeManager/Timer" to="TimeManager" method="_on_timer_timeout"]
 [connection signal="edgeNoLongerHit" from="Camera" to="NavigationRegion/UILayer/GameUI" method="_on_camera_edge_no_longer_hit"]

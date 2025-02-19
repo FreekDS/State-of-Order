@@ -12,6 +12,11 @@ const WOMEN_SHORTS = [
 	6,7,8,9
 ]
 
+
+const UNNATURAL_HAIR = [
+	3,7
+]
+
 # Faces that can only be used for male characters
 const ONLY_MALE_FACES = [
 	7
@@ -64,7 +69,7 @@ func makeWomen():
 	
 	while face.frame_coords.x in ONLY_MALE_FACES:
 		face.frame_coords.x = randi_range(0, face.hframes-1)
-	
+		
 
 func makeMen():
 	randomOutfit()
@@ -76,6 +81,8 @@ func makeMen():
 func makeWearYellow():
 	shirt.frame_coords.x = YELLOW_SHIRT
 
+func giveUnNaturalHair():
+	hair.frame_coords.x = UNNATURAL_HAIR.pick_random()
 
 func wearsYellow() -> bool:
 	return shirt.frame_coords.x == YELLOW_SHIRT

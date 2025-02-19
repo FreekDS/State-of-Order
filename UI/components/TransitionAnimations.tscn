@@ -1,12 +1,13 @@
-[gd_scene load_steps=7 format=3 uid="uid://bvmslb2hf1aih"]
+[gd_scene load_steps=12 format=3 uid="uid://bvmslb2hf1aih"]
 
 [ext_resource type="Shader" path="res://UI/components/shaders/Transition.gdshader" id="1_ou77r"]
+[ext_resource type="Shader" path="res://Game/shaders/distortionachtig.gdshader" id="2_0wxt5"]
 
 [sub_resource type="GDScript" id="GDScript_v15m0"]
 script/source = "## Load this as autoload to have a visual transition effect
 extends CanvasLayer
 
-@onready var anim : AnimationPlayer = $FadeTransition/Animations
+@onready var anim : AnimationPlayer = $Distortion/AnimationPlayer
 
 signal done(isOpen: bool)
 
@@ -30,6 +31,47 @@ func close():
 	)
 	closed = true
 "
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_flo7b"]
+shader = ExtResource("2_0wxt5")
+shader_parameter/step_range = 0.0
+
+[sub_resource type="Animation" id="Animation_1odvk"]
+resource_name = "fade"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/step_range")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+
+[sub_resource type="Animation" id="Animation_f4cpn"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/step_range")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jytbi"]
+_data = {
+"RESET": SubResource("Animation_f4cpn"),
+"fade": SubResource("Animation_1odvk")
+}
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qc4cc"]
 shader = ExtResource("1_ou77r")
@@ -76,7 +118,22 @@ _data = {
 process_mode = 3
 script = SubResource("GDScript_v15m0")
 
+[node name="Distortion" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_flo7b")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Distortion"]
+libraries = {
+"": SubResource("AnimationLibrary_jytbi")
+}
+
 [node name="FadeTransition" type="ColorRect" parent="."]
+visible = false
 material = SubResource("ShaderMaterial_qc4cc")
 anchors_preset = 15
 anchor_right = 1.0

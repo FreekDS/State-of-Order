@@ -93,6 +93,17 @@ func setScared(scared: bool):
 func isScared() -> bool:
 	return face.frame_coords.y == FACE_ROW_SCARED
 
+func getHairColor():
+	
+	const PIXEL_IN_CELL = Vector2i(10, 4)
+	
+	var image = hair.texture.get_image()
+	var cell_size = image.get_width() / hair.hframes
+	var currentCellx = cell_size * hair.frame_coords.x
+	
+	return image.get_pixel(currentCellx + PIXEL_IN_CELL.x, PIXEL_IN_CELL.y)
+	
+
 #func _input(event: InputEvent) -> void:
 	#if event.is_action_pressed("ui_accept"):
 		#randomOutfit()

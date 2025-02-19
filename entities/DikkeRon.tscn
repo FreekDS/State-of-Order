@@ -220,7 +220,7 @@ shape = SubResource("RectangleShape2D_jm8sb")
 [node name="DikkeRonSprites" parent="." instance=ExtResource("12_i5n12")]
 
 [node name="Hair" type="Node2D" parent="DikkeRonSprites" node_paths=PackedStringArray("dikkeRon", "sprite", "highlight", "speechBubble")]
-show_behind_parent = true
+visible = false
 position = Vector2(0, -20)
 script = ExtResource("3_jracq")
 dikkeRon = NodePath("../..")

@@ -21,6 +21,8 @@ var prevpos:Vector2=Vector2(0,0)
 
 var DragMode : bool = false
 
+var color : Color = Color.RED
+
 var spriteLocBeforeMove : Vector2= Vector2(0,0)
 
 
@@ -61,9 +63,10 @@ func _draw() -> void:
 		if DragMode and i==len(points):
 			continue
 		var point=points[i]
-		draw_circle(point[2],point[3],Color.RED)
+		draw_circle(point[2],point[3],color)
 	
 func EnableDragmode() -> void:
+	show()
 	if DragMode:
 		return
 	spriteLocBeforeMove=sprite.offset
@@ -73,6 +76,7 @@ func EnableDragmode() -> void:
 	DragMode = true
 	
 func DisableDragmode() -> void:
+	hide()
 	if not DragMode:
 		return
 	applyOffset(spriteLocBeforeMove)

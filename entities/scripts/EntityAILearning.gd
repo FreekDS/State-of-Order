@@ -33,7 +33,7 @@ func isMouseInDaHouse():
 	var mousePos := get_local_mouse_position()
 	return sprite.get_rect().has_point(mousePos) and pickable
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if velocity.x < 0:
 		sprite.faceLeft()
 	if velocity.x > 0:

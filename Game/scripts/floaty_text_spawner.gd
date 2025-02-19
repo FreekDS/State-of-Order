@@ -4,11 +4,11 @@ const floatyText = preload("res://UI/components/floating_text.tscn")
 
 func _ready() -> void:
 	EventBus.wrongCapture.connect(
-		func guyCaptured(who: DikkeRon, score):
+		func guyCaptured(who: DikkeRon, _score):
 			spawnText("[color=red]- social credit", who)
 	)
 	EventBus.successfulCapture.connect(
-		func guyCaptured(who: DikkeRon, score):
+		func guyCaptured(who: DikkeRon, _score):
 			spawnText("[color=green]+ social credit", who)
 	)
 

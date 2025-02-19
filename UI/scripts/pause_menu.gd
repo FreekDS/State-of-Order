@@ -42,7 +42,6 @@ func _input(event: InputEvent) -> void:
 			show() # TODO: actual animation
 			TransitionAnimations.open()
 			await TransitionAnimations.done
-			print("jepppers")
 			animations.play("show")
 			
 		else:
@@ -82,12 +81,11 @@ func populateRules(dayData: DayResource):
 		child.visible = false
 		child.queue_free()
 		
-	for tr in dayData.disallowedTraits:
-		ruleList.add_child(createSingleRule(tr, TRANSLATION_TRAITS))
+	for trt in dayData.disallowedTraits:
+		ruleList.add_child(createSingleRule(trt, TRANSLATION_TRAITS))
 	
-	for tr in dayData.disallowedActions:
-		print("jep")
-		ruleList.add_child(createSingleRule(tr, TRANSLATION_STATES))
+	for act in dayData.disallowedActions:
+		ruleList.add_child(createSingleRule(act, TRANSLATION_STATES))
 
 
 func _on_settings_button_pressed() -> void:

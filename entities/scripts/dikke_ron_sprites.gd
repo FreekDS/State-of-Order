@@ -105,7 +105,7 @@ func getHairColor():
 	const PIXEL_IN_CELL = Vector2i(10, 4)
 	
 	var image = hair.texture.get_image()
-	var cell_size = image.get_width() / hair.hframes
+	var cell_size = round(image.get_width() / float(hair.hframes))
 	var currentCellx = cell_size * hair.frame_coords.x
 	
 	return image.get_pixel(currentCellx + PIXEL_IN_CELL.x, PIXEL_IN_CELL.y)

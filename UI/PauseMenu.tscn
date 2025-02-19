@@ -7,21 +7,6 @@
 [ext_resource type="Texture2D" uid="uid://shinf46v20y6" path="res://Textures/settings.png" id="5_d7ct1"]
 [ext_resource type="Texture2D" uid="uid://c5y0do8spdgy0" path="res://Textures/settings_disabled.png" id="6_h10mj"]
 
-[sub_resource type="Animation" id="Animation_erma2"]
-resource_name = "show"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("RuleList:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.6, 0.766667),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector2(70, 400), Vector2(70, 20), Vector2(70, 70)]
-}
-
 [sub_resource type="Animation" id="Animation_am7dp"]
 length = 0.001
 tracks/0/type = "value"
@@ -35,6 +20,22 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector2(70, 400)]
+}
+
+[sub_resource type="Animation" id="Animation_erma2"]
+resource_name = "show"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("RuleList:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.133333, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(70, 400), Vector2(70, 20), Vector2(70, 70)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_cc61p"]

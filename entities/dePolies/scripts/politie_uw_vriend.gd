@@ -20,7 +20,6 @@ func noLongerAcceptStouterik():
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_released("grab_character") and pendingStouterik != null:
-		print("gevangen")
 		EventBus.guyCaptured.emit(pendingStouterik)
 		pendingStouterik.die()
 		pendingStouterik = null

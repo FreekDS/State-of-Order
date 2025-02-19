@@ -1,6 +1,7 @@
 class_name NPCState
 extends Node
 
+@warning_ignore("unused_signal")
 signal switchState(oldState: NPCState)
 
 @export var character : CharacterBody2D
@@ -10,11 +11,11 @@ signal switchState(oldState: NPCState)
 
 var possibleNextStates : Array[NPCStateManager.STATE] = []
 
-func setup(char : CharacterBody2D,
+func setup(ch : CharacterBody2D,
 		   anim : AnimationPlayer,
 		   nav : NavigationAgent2D,
 		   debugLabel : Label):
-	character = char
+	character = ch
 	animations = anim
 	navAgent = nav
 	debug = debugLabel

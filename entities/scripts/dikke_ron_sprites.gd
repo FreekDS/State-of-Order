@@ -1,3 +1,4 @@
+class_name DikkeRonSprites
 extends Sprite2D
 
 
@@ -18,7 +19,7 @@ const ONLY_MALE_FACES = [
 
 const YELLOW_SHIRT = 4
 
-@onready var hair: Sprite2D = $Hair
+@onready var hair: Sprite2D = $Hairs
 @onready var face: Sprite2D = $Face
 @onready var shirt: Sprite2D = $Shirt
 @onready var pants: Sprite2D = $Pants

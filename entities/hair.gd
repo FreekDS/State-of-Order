@@ -89,5 +89,7 @@ func applyOffset(newOffset):
 		
 		if spr is SpeechBubble:
 			spr.position = newOffset + Vector2(0, -19) # size of speechbubble
+		elif spr is DikkeRonSprites:
+			spr.updatOffset(newOffset)
 		else:
 			spr.offset = newOffset

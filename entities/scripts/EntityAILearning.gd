@@ -3,10 +3,10 @@ extends CharacterBody2D
 
 @onready var animations: AnimationPlayer = $AnimationPlayer
 @onready var collision: CollisionShape2D = $CollisionShape2D
-@onready var highlight: Sprite2D = $Sprite2D/Highlight
-@onready var sprite: Sprite2D = $Sprite2D
+@onready var highlight: Sprite2D = $DikkeRonSprites/Highlight
+@onready var sprite: DikkeRonSprites = $DikkeRonSprites
 
-@onready var hair: Node2D = $Sprite2D/Hair
+@onready var hair: Node2D = $DikkeRonSprites/Hair
 @onready var stateManager: NPCStateManager = $StateManager
 @onready var traitManager: NPCTraitManager = $TraitManager
 @onready var speechbubble: SpeechBubble = $Speechbubble
@@ -32,9 +32,14 @@ func isMouseInDaHouse():
 	var mousePos := get_local_mouse_position()
 	return sprite.get_rect().has_point(mousePos) and pickable
 
+func _process(delta: float) -> void:
+	if velocity.x < 0:
+		sprite.faceLeft()
+	if velocity.x > 0:
+		sprite.faceRight()
 
 func _physics_process(_delta: float) -> void:
-	if isMouseInDaHouse():
+	if isMouseInDaHouse() and not dead:
 		highlight.show()
 		helpIkBenGeselecteerd.emit(self)
 		selected = true
@@ -94,12 +99,10 @@ func endDrag() -> void:
 
 func die():
 	dead = true
+	animations.play("die", -1, 1.5)
 	animations.animation_finished.connect(
 		func(_anim): queue_free(), CONNECT_ONE_SHOT
 	)
-	animations.play("die", -1, 1.5)
-
-
 
 func obtainTraits() -> Array[NPCTraitManager.TRAIT]:
 	return traitManager.getTraits()

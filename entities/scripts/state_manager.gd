@@ -1,7 +1,7 @@
 class_name NPCStateManager
 extends Node2D
 
-@export var characterBody : CharacterBody2D
+@export var characterBody : DikkeRon
 @export var navigationAgent: NavigationAgent2D
 @export var animations : AnimationPlayer
 
@@ -81,6 +81,10 @@ func _on_state_switch_requested(oldState: NPCState):
 
 
 func _physics_process(_delta: float) -> void:
+	if characterBody.dead:
+		# not processing any state changes anymore if dead
+		return
+		
 	if _state != null:
 		_state.tick()
 

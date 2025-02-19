@@ -30,7 +30,7 @@ hframes = 10
 vframes = 5
 frame = 10
 
-[node name="Hair" type="Sprite2D" parent="."]
+[node name="Hairs" type="Sprite2D" parent="."]
 texture = ExtResource("2_56j6r")
 offset = Vector2(0, -12)
 hframes = 10

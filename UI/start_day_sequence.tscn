@@ -1,0 +1,184 @@
+[gd_scene load_steps=11 format=3 uid="uid://dg3p6rcp0ut81"]
+
+[ext_resource type="Texture2D" uid="uid://c75pdmv73elb4" path="res://Textures/rule_paper.png" id="1_01dm7"]
+[ext_resource type="Script" path="res://UI/start_day_sequence.gd" id="1_utdq6"]
+[ext_resource type="PackedScene" uid="uid://duwfs4j1ne263" path="res://UI/components/single_rule.tscn" id="2_n8id2"]
+[ext_resource type="Texture2D" uid="uid://cpp3iuqcr7enr" path="res://Textures/all_my_fellas.png" id="4_0xftj"]
+
+[sub_resource type="Animation" id="Animation_kgd0h"]
+resource_name = "start"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("RuleList:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.133333, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(70, 400), Vector2(70, 20), Vector2(70, 70)]
+}
+
+[sub_resource type="Animation" id="Animation_j80ct"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("RuleList:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(70, 400)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_f62v6"]
+_data = {
+"RESET": SubResource("Animation_j80ct"),
+"start": SubResource("Animation_kgd0h")
+}
+
+[sub_resource type="Animation" id="Animation_5qcqq"]
+resource_name = "bop"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CarpeDiem:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.233333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.02, 1.02)]
+}
+
+[sub_resource type="Animation" id="Animation_7oin0"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CarpeDiem:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0jle7"]
+_data = {
+"RESET": SubResource("Animation_7oin0"),
+"bop": SubResource("Animation_5qcqq")
+}
+
+[node name="StartDaySequence" type="Control" node_paths=PackedStringArray("ruleList", "unnaturalhairtemplate")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_utdq6")
+ruleList = NodePath("RuleList/MarginContainer/RuleList")
+unnaturalhairtemplate = NodePath("UnnaturalHairTemplate")
+
+[node name="RuleList" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.242
+anchor_top = 1.0
+anchor_right = 0.242
+anchor_bottom = 1.0
+offset_left = -84.88
+offset_top = 40.0
+offset_right = 225.12
+offset_bottom = 442.0
+grow_vertical = 0
+texture = ExtResource("1_01dm7")
+
+[node name="MarginContainer" type="MarginContainer" parent="RuleList"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 75
+theme_override_constants/margin_top = 20
+
+[node name="RuleList" type="VBoxContainer" parent="RuleList/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="SingleRule" parent="RuleList/MarginContainer/RuleList" instance=ExtResource("2_n8id2")]
+visible = false
+layout_mode = 2
+
+[node name="SingleRule2" parent="RuleList/MarginContainer/RuleList" instance=ExtResource("2_n8id2")]
+visible = false
+layout_mode = 2
+
+[node name="DayCount" type="RichTextLabel" parent="RuleList"]
+layout_mode = 0
+offset_left = 62.0
+offset_top = 4.0
+offset_right = 163.0
+offset_bottom = 44.0
+bbcode_enabled = true
+text = "[color=black]MANIFESTO DAY 0"
+fit_content = true
+autowrap_mode = 0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_f62v6")
+}
+
+[node name="TempRules" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="UnnaturalHairTemplate" type="Sprite2D" parent="."]
+visible = false
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("4_0xftj")
+offset = Vector2(5, 16)
+hframes = 10
+vframes = 5
+frame = 2
+
+[node name="CarpeDiem" type="RichTextLabel" parent="."]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -40.0
+grow_horizontal = 0
+grow_vertical = 0
+pivot_offset = Vector2(122.705, 19.84)
+theme_override_constants/outline_size = 2
+bbcode_enabled = true
+text = "[center]<< Press the any key to seize the day >>
+[font_size=8]carpe diem"
+fit_content = true
+autowrap_mode = 0
+
+[node name="Bop" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_0jle7")
+}
+autoplay = "bop"

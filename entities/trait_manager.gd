@@ -12,6 +12,12 @@ enum TRAIT {
 
 var _traits : Array[TRAIT] = []
 
+func obtainTraitsFromSprites():
+	if dikkeRonSprites.wearsYellow():
+		_traits.append(TRAIT.WEARS_YELLOW)
+	if dikkeRonSprites.hasUnnaturalHair():
+		_traits.append(TRAIT.NON_NATURAL_HAIR)
+
 
 func addTrait(traitt: TRAIT):
 	if _traits.has(traitt): return

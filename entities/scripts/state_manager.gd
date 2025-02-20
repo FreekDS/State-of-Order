@@ -74,6 +74,7 @@ func _ready():
 	_state.enter()
 
 
+
 func _on_state_switch_requested(oldState: NPCState):
 	oldState.exit()
 	var counter=0
@@ -119,7 +120,7 @@ func enforceNextState():
 	
 #Voor praten of schieten ofzo moet ge meerdere characters samen iets laten doen
 func enforceState(sate: STATE):
-	_state.exit()	
+	_state.exit()
 	_state = stateMap[sate]
 	_state.enter()
 

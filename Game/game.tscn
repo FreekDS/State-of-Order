@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://dkydrawijeyqe"]
+[gd_scene load_steps=23 format=3 uid="uid://dkydrawijeyqe"]
 
 [ext_resource type="PackedScene" uid="uid://vfkensc2u1h1" path="res://UI/GameUI.tscn" id="1_2ob6e"]
 [ext_resource type="Script" path="res://Game/scripts/time_manager.gd" id="1_5ff1s"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://Game/CameraController.gd" id="1_hw18y"]
 [ext_resource type="Script" path="res://Game/scripts/CharacterPicker.gd" id="1_iuers"]
 [ext_resource type="Texture2D" uid="uid://xjnhaqsrm5xk" path="res://Textures/grond.png" id="1_n0ep5"]
+[ext_resource type="Script" path="res://Game/game.gd" id="1_voo7o"]
 [ext_resource type="Resource" uid="uid://815ki2igdjnh" path="res://resources/day1.tres" id="2_1wdd8"]
 [ext_resource type="NavigationPolygon" uid="uid://nxn7qiavic2y" path="res://Game/navigation/navigationPolygon.tres" id="2_va8h4"]
 [ext_resource type="PackedScene" uid="uid://dylnvnx8f0goe" path="res://entities/DikkeRon.tscn" id="3_gqgcv"]
@@ -29,6 +30,7 @@ shader_parameter/vignette_rgb = Color(0, 0, 0, 1)
 
 [node name="Game" type="Node2D"]
 y_sort_enabled = true
+script = ExtResource("1_voo7o")
 
 [node name="GuySpawner" type="Node" parent="." node_paths=PackedStringArray("targetNode", "navmap")]
 script = ExtResource("1_8lkux")

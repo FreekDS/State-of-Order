@@ -49,17 +49,25 @@ func updatOffset(newOffset: Vector2):
 		sprite.offset = newOffset
 
 func randomOutfit():
+	
+	pants.frame_coords.y = PANTS_ROW
+	pants.frame_coords.x = randi_range(0, pants.hframes-1)
+	
+	if pants.frame_coords.x in WOMEN_SHORTS:
+		isWomen = true
+	
 	hair.frame_coords.y = HAIR_ROW
 	hair.frame_coords.x = randi_range(0, hair.hframes-1)
 	
 	face.frame_coords.y = FACE_ROW_NORMAL
 	face.frame_coords.x = randi_range(0, face.hframes-1)
 	
+	if isWomen:
+		while face.frame_coords.x in ONLY_MALE_FACES:
+			face.frame_coords.x = randi_range(0, face.hframes-1)
+	
 	shirt.frame_coords.y = SHIRT_ROW
 	shirt.frame_coords.x = randi_range(0, shirt.hframes-1)
-
-	pants.frame_coords.y = PANTS_ROW
-	pants.frame_coords.x = randi_range(0, pants.hframes-1)
 
 
 func makeWomen():
@@ -83,6 +91,9 @@ func makeWearYellow():
 
 func giveUnNaturalHair():
 	hair.frame_coords.x = UNNATURAL_HAIR.pick_random()
+	
+func hasUnnaturalHair():
+	return hair.frame_coords.x in UNNATURAL_HAIR
 
 func wearsYellow() -> bool:
 	return shirt.frame_coords.x == YELLOW_SHIRT

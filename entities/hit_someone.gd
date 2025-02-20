@@ -26,7 +26,8 @@ func _ready() -> void:
 		NPCStateManager.STATE.STANDSTILL, 
 		NPCStateManager.STATE.WANDER_AIMLESS,
 		#NPCStateManager.STATE.HIT_SOMEONE, #twe keer vecht? pakt van niet
-		NPCStateManager.STATE.TALK_TO_SOMEONE
+		NPCStateManager.STATE.TALK_TO_SOMEONE,
+		NPCStateManager.STATE.HODL_GUN
 	]
 #wandelen naar de neighbour niet nodig, want na het praten staat ge er al naast normaal
 func enter():
@@ -43,6 +44,9 @@ func enter():
 			if NPCStateManager.STATE.HIT_SOMEONE == buur.stateManager._stateType:
 				neighbourchosen = buur
 				break
+		if neighbourchosen == null:
+			print("meneer wilt vechten met de wind, pakt van niet")
+			switchState.emit(self)
 		fightLengthTimer.start(maxFightTime)
 	
 	if neighbourchosen == null:
@@ -57,6 +61,8 @@ func enter():
 
 func tick(_delta: float):
 	character.velocity = Vector2.ZERO
+	if neighbourchosen == null:
+		switchState.emit(self)
 	vuistSprite.rotation=180+neighbourchosen.global_position.angle_to_point(self.character.global_position)
 
 func exit():

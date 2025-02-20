@@ -28,9 +28,10 @@ var babbel_words = [
 var active = false
 func _ready() -> void:
 	possibleNextStates = [
-		#NPCStateManager.STATE.STANDSTILL, 
-		#NPCStateManager.STATE.WANDER_AIMLESS,
+		NPCStateManager.STATE.STANDSTILL, 
+		NPCStateManager.STATE.WANDER_AIMLESS,
 		NPCStateManager.STATE.HIT_SOMEONE,
+		NPCStateManager.STATE.HODL_GUN,
 		#NPCStateManager.STATE.TALK_TO_SOMEONE
 	]
 
@@ -41,7 +42,7 @@ func enter():
 		talkLengthTimer.start(randf_range(minTalkTime, maxTalkTime))
 	else:
 		debug.text = "PRATEN follow"
-		# als ge niet initiator zijt dan  wacht ge het max
+		# als ge niet initiator zijt dan wacht ge het max
 		talkLengthTimer.start(maxTalkTime)
 	
 	

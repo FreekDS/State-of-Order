@@ -4,10 +4,11 @@ extends Node2D
 @export var sprite:Sprite2D
 @export var highlight: Sprite2D
 @export var speechBubble:Sprite2D
+@export var geweer:Sprite2D
 @export var bouncyness:float
 
 @onready
-var nodesToOffset : Array[Sprite2D] = [sprite, highlight, speechBubble]
+var nodesToOffset : Array[Sprite2D] = [sprite, highlight, speechBubble, geweer]
 
 # wanted offset, max distance, actual pos, radius
 var points = [

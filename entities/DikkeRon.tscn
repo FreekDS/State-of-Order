@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://dylnvnx8f0goe"]
+[gd_scene load_steps=34 format=3 uid="uid://dylnvnx8f0goe"]
 
 [ext_resource type="Script" path="res://entities/scripts/EntityAILearning.gd" id="1_nkst8"]
 [ext_resource type="PackedScene" uid="uid://sa773o5v8h1g" path="res://decorations/Speechbubble.tscn" id="2_joovv"]
@@ -16,6 +16,8 @@
 [ext_resource type="Texture2D" uid="uid://dynwv584ldh3w" path="res://Textures/vuist.png" id="10_sod6u"]
 [ext_resource type="PackedScene" uid="uid://4fa13uf524uu" path="res://entities/DikkeRonSprites.tscn" id="12_i5n12"]
 [ext_resource type="Script" path="res://entities/scripts/states/incoming.gd" id="16_wslee"]
+[ext_resource type="Texture2D" uid="uid://cocjyc71h37pu" path="res://Textures/gewir2.png" id="17_k8mtw"]
+[ext_resource type="Script" path="res://entities/hodl_gun.gd" id="18_yn2ai"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_hrdx7"]
 radius = 94.6414
@@ -297,7 +299,7 @@ visible = false
 position = Vector2(-13, 1)
 texture = ExtResource("10_sod6u")
 
-[node name="Hair" type="Node2D" parent="DikkeRonSprites" node_paths=PackedStringArray("dikkeRon", "sprite", "highlight", "speechBubble")]
+[node name="Hair" type="Node2D" parent="DikkeRonSprites" node_paths=PackedStringArray("dikkeRon", "sprite", "highlight", "speechBubble", "geweer")]
 visible = false
 position = Vector2(0, -20)
 script = ExtResource("3_jracq")
@@ -305,6 +307,7 @@ dikkeRon = NodePath("../..")
 sprite = NodePath("..")
 highlight = NodePath("../Highlight")
 speechBubble = NodePath("../../Speechbubble")
+geweer = NodePath("../Gewir2")
 bouncyness = 1.5
 
 [node name="Highlight" type="Sprite2D" parent="DikkeRonSprites"]
@@ -313,6 +316,11 @@ show_behind_parent = true
 z_index = 1
 texture = ExtResource("3_67qvq")
 offset = Vector2(0, -12)
+
+[node name="Gewir2" type="Sprite2D" parent="DikkeRonSprites"]
+position = Vector2(0, 1)
+texture = ExtResource("17_k8mtw")
+offset = Vector2(4, -8)
 
 [node name="Speechbubble" parent="." instance=ExtResource("2_joovv")]
 position = Vector2(7, -33)
@@ -403,6 +411,21 @@ debug_color = Color(0.889671, 0.268976, 0.478346, 0.42)
 [node name="INCOMING" type="Node" parent="StateManager"]
 script = ExtResource("16_wslee")
 
+[node name="HODL_GUN" type="Node" parent="StateManager" node_paths=PackedStringArray("gunSprite", "speechBubble", "character", "navAgent", "debug")]
+script = ExtResource("18_yn2ai")
+gunSprite = NodePath("../../DikkeRonSprites/Gewir2")
+speechBubble = NodePath("../../Speechbubble")
+character = NodePath("../..")
+navAgent = NodePath("../../NavigationAgent2D")
+debug = NodePath("../../DEBUG")
+
+[node name="StateLength" type="Timer" parent="StateManager/HODL_GUN"]
+
+[node name="SpeechBubbleTimer" type="Timer" parent="StateManager/HODL_GUN"]
+
+[node name="MaxSingleDirTime" type="Timer" parent="StateManager/HODL_GUN"]
+wait_time = 5.0
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_vpypy")
@@ -423,3 +446,6 @@ autoplay = "run"
 [connection signal="timeout" from="StateManager/HIT_SOMEONE/HitTimer" to="StateManager/HIT_SOMEONE" method="_on_hit_timer_timeout"]
 [connection signal="timeout" from="StateManager/SWIM_IN_FOUNTAIN/SwimTime" to="StateManager/SWIM_IN_FOUNTAIN" method="_on_swim_time_timeout"]
 [connection signal="body_entered" from="StateManager/SWIM_IN_FOUNTAIN/FountainDetector" to="StateManager/SWIM_IN_FOUNTAIN" method="_on_fountain_detector_body_entered"]
+[connection signal="timeout" from="StateManager/HODL_GUN/StateLength" to="StateManager/HODL_GUN" method="_on_state_length_timeout"]
+[connection signal="timeout" from="StateManager/HODL_GUN/SpeechBubbleTimer" to="StateManager/HODL_GUN" method="_on_speech_bubble_timer_timeout"]
+[connection signal="timeout" from="StateManager/HODL_GUN/MaxSingleDirTime" to="StateManager/HODL_GUN" method="_on_max_single_dir_time_timeout"]

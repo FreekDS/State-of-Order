@@ -110,6 +110,15 @@ func getHairColor():
 	
 	return image.get_pixel(currentCellx + PIXEL_IN_CELL.x, PIXEL_IN_CELL.y)
 	
+	
+func showFaceOnly(visibility: bool):
+	self_modulate.a = 0 if visibility else 1
+	pants.visible = !visibility
+	shirt.visible = !visibility
+	
+	face.z_index = 1 if visibility else 0
+	hair.z_index = 1 if visibility else 0
+	
 
 #func _input(event: InputEvent) -> void:
 	#if event.is_action_pressed("ui_accept"):

@@ -18,6 +18,9 @@ var pickedUp := false
 signal helpIkBenGeselecteerd(who: DikkeRon)
 signal neverMindIkBenGedeselect(who: DikkeRon)
 
+signal dragEnded
+signal dragStarted
+
 var dead = false
 
 func _ready():
@@ -59,12 +62,16 @@ func startDrag() -> void:
 	
 	speechbubble.option = "😨"
 	speechbubble.open()
+	
+	dragStarted.emit()
 	stateManager.process_mode = Node.PROCESS_MODE_DISABLED
 	
 	hair.EnableDragmode()
 	pickedUp=true
 	animations.play("run", -1, 5.0)
 	
+
+
 func endDrag() -> void:
 	set_collision_layer_value(2, false)	# no longer interact with police
 	set_collision_layer_value(1, true)	# interact with others again
@@ -73,6 +80,7 @@ func endDrag() -> void:
 	hair.DisableDragmode()
 	
 	stateManager.process_mode = Node.PROCESS_MODE_INHERIT
+	dragEnded.emit()
 	
 	speechbubble.close()
 	

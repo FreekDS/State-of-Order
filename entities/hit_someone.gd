@@ -51,7 +51,7 @@ func enter():
 	speechBubble.option = boos_words.pick_random()
 	speechBubble.open()
 
-func tick():
+func tick(_delta: float):
 	character.velocity = Vector2.ZERO
 	vuistSprite.rotation=180+neighbourchosen.global_position.angle_to_point(self.character.global_position)
 

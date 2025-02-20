@@ -35,6 +35,7 @@ enum STATE {
 	STATE.TALK_TO_SOMEONE: $TALK_TO_SOMEONE,
 	STATE.STANDSTILL: $IDLE,
 	STATE.HIT_SOMEONE: $HIT_SOMEONE,
+	STATE.SWIM_IN_FONTAIN: $SWIM_IN_FOUNTAIN,
 }
 
 
@@ -67,7 +68,8 @@ func _ready():
 	set_physics_process(false)
 	set_physics_process.call_deferred(true)
 	
-	_state = stateMap[STATE.WANDER_AIMLESS]
+	_state = stateMap[STATE.SWIM_IN_FONTAIN]
+	_stateType = STATE.SWIM_IN_FONTAIN
 	_state.enter()
 
 
@@ -87,19 +89,24 @@ func _on_state_switch_requested(oldState: NPCState):
 	_state.enter()
 
 
-func _physics_process(_delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	if characterBody.dead:
 		# not processing any state changes anymore if dead
 		return
 		
 	if _state != null:
-		_state.tick()
+		_state.tick(delta)
 
 func recalculateRoute():
 	navigationAgent.target_position = navigationAgent.target_position
+
 	
 func getStates() -> Array[STATE]:
-	return [_stateType]
+	if _state.isMainActionBusy():
+		return [_stateType]
+	const fallback := STATE.STANDSTILL
+	return [fallback]
+
 
 func getViableNextStates():
 	return _state.possibleNextStates
@@ -133,3 +140,11 @@ func enforceState(sate: STATE):
 #		- Hond zonder leiband
 #	
 #	Na een actie lopen de guys mss gewoon weg? Guys die actie verricht hebben moogt ge ook nog pakken vr punten
+
+
+func _on_dikke_ron_drag_started() -> void:
+	_state.onDrag()
+
+
+func _on_dikke_ron_drag_ended() -> void:
+	_state.onDragEnd()

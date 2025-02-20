@@ -39,7 +39,7 @@ func enter():
 	animations.play("idle")
 
 
-func tick():
+func tick(delta: float):
 	character.velocity = Vector2.ZERO
 
 

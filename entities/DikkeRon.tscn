@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://dylnvnx8f0goe"]
+[gd_scene load_steps=32 format=3 uid="uid://dylnvnx8f0goe"]
 
 [ext_resource type="Script" path="res://entities/scripts/EntityAILearning.gd" id="1_nkst8"]
 [ext_resource type="PackedScene" uid="uid://sa773o5v8h1g" path="res://decorations/Speechbubble.tscn" id="2_joovv"]
@@ -11,11 +11,22 @@
 [ext_resource type="Script" path="res://entities/scripts/state_manager.gd" id="5_gy3v6"]
 [ext_resource type="Script" path="res://entities/trait_manager.gd" id="7_ay147"]
 [ext_resource type="Script" path="res://entities/hit_someone.gd" id="7_nuaoc"]
+[ext_resource type="Script" path="res://entities/scripts/states/swim_in_fountain.gd" id="9_lu0xe"]
+[ext_resource type="Texture2D" uid="uid://bn88r761sa15c" path="res://Textures/drouple.png" id="10_5mckd"]
 [ext_resource type="Texture2D" uid="uid://dynwv584ldh3w" path="res://Textures/vuist.png" id="10_sod6u"]
 [ext_resource type="PackedScene" uid="uid://4fa13uf524uu" path="res://entities/DikkeRonSprites.tscn" id="12_i5n12"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_hrdx7"]
 radius = 94.6414
+
+[sub_resource type="LabelSettings" id="LabelSettings_x6ajt"]
+font_color = Color(1, 1, 1, 0.431373)
+outline_size = 1
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jm8sb"]
+size = Vector2(3, 3)
 
 [sub_resource type="Animation" id="Animation_4ukmq"]
 resource_name = "RESET"
@@ -57,34 +68,6 @@ tracks/2/keys = {
 "values": [Vector2(-13, 1)]
 }
 
-[sub_resource type="Animation" id="Animation_7ocug"]
-resource_name = "hitRight"
-length = 0.5
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("../../DikkeRonSprites/Vuist:visible")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.466667),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [true, false]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("../../DikkeRonSprites/Vuist:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.466667),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(13, 0), Vector2(13, -27)]
-}
-
 [sub_resource type="Animation" id="Animation_ov8wk"]
 resource_name = "hit"
 length = 0.5
@@ -113,6 +96,34 @@ tracks/1/keys = {
 "values": [Vector2(0, 0), Vector2(0, -27)]
 }
 
+[sub_resource type="Animation" id="Animation_7ocug"]
+resource_name = "hitRight"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../../DikkeRonSprites/Vuist:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.466667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../../DikkeRonSprites/Vuist:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.466667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(13, 0), Vector2(13, -27)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_whagq"]
 _data = {
 "RESET": SubResource("Animation_4ukmq"),
@@ -120,14 +131,31 @@ _data = {
 "hitRight": SubResource("Animation_7ocug")
 }
 
-[sub_resource type="LabelSettings" id="LabelSettings_x6ajt"]
-font_color = Color(1, 1, 1, 0.431373)
-outline_size = 1
-outline_color = Color(0, 0, 0, 1)
-shadow_size = 0
+[sub_resource type="Curve" id="Curve_d6x4r"]
+_data = [Vector2(0.00437681, 1), 0.0, 0.0, 0, 0, Vector2(0.752547, 0.880703), -1.17082, -1.17082, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_jm8sb"]
-size = Vector2(3, 3)
+[sub_resource type="CurveTexture" id="CurveTexture_siyyi"]
+curve = SubResource("Curve_d6x4r")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_51yus"]
+particle_flag_align_y = true
+particle_flag_rotate_y = true
+particle_flag_disable_z = true
+angle_min = 1.07288e-05
+angle_max = 10.0
+velocity_pivot = Vector3(0, 1, 0)
+direction = Vector3(0, -1, 0)
+spread = 30.0
+initial_velocity_min = 30.0
+initial_velocity_max = 60.0
+gravity = Vector3(0, 98, 0)
+scale_min = 0.2
+scale_max = 0.8
+alpha_curve = SubResource("CurveTexture_siyyi")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rj142"]
+size = Vector2(95, 60)
 
 [sub_resource type="Animation" id="Animation_fiwkm"]
 length = 0.001
@@ -275,62 +303,6 @@ parent = NodePath("..")
 position = Vector2(0, -12)
 shape = SubResource("CircleShape2D_hrdx7")
 
-[node name="StateManager" type="Node2D" parent="." node_paths=PackedStringArray("characterBody", "navigationAgent", "animations", "detectOthers", "debug")]
-script = ExtResource("5_gy3v6")
-characterBody = NodePath("..")
-navigationAgent = NodePath("../NavigationAgent2D")
-animations = NodePath("../AnimationPlayer")
-detectOthers = NodePath("../DetectOthers")
-debug = NodePath("../DEBUG")
-
-[node name="WANDER_AIMLESS" type="Node" parent="StateManager"]
-script = ExtResource("3_6e7u3")
-
-[node name="MaxSingleDirTime" type="Timer" parent="StateManager/WANDER_AIMLESS"]
-wait_time = 5.0
-autostart = true
-
-[node name="IDLE" type="Node" parent="StateManager" node_paths=PackedStringArray("speechBubble")]
-script = ExtResource("4_jylb0")
-speechBubble = NodePath("../../Speechbubble")
-
-[node name="IdleTime" type="Timer" parent="StateManager/IDLE"]
-one_shot = true
-
-[node name="IdleEffect" type="Timer" parent="StateManager/IDLE"]
-wait_time = 2.0
-one_shot = true
-
-[node name="TALK_TO_SOMEONE" type="Node" parent="StateManager" node_paths=PackedStringArray("detectOthers", "speechBubble")]
-script = ExtResource("5_11s4v")
-detectOthers = NodePath("../../DetectOthers")
-speechBubble = NodePath("../../Speechbubble")
-
-[node name="TalkLengthTimer" type="Timer" parent="StateManager/TALK_TO_SOMEONE"]
-
-[node name="TalkBubbleTimer" type="Timer" parent="StateManager/TALK_TO_SOMEONE"]
-
-[node name="HIT_SOMEONE" type="Node" parent="StateManager" node_paths=PackedStringArray("detectOthers", "speechBubble", "vuistSprite", "character", "animations", "navAgent")]
-script = ExtResource("7_nuaoc")
-detectOthers = NodePath("../../DetectOthers")
-speechBubble = NodePath("../../Speechbubble")
-vuistSprite = NodePath("../../DikkeRonSprites/Vuist")
-character = NodePath("../..")
-animations = NodePath("HitAnimationPlayer")
-navAgent = NodePath("../../NavigationAgent2D")
-
-[node name="HitAnimationPlayer" type="AnimationPlayer" parent="StateManager/HIT_SOMEONE"]
-libraries = {
-"": SubResource("AnimationLibrary_whagq")
-}
-autoplay = "hit"
-
-[node name="TalkBubbleTimer" type="Timer" parent="StateManager/HIT_SOMEONE"]
-
-[node name="FightLengthTimer" type="Timer" parent="StateManager/HIT_SOMEONE"]
-
-[node name="HitTimer" type="Timer" parent="StateManager/HIT_SOMEONE"]
-
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 debug_enabled = true
 
@@ -375,12 +347,97 @@ offset = Vector2(0, -12)
 position = Vector2(7, -33)
 option = "[shake]😨"
 
+[node name="StateManager" type="Node2D" parent="." node_paths=PackedStringArray("characterBody", "navigationAgent", "animations", "detectOthers", "debug")]
+script = ExtResource("5_gy3v6")
+characterBody = NodePath("..")
+navigationAgent = NodePath("../NavigationAgent2D")
+animations = NodePath("../AnimationPlayer")
+detectOthers = NodePath("../DetectOthers")
+debug = NodePath("../DEBUG")
+
+[node name="WANDER_AIMLESS" type="Node" parent="StateManager"]
+script = ExtResource("3_6e7u3")
+
+[node name="MaxSingleDirTime" type="Timer" parent="StateManager/WANDER_AIMLESS"]
+wait_time = 5.0
+
+[node name="IDLE" type="Node" parent="StateManager" node_paths=PackedStringArray("speechBubble")]
+script = ExtResource("4_jylb0")
+speechBubble = NodePath("../../Speechbubble")
+
+[node name="IdleTime" type="Timer" parent="StateManager/IDLE"]
+one_shot = true
+
+[node name="IdleEffect" type="Timer" parent="StateManager/IDLE"]
+wait_time = 2.0
+one_shot = true
+
+[node name="TALK_TO_SOMEONE" type="Node" parent="StateManager" node_paths=PackedStringArray("detectOthers", "speechBubble")]
+script = ExtResource("5_11s4v")
+detectOthers = NodePath("../../DetectOthers")
+speechBubble = NodePath("../../Speechbubble")
+
+[node name="TalkLengthTimer" type="Timer" parent="StateManager/TALK_TO_SOMEONE"]
+
+[node name="TalkBubbleTimer" type="Timer" parent="StateManager/TALK_TO_SOMEONE"]
+
+[node name="HIT_SOMEONE" type="Node" parent="StateManager" node_paths=PackedStringArray("detectOthers", "speechBubble", "vuistSprite", "character", "animations", "navAgent")]
+script = ExtResource("7_nuaoc")
+detectOthers = NodePath("../../DetectOthers")
+speechBubble = NodePath("../../Speechbubble")
+vuistSprite = NodePath("../../DikkeRonSprites/Vuist")
+character = NodePath("../..")
+animations = NodePath("HitAnimationPlayer")
+navAgent = NodePath("../../NavigationAgent2D")
+
+[node name="HitAnimationPlayer" type="AnimationPlayer" parent="StateManager/HIT_SOMEONE"]
+libraries = {
+"": SubResource("AnimationLibrary_whagq")
+}
+autoplay = "hit"
+
+[node name="TalkBubbleTimer" type="Timer" parent="StateManager/HIT_SOMEONE"]
+
+[node name="FightLengthTimer" type="Timer" parent="StateManager/HIT_SOMEONE"]
+
+[node name="HitTimer" type="Timer" parent="StateManager/HIT_SOMEONE"]
+
+[node name="SWIM_IN_FOUNTAIN" type="Node2D" parent="StateManager"]
+script = ExtResource("9_lu0xe")
+minSwimTime = 3
+
+[node name="SwimTime" type="Timer" parent="StateManager/SWIM_IN_FOUNTAIN"]
+one_shot = true
+
+[node name="Splash" type="GPUParticles2D" parent="StateManager/SWIM_IN_FOUNTAIN"]
+z_index = 1
+position = Vector2(0, -10)
+emitting = false
+amount = 10
+process_material = SubResource("ParticleProcessMaterial_51yus")
+texture = ExtResource("10_5mckd")
+one_shot = true
+speed_scale = 1.2
+explosiveness = 1.0
+
+[node name="FountainDetector" type="Area2D" parent="StateManager/SWIM_IN_FOUNTAIN"]
+visible = false
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StateManager/SWIM_IN_FOUNTAIN/FountainDetector"]
+position = Vector2(0.5, -12)
+shape = SubResource("RectangleShape2D_rj142")
+debug_color = Color(0.889671, 0.268976, 0.478346, 0.42)
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_vpypy")
 }
 autoplay = "run"
 
+[connection signal="dragEnded" from="." to="StateManager" method="_on_dikke_ron_drag_ended"]
+[connection signal="dragStarted" from="." to="StateManager" method="_on_dikke_ron_drag_started"]
+[connection signal="target_reached" from="NavigationAgent2D" to="StateManager" method="_on_navigation_agent_2d_target_reached"]
 [connection signal="timeout" from="StateManager/WANDER_AIMLESS/MaxSingleDirTime" to="StateManager/WANDER_AIMLESS" method="_on_max_single_dir_time_timeout"]
 [connection signal="timeout" from="StateManager/IDLE/IdleTime" to="StateManager/IDLE" method="_on_idle_time_timeout"]
 [connection signal="timeout" from="StateManager/IDLE/IdleEffect" to="StateManager/IDLE" method="_on_idle_effect_timeout"]
@@ -390,4 +447,5 @@ autoplay = "run"
 [connection signal="timeout" from="StateManager/HIT_SOMEONE/TalkBubbleTimer" to="StateManager/HIT_SOMEONE" method="_on_talk_bubble_timer_timeout"]
 [connection signal="timeout" from="StateManager/HIT_SOMEONE/FightLengthTimer" to="StateManager/HIT_SOMEONE" method="_on_fight_length_timer_timeout"]
 [connection signal="timeout" from="StateManager/HIT_SOMEONE/HitTimer" to="StateManager/HIT_SOMEONE" method="_on_hit_timer_timeout"]
-[connection signal="target_reached" from="NavigationAgent2D" to="StateManager" method="_on_navigation_agent_2d_target_reached"]
+[connection signal="timeout" from="StateManager/SWIM_IN_FOUNTAIN/SwimTime" to="StateManager/SWIM_IN_FOUNTAIN" method="_on_swim_time_timeout"]
+[connection signal="body_entered" from="StateManager/SWIM_IN_FOUNTAIN/FountainDetector" to="StateManager/SWIM_IN_FOUNTAIN" method="_on_fountain_detector_body_entered"]

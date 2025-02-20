@@ -26,10 +26,11 @@ var active = false
 
 func _ready() -> void:
 	possibleNextStates = [
-		NPCStateManager.STATE.STANDSTILL, 
-		NPCStateManager.STATE.WANDER_AIMLESS,
-		NPCStateManager.STATE.TALK_TO_SOMEONE,
-		NPCStateManager.STATE.HIT_SOMEONE,
+		#NPCStateManager.STATE.STANDSTILL, 
+		#NPCStateManager.STATE.WANDER_AIMLESS,
+		#NPCStateManager.STATE.TALK_TO_SOMEONE,
+		#NPCStateManager.STATE.HIT_SOMEONE,
+		NPCStateManager.STATE.SHOOT_SOMEONE,
 	]
 
 

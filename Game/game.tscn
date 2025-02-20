@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://dkydrawijeyqe"]
+[gd_scene load_steps=23 format=3 uid="uid://dkydrawijeyqe"]
 
 [ext_resource type="PackedScene" uid="uid://vfkensc2u1h1" path="res://UI/GameUI.tscn" id="1_2ob6e"]
 [ext_resource type="Script" path="res://Game/scripts/time_manager.gd" id="1_5ff1s"]
@@ -7,9 +7,7 @@
 [ext_resource type="Script" path="res://Game/CameraController.gd" id="1_hw18y"]
 [ext_resource type="Script" path="res://Game/scripts/CharacterPicker.gd" id="1_iuers"]
 [ext_resource type="Texture2D" uid="uid://xjnhaqsrm5xk" path="res://Textures/grond.png" id="1_n0ep5"]
-[ext_resource type="Script" path="res://Game/game.gd" id="1_voo7o"]
 [ext_resource type="Resource" uid="uid://815ki2igdjnh" path="res://resources/day1.tres" id="2_1wdd8"]
-[ext_resource type="Script" path="res://resources/DayRuleResource.gd" id="2_puv3e"]
 [ext_resource type="NavigationPolygon" uid="uid://nxn7qiavic2y" path="res://Game/navigation/navigationPolygon.tres" id="2_va8h4"]
 [ext_resource type="PackedScene" uid="uid://dylnvnx8f0goe" path="res://entities/DikkeRon.tscn" id="3_gqgcv"]
 [ext_resource type="Shader" path="res://Game/shaders/vignette.gdshader" id="5_r6mn3"]
@@ -22,6 +20,7 @@
 [ext_resource type="Texture2D" uid="uid://balnyvlsal5gi" path="res://Textures/buldings_2.png" id="13_tv7ae"]
 [ext_resource type="Script" path="res://Game/scripts/floaty_text_spawner.gd" id="18_fkr3s"]
 [ext_resource type="PackedScene" uid="uid://dgx4yfq0frsf6" path="res://decorations/fountain.tscn" id="18_tqgm8"]
+[ext_resource type="Script" path="res://Game/cursor.gd" id="23_m7f27"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_rk6gf"]
 shader = ExtResource("5_r6mn3")
@@ -31,8 +30,6 @@ shader_parameter/vignette_rgb = Color(0, 0, 0, 1)
 
 [node name="Game" type="Node2D"]
 y_sort_enabled = true
-script = ExtResource("1_voo7o")
-days = Array[ExtResource("2_puv3e")]([null])
 
 [node name="GuySpawner" type="Node" parent="." node_paths=PackedStringArray("targetNode", "navmap")]
 script = ExtResource("1_8lkux")
@@ -313,6 +310,9 @@ position = Vector2(396, -93)
 
 [node name="FloatyTextSpawner" type="Node2D" parent="."]
 script = ExtResource("18_fkr3s")
+
+[node name="Cursor" type="Node" parent="."]
+script = ExtResource("23_m7f27")
 
 [connection signal="timeout" from="GuySpawner/PollGuyCount" to="GuySpawner" method="_on_poll_guy_count_timeout"]
 [connection signal="timeout" from="TimeManager/Timer" to="TimeManager" method="_on_timer_timeout"]

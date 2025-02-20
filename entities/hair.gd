@@ -26,6 +26,10 @@ var color : Color = Color.RED
 
 var spriteLocBeforeMove : Vector2= Vector2(0,0)
 
+func _ready() -> void:
+	#performance ding want dit kan traag zijn als ge het veel runned
+	set_physics_process(false)
+	
 
 func _physics_process(delta: float) -> void:
 	if( not DragMode):
@@ -67,9 +71,11 @@ func _draw() -> void:
 		draw_circle(point[2],point[3],color)
 	
 func EnableDragmode() -> void:
+	
 	show()
 	if DragMode:
 		return
+	set_physics_process(true)
 	spriteLocBeforeMove=sprite.offset
 	#reverse of the points + extra last one indicating the user
 	points.reverse()
@@ -81,7 +87,8 @@ func DisableDragmode() -> void:
 	if not DragMode:
 		return
 	applyOffset(spriteLocBeforeMove)
-	
+	#performance ding want dit kan traag zijn als ge het veel runned
+	set_physics_process(false)
 	DragMode = false
 	#points.remove_at(len(points)-1)
 	points.reverse()

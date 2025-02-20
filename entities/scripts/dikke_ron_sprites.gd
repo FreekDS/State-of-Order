@@ -112,7 +112,6 @@ func isScared() -> bool:
 	return face.frame_coords.y == FACE_ROW_SCARED
 
 func getHairColor():
-	
 	const PIXEL_IN_CELL = Vector2i(10, 4)
 	
 	var image = hair.texture.get_image()

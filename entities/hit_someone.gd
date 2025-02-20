@@ -44,26 +44,27 @@ func enter():
 			if NPCStateManager.STATE.HIT_SOMEONE == buur.stateManager._stateType:
 				neighbourchosen = buur
 				break
-		if neighbourchosen == null:
-			print("meneer wilt vechten met de wind, pakt van niet")
-			switchState.emit(self)
-		fightLengthTimer.start(maxFightTime)
+		
+		fightLengthTimer.start(maxFightTime)	
 	
-	if neighbourchosen == null:
-		breakpoint
-	
-	vuistSprite.rotation=180+neighbourchosen.global_position.angle_to_point(self.character.global_position)
-	hitanimation.play("hit")
-	talkBubbleTimer.start(randf_range(1,2))
-	active = true
-	speechBubble.option = boos_words.pick_random()
-	speechBubble.open()
+	# ik snap het echt niet, maar dit is mogelijk 
+	if neighbourchosen != null:	
+		vuistSprite.rotation=180+neighbourchosen.global_position.angle_to_point(self.character.global_position)
+		hitanimation.play("hit")
+		talkBubbleTimer.start(randf_range(1,2))
+		active = true
+		speechBubble.option = boos_words.pick_random()
+		speechBubble.open()
+	else:
+		print("meneer wilt vechten met de wind, pakt van niet")
+		switchState.emit(self)
 
 func tick(_delta: float):
 	character.velocity = Vector2.ZERO
 	if neighbourchosen == null:
 		switchState.emit(self)
-	vuistSprite.rotation=180+neighbourchosen.global_position.angle_to_point(self.character.global_position)
+	if neighbourchosen != null:
+		vuistSprite.rotation=180+neighbourchosen.global_position.angle_to_point(self.character.global_position)
 
 func exit():
 	hitanimation.play("RESET")

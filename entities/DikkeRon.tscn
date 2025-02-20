@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://dylnvnx8f0goe"]
+[gd_scene load_steps=36 format=3 uid="uid://dylnvnx8f0goe"]
 
 [ext_resource type="Script" path="res://entities/scripts/EntityAILearning.gd" id="1_nkst8"]
 [ext_resource type="PackedScene" uid="uid://sa773o5v8h1g" path="res://decorations/Speechbubble.tscn" id="2_joovv"]
@@ -18,6 +18,8 @@
 [ext_resource type="Script" path="res://entities/scripts/states/incoming.gd" id="16_wslee"]
 [ext_resource type="Texture2D" uid="uid://cocjyc71h37pu" path="res://Textures/gewir2.png" id="17_k8mtw"]
 [ext_resource type="Script" path="res://entities/hodl_gun.gd" id="18_yn2ai"]
+[ext_resource type="Script" path="res://entities/shoot_someone.gd" id="19_1vo04"]
+[ext_resource type="PackedScene" uid="uid://byymkb75eqjrp" path="res://entities/Bullet.tscn" id="20_uk0aw"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_hrdx7"]
 radius = 94.6414
@@ -318,6 +320,7 @@ texture = ExtResource("3_67qvq")
 offset = Vector2(0, -12)
 
 [node name="Gewir2" type="Sprite2D" parent="DikkeRonSprites"]
+visible = false
 position = Vector2(0, 1)
 texture = ExtResource("17_k8mtw")
 offset = Vector2(4, -8)
@@ -426,6 +429,19 @@ debug = NodePath("../../DEBUG")
 [node name="MaxSingleDirTime" type="Timer" parent="StateManager/HODL_GUN"]
 wait_time = 5.0
 
+[node name="SHOOT_SOMEONE" type="Node" parent="StateManager" node_paths=PackedStringArray("detectOthers", "speechBubble", "gunSprite", "character", "debug")]
+script = ExtResource("19_1vo04")
+detectOthers = NodePath("../../DetectOthers")
+speechBubble = NodePath("../../Speechbubble")
+gunSprite = NodePath("../../DikkeRonSprites/Gewir2")
+bulletScene = ExtResource("20_uk0aw")
+character = NodePath("../..")
+debug = NodePath("../../DEBUG")
+
+[node name="StateLength" type="Timer" parent="StateManager/SHOOT_SOMEONE"]
+
+[node name="SpeechBubbleTimer" type="Timer" parent="StateManager/SHOOT_SOMEONE"]
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_vpypy")
@@ -449,3 +465,5 @@ autoplay = "run"
 [connection signal="timeout" from="StateManager/HODL_GUN/StateLength" to="StateManager/HODL_GUN" method="_on_state_length_timeout"]
 [connection signal="timeout" from="StateManager/HODL_GUN/SpeechBubbleTimer" to="StateManager/HODL_GUN" method="_on_speech_bubble_timer_timeout"]
 [connection signal="timeout" from="StateManager/HODL_GUN/MaxSingleDirTime" to="StateManager/HODL_GUN" method="_on_max_single_dir_time_timeout"]
+[connection signal="timeout" from="StateManager/SHOOT_SOMEONE/StateLength" to="StateManager/SHOOT_SOMEONE" method="_on_state_length_timeout"]
+[connection signal="timeout" from="StateManager/SHOOT_SOMEONE/SpeechBubbleTimer" to="StateManager/SHOOT_SOMEONE" method="_on_speech_bubble_timer_timeout"]

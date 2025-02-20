@@ -73,9 +73,9 @@ _data = {
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("1_r8yrr")
+offset = Vector2(0, -23)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 10.25)
 shape = SubResource("RectangleShape2D_m74mk")
 
 [node name="PointLight2D" type="PointLight2D" parent="."]

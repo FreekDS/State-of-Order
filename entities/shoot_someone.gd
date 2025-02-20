@@ -49,6 +49,8 @@ func tick(_delta: float):
 		gunSprite.rotation=180+neighbourchosen.global_position.angle_to_point(self.character.global_position)
 
 func exit():
+	state_length.stop()
+	speech_bubble_timer.stop()
 	gunSprite.visible = false
 	neighbourchosen=null
 	active = false

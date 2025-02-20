@@ -14,14 +14,16 @@ func _ready() -> void:
 	for child : DikkeRon in get_children():
 		if child is not DikkeRon:
 			continue
-			
-		Globals.allNpcs.append(child)
-		
-		child.setup(navigationRegion.get_navigation_map())
-		
-		child.helpIkBenGeselecteerd.connect(_on_select)
-		child.neverMindIkBenGedeselect.connect(_on_deselect)
 
+		setupGuy(child)
+
+
+
+func setupGuy(guy: DikkeRon):
+	guy.setup(navigationRegion.get_navigation_map())
+	guy.helpIkBenGeselecteerd.connect(_on_select)
+	guy.neverMindIkBenGedeselect.connect(_on_deselect)
+	Globals.allNpcs.append(guy)
 
 func _physics_process(_delta: float) -> void:
 	if _selected and _mouseDown:

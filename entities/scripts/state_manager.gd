@@ -36,6 +36,7 @@ enum STATE {
 	STATE.STANDSTILL: $IDLE,
 	STATE.HIT_SOMEONE: $HIT_SOMEONE,
 	STATE.SWIM_IN_FONTAIN: $SWIM_IN_FOUNTAIN,
+	STATE.INCOMING: $INCOMING
 }
 
 
@@ -68,8 +69,8 @@ func _ready():
 	set_physics_process(false)
 	set_physics_process.call_deferred(true)
 	
-	_state = stateMap[STATE.SWIM_IN_FONTAIN]
-	_stateType = STATE.SWIM_IN_FONTAIN
+	_state = stateMap[STATE.STANDSTILL]
+	_stateType = STATE.STANDSTILL
 	_state.enter()
 
 

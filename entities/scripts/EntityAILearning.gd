@@ -107,6 +107,9 @@ func endDrag() -> void:
 
 
 func die():
+	if Globals.allNpcs.has(self):
+		Globals.allNpcs.erase(self)
+		
 	dead = true
 	animations.play("die", -1, 1.5)
 	animations.animation_finished.connect(

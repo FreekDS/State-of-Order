@@ -44,6 +44,10 @@ func enter():
 				neighbourchosen = buur
 				break
 		fightLengthTimer.start(maxFightTime)
+	
+	if neighbourchosen == null:
+		breakpoint
+	
 	vuistSprite.rotation=180+neighbourchosen.global_position.angle_to_point(self.character.global_position)
 	hitanimation.play("hit")
 	talkBubbleTimer.start(randf_range(1,2))

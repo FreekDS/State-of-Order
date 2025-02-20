@@ -123,6 +123,10 @@ func _swim():
 
 
 func _pickPointInFountain() -> Vector2:
+	if _detectedFountain == null:
+		push_error("Vreemd, zou ni mogen geberuenr")
+		return Vector2.ZERO
+		
 	var pos := _detectedFountain.global_position + Vector2(0, 5)
 	const X_EXT = 30
 	const Y_EXT = 20

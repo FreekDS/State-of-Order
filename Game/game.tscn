@@ -1,7 +1,8 @@
-[gd_scene load_steps=21 format=3 uid="uid://dkydrawijeyqe"]
+[gd_scene load_steps=22 format=3 uid="uid://dkydrawijeyqe"]
 
 [ext_resource type="PackedScene" uid="uid://vfkensc2u1h1" path="res://UI/GameUI.tscn" id="1_2ob6e"]
 [ext_resource type="Script" path="res://Game/scripts/time_manager.gd" id="1_5ff1s"]
+[ext_resource type="Script" path="res://Game/scripts/guy_spawner.gd" id="1_8lkux"]
 [ext_resource type="Script" path="res://Game/scripts/roel_manager.gd" id="1_d20kw"]
 [ext_resource type="Script" path="res://Game/CameraController.gd" id="1_hw18y"]
 [ext_resource type="Script" path="res://Game/scripts/CharacterPicker.gd" id="1_iuers"]
@@ -28,6 +29,20 @@ shader_parameter/vignette_rgb = Color(0, 0, 0, 1)
 
 [node name="Game" type="Node2D"]
 y_sort_enabled = true
+
+[node name="GuySpawner" type="Node" parent="." node_paths=PackedStringArray("targetNode", "navmap")]
+script = ExtResource("1_8lkux")
+targetNode = NodePath("../NavigationRegion/Characters")
+navmap = NodePath("../NavigationRegion")
+
+[node name="SpawnMarker" type="Marker2D" parent="GuySpawner"]
+position = Vector2(0, 640)
+
+[node name="PollGuyCount" type="Timer" parent="GuySpawner"]
+wait_time = 2.0
+
+[node name="SpawnDelay" type="Timer" parent="GuySpawner"]
+one_shot = true
 
 [node name="RoelManager" type="Node" parent="."]
 script = ExtResource("1_d20kw")
@@ -296,6 +311,7 @@ position = Vector2(396, -93)
 [node name="FloatyTextSpawner" type="Node2D" parent="."]
 script = ExtResource("18_fkr3s")
 
+[connection signal="timeout" from="GuySpawner/PollGuyCount" to="GuySpawner" method="_on_poll_guy_count_timeout"]
 [connection signal="timeout" from="TimeManager/Timer" to="TimeManager" method="_on_timer_timeout"]
 [connection signal="edgeNoLongerHit" from="Camera" to="NavigationRegion/UILayer/GameUI" method="_on_camera_edge_no_longer_hit"]
 [connection signal="hitEdge" from="Camera" to="NavigationRegion/UILayer/GameUI" method="_on_camera_hit_edge"]

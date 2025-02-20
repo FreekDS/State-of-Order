@@ -1,9 +1,11 @@
+class_name PauseMenu
 extends Control
 
 @onready var ruleList = $RuleList/MarginContainer/RuleList
 
 const singleRule = preload("res://UI/components/single_rule.tscn")
 @onready var animations: AnimationPlayer = $AnimationPlayer
+@onready var unnaturalhairtemplate: Sprite2D = $UnnaturalHairTemplate
 
 var open = false
 
@@ -77,12 +79,34 @@ func createSingleRule(traitOrAction, translationDict: Dictionary) -> HBoxContain
 
 
 func populateRules(dayData: DayResource):
+	$RuleList/DayCount.text = "[color=black]MANIFESTO - DAY " + str(dayData.dayNumber)
 	for child in ruleList.get_children():
 		child.visible = false
 		child.queue_free()
 		
 	for trt in dayData.disallowedTraits:
-		ruleList.add_child(createSingleRule(trt, TRANSLATION_TRAITS))
+		var rule = createSingleRule(trt, TRANSLATION_TRAITS)
+		if trt == NPCTraitManager.TRAIT.NON_NATURAL_HAIR:
+			
+			var control1 = Control.new()
+			var control2 = Control.new()
+			
+			var unnatural1 = unnaturalhairtemplate.duplicate()
+			var unnatural2 = unnaturalhairtemplate.duplicate()
+			unnatural2.frame_coords.x = 6
+			
+			control1.custom_minimum_size = Vector2(8,8)
+			control2.custom_minimum_size = Vector2(8,8)
+			
+			control1.add_child(unnatural1)
+			control2.add_child(unnatural2)
+			
+			unnatural1.show()
+			unnatural2.show()
+			
+			rule.add_child(control1)
+			rule.add_child(control2)
+		ruleList.add_child(rule)
 	
 	for act in dayData.disallowedActions:
 		ruleList.add_child(createSingleRule(act, TRANSLATION_STATES))

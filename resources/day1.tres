@@ -5,6 +5,6 @@
 [resource]
 script = ExtResource("1_4ate5")
 dayNumber = 1
-disallowedActions = Array[int]([9])
-disallowedTraits = Array[int]([0])
+disallowedActions = Array[int]([9, 6])
+disallowedTraits = Array[int]([3, 0])
 score = 1

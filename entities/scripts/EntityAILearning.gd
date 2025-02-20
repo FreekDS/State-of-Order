@@ -79,7 +79,8 @@ func endDrag() -> void:
 	set_collision_mask_value(1, true)
 	hair.DisableDragmode()
 	
-	stateManager.process_mode = Node.PROCESS_MODE_INHERIT
+	if not dead:
+		stateManager.process_mode = Node.PROCESS_MODE_INHERIT
 	dragEnded.emit()
 	
 	speechbubble.close()

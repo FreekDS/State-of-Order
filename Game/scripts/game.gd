@@ -55,6 +55,8 @@ func _on_end_of_day_sequence_done() -> void:
 		print("EINDE SPEL, GEDAAN MET SPELEN")
 		return
 		
+	guySpawner.clear()
+	
 	EventBus.daySetup.emit(dayInformation[currentDay])
 	guySpawner.setupGame(dayInformation[currentDay])
 	startSequence.playAnimation(dayInformation[currentDay])

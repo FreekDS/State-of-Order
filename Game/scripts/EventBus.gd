@@ -17,6 +17,8 @@ signal successfulCapture(who: DikkeRon, score: int)
 signal wrongCapture(who: DikkeRon, score: int)
 
 @warning_ignore("unused_signal")
+signal daySetup(dayData: DayResource)
+@warning_ignore("unused_signal")
 signal dayStarted(dayData: DayResource)
 
 @warning_ignore("unused_signal")

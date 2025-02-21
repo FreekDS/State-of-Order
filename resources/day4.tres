@@ -5,7 +5,9 @@
 [resource]
 script = ExtResource("1_tkic6")
 dayNumber = 4
+tagline = "you know the drill"
 disallowedActions = Array[int]([9, 6])
 disallowedTraits = Array[int]([3, 0])
 score = 1
-isKillDay = false
+isKillDay = true
+noGuys = false

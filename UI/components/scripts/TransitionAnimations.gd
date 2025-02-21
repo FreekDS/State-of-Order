@@ -14,7 +14,7 @@ func open():
 			done.emit(true),
 		CONNECT_ONE_SHOT
 	)
-	closed = false
+	closed = true
 
 func close():
 	anim.play_backwards("fade")
@@ -23,4 +23,4 @@ func close():
 			done.emit(false),
 		CONNECT_ONE_SHOT
 	)
-	closed = true
+	closed = false

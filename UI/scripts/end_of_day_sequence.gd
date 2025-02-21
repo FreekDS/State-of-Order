@@ -17,6 +17,15 @@ signal done
 var _canShowDaySummary := false
 var _canClose := false
 
+
+
+var guysCapturedToday = 0
+var wrongGuysCapturedToday = 0
+var rightGuysCapturedToday = 0
+
+var totalSocialCredit = 0
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	EventBus.dayEnded.connect(_on_day_end)
@@ -24,9 +33,30 @@ func _ready() -> void:
 		func(dayData: DayResource):
 			day_summary.text = "Summary - Day " + str(dayData.dayNumber)
 	)
+	
+	EventBus.successfulCapture.connect(
+		func(_guy, _amount):
+			guysCapturedToday += 1
+			rightGuysCapturedToday += 1
+			totalSocialCredit += 1
+	)
+	EventBus.wrongCapture.connect(
+		func(_guy, _amount): 
+			guysCapturedToday += 1
+			wrongGuysCapturedToday += 1
+			totalSocialCredit -= 1
+			if totalSocialCredit < 0: totalSocialCredit = 0
+	)
+
+func setupTexts():
+	allArrestedText.text = "Total people arrested: [indent]" + str(guysCapturedToday)
+	goodArrestedText.text = "Rightful arrestations:[indent]" + str(rightGuysCapturedToday)
+	wrongArrestedText.text = "Unfortunate collateral convictions: [indent]" + str(wrongGuysCapturedToday)
+	socialCreditText.text = "Social credit after day 1: [indent]" + str(totalSocialCredit)
 
 
 func _on_day_end():
+	setupTexts()
 	var textTween = CarpeDiem.create_tween()
 	textTween.tween_property(CarpeDiem, "modulate:a", 1.0, 1)
 	await textTween.finished
@@ -63,9 +93,13 @@ func reset():
 	var toAnimate = [allArrestedText, goodArrestedText, wrongArrestedText, socialCreditText]
 	for text in toAnimate:
 		text.modulate.a = 0
-	var _canShowDaySummary := false
-	var _canClose := false
+
+	_canShowDaySummary = false
+	_canClose = false
 	animations.play("RESET")
+	guysCapturedToday = 0
+	wrongGuysCapturedToday = 0
+	rightGuysCapturedToday = 0
 
 
 func _input(event: InputEvent) -> void:
@@ -75,8 +109,13 @@ func _input(event: InputEvent) -> void:
 		_on_day_end()
 	
 	if event is InputEventKey or event is InputEventMouseButton:
+		if event is InputEventMouseButton and event.button_index in [MOUSE_BUTTON_WHEEL_DOWN, MOUSE_BUTTON_WHEEL_UP]:
+			return
 		if event.is_pressed():
 			if _canShowDaySummary:
+				if not TransitionAnimations.closed:
+					TransitionAnimations.open()
+					await TransitionAnimations.done
 				_canShowDaySummary = false
 				CarpeDiem.modulate.a = 0
 				animations.play("show")

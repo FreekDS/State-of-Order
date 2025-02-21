@@ -30,6 +30,8 @@ func _input(event: InputEvent) -> void:
 	#if event.is_action_pressed("ui_accept"):
 		#playAnimation(data as DayResource)
 	if event is InputEventKey or event is InputEventMouseButton:
+		if event is InputEventMouseButton and event.button_index in [MOUSE_BUTTON_WHEEL_DOWN, MOUSE_BUTTON_WHEEL_UP]:
+			return
 		if canAdvance and event.is_pressed():
 			$AnimationPlayer.play_backwards("start")
 			$CarpeDiem.modulate.a = 0

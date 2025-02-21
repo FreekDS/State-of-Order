@@ -13,7 +13,7 @@ func _on_play_pressed() -> void:
 
 
 func _on_settings_pressed() -> void:
-	$CreditsContainer.visible = !$CreditsContainer.visible
+	$Settings.visible = !$Settings.visible
 
 
 func _on_hilde_credits_pressed() -> void:
@@ -21,7 +21,7 @@ func _on_hilde_credits_pressed() -> void:
 
 
 func _on_settings_close_request() -> void:
-	$CreditsContainer.hide()
+	$Settings.hide()
 
 
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:

@@ -29,10 +29,14 @@ const GUY_SCENE = preload("res://entities/DikkeRon.tscn")
 
 
 func _ready() -> void:
-	EventBus.dayEnded.connect(
+	EventBus.timesUp.connect(
 		func(): 
 			$PollGuyCount.stop()
 			SpawnDelay.stop()
+			for child in targetNode.get_children():
+				if child is not DikkeRon:
+					continue
+				child.stateManager.enforceState(NPCStateManager.STATE.LEAVING)
 	)
 
 func setupGame(_dayData):
@@ -44,7 +48,10 @@ func setupGame(_dayData):
 		
 	$PollGuyCount.start()
 
-
+func clear():
+	for child in targetNode.get_children():
+		if child is DikkeRon:
+			child.queue_free()
 
 func spawnGuy(at: Vector2) -> DikkeRon:
 	var guyInstance := GUY_SCENE.instantiate() as DikkeRon
@@ -68,6 +75,3 @@ func _on_poll_guy_count_timeout() -> void:
 		var maxDelay = lerp(minSpawnDelay, maxSpawnDelay, Globals.allNpcs.size() / maxGuysInScene)
 		
 		SpawnDelay.start(randf_range(minSpawnDelay, maxDelay))
-		
-		
-		# TODO: set state to INCOMING

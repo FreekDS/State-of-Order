@@ -9,6 +9,11 @@ signal done
 @onready var TekstDrie = $"CenterContainer/HBoxContainer/3"
 @onready var anim = $AnimationPlayer
 
+func _ready():
+	EventBus.daySetup.connect(
+		func(dayData: DayResource):
+			HeyIkWilNieuweTekst("Day", str(dayData.dayNumber), dayData.tagline)
+	)
 
 func dramatiek() -> void:
 	if anim.is_playing():
@@ -18,8 +23,9 @@ func dramatiek() -> void:
 	visible = true
 	await anim.animation_finished
 	done.emit()
-	
+
+
 func HeyIkWilNieuweTekst(een: String, twee: String, drie: String) -> void:
-	TekstEen.text = een
-	TekstTwee.text = twee
+	TekstEen.text = een + " "
+	TekstTwee.text = twee + " - "
 	TekstDrie.text = drie

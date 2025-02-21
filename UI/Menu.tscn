@@ -145,9 +145,6 @@ theme_override_constants/margin_top = 120
 theme_override_constants/margin_right = 120
 theme_override_constants/margin_bottom = 120
 
-[node name="Settings" parent="CreditsContainer" instance=ExtResource("2_loq58")]
-layout_mode = 2
-
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
 layout_mode = 1
 offset_left = 10.0
@@ -165,6 +162,11 @@ autowrap_mode = 0
 [node name="Camera2D" type="Camera2D" parent="."]
 offset = Vector2(320, 180)
 
+[node name="Settings" parent="." instance=ExtResource("2_loq58")]
+visible = false
+layout_mode = 2
+anchors_preset = 0
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_kgx62")
@@ -173,5 +175,5 @@ libraries = {
 [connection signal="pressed" from="HBoxContainer/Play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="HBoxContainer/Settings" to="." method="_on_settings_pressed"]
 [connection signal="pressed" from="HBoxContainer/Hilde Credits" to="." method="_on_hilde_credits_pressed"]
-[connection signal="closeRequest" from="CreditsContainer/Settings" to="." method="_on_settings_close_request"]
+[connection signal="closeRequest" from="Settings" to="." method="_on_settings_close_request"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

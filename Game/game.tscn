@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://dkydrawijeyqe"]
+[gd_scene load_steps=34 format=3 uid="uid://dkydrawijeyqe"]
 
 [ext_resource type="PackedScene" uid="uid://vfkensc2u1h1" path="res://UI/GameUI.tscn" id="1_2ob6e"]
 [ext_resource type="Script" path="res://Game/scripts/time_manager.gd" id="1_5ff1s"]
@@ -25,10 +25,12 @@
 [ext_resource type="Texture2D" uid="uid://balnyvlsal5gi" path="res://Textures/buldings_2.png" id="13_tv7ae"]
 [ext_resource type="Script" path="res://Game/scripts/floaty_text_spawner.gd" id="18_fkr3s"]
 [ext_resource type="PackedScene" uid="uid://dgx4yfq0frsf6" path="res://decorations/fountain.tscn" id="18_tqgm8"]
+[ext_resource type="Script" path="res://Game/kogel_doos.gd" id="20_wjlpx"]
+[ext_resource type="PackedScene" uid="uid://byymkb75eqjrp" path="res://entities/Bullet.tscn" id="21_jm124"]
 [ext_resource type="PackedScene" uid="uid://dg3p6rcp0ut81" path="res://UI/start_day_sequence.tscn" id="23_j1lo2"]
 [ext_resource type="Script" path="res://Game/cursor.gd" id="23_m7f27"]
 [ext_resource type="PackedScene" uid="uid://dj8m2ck2dm71d" path="res://UI/dramatische_tekst.tscn" id="28_x8nq2"]
-[ext_resource type="PackedScene" uid="uid://c5p02p3qcur07" path="res://UI/end_of_day_sequence.tscn" id="29_8n2re"]
+[ext_resource type="PackedScene" path="res://UI/end_of_day_sequence.tscn" id="29_8n2re"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_700af"]
 vertices = PackedVector2Array(-188, -516.75, 280, -520.75, 498, -520.75, 293, -513.25, -202, -513.25, 525.063, -533.281, 521.891, -361.258, 498, -533.25, 501, -542.75, -542.133, -350.492, -542.727, -364.898, -521.961, -360.953, -521.039, -342.461, 179, -49, 179, -73, 479, -117.938, 479, 21.8828, 179, -113, 477, -148.711, 503.898, -123.906, 35.9375, -5.15625, 38.1797, -13.5, 129, -49, 112, -49, 62, -49, 35.9375, -21.8438, 520, 279.258, 542, 274.258, 542, 285.18, 520, 291.18, -523.023, -531.508, -544.852, -539.453, -544.227, -555.648, -524, -550.602, -494, -526.75, 503.141, -154.75, -520, 509.75, -520, 499.023, -504.063, 502.008, -502, 517.75, -537.844, 289.227, -537.219, 273.047, -522, 276.102, -519.922, 294.219, -502, -126.383, -502, -152.297, -479, -149.313, -477, -116.391, -541, 97.3281, -541, 84.5469, -522.094, 86.5391, -522, 103.344, 293, -500.75, 521.039, -344.758, 477, -239.797, -468, -516.75, 522.094, 83.4922, 543, 81.5, 543, 96.9609, 520, 101.969, 544.25, -364.313, 544.828, -351.703, -524, -575.961, 523.281, -569.031, 524.094, -555.25, 501, -555.25, -487, -565.25, 499, 501.258, 519, 500.25, 519, 509.094, 498.953, 514.109, 179, -137, 29.8438, -27.9375, 499.93, 595.977, -502, 594, -188, -529.25, 280, -533.25, -487, -552.75, -521, -565.25, -521, -552.75, -460, -529.25, -460, -539.25, -468, -526.75, 129, -137, 129, -113, 115, -113, 115, -137, 129, -73, 112, -73, 65, -113, 62, -73, 499, 392.227, -502.961, 392.352, -202, -500.75, -479, -240.75, -477, 20.7813, 521.078, 22.8828, -521.07, 22.7734, 535, -542.75, 535, -552.359, 540.742, -552.719, 542.492, -541.023, -494, -539.25, 520, 386.219, -521.906, 386.352, 520.039, -251.797, -520.039, -252.75, 65, -137, -22.1563, -30, 29.8438, 0.9375, 22.1563, -30, -29.8438, -27.9375, -35.9375, -21.8438, -38.1797, -13.5, -35.9375, -5.15625, -29.8438, 0.9375, 22.1563, 3, -22.1563, 3)
@@ -304,6 +306,10 @@ texture = ExtResource("12_rcx3c")
 [node name="buldingsL" type="Sprite2D" parent="GamePlay/NavigationRegion/decorations"]
 position = Vector2(-599, -4)
 texture = ExtResource("13_tv7ae")
+
+[node name="KogelDoos" type="Node2D" parent="GamePlay/NavigationRegion"]
+script = ExtResource("20_wjlpx")
+kogelScene = ExtResource("21_jm124")
 
 [node name="Characters" type="Node2D" parent="GamePlay/NavigationRegion" node_paths=PackedStringArray("navigationRegion")]
 y_sort_enabled = true

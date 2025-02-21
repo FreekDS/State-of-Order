@@ -265,3 +265,10 @@ texture = ExtResource("5_itdhl")
 [node name="DramatischeTekst" parent="." instance=ExtResource("8_koskq")]
 layout_mode = 0
 anchors_preset = 0
+anchor_left = 0.0
+anchor_right = 0.0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 641.0
+offset_bottom = 366.0
+grow_horizontal = 1

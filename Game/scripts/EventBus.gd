@@ -27,3 +27,7 @@ signal dayEnded
 #jaja kan een enum worden, maar ik ben lui
 @warning_ignore("unused_signal")
 signal changeCursor(normaal: bool)
+
+
+@warning_ignore("unused_signal")
+signal kogelHier(positie: Vector2, velocity: Vector2)

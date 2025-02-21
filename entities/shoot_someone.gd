@@ -31,7 +31,7 @@ func enter():
 		gunSprite.visible = true
 		debug.text = "GUN aiming"
 		state_length.start(aimTime)
-		gunSprite.rotation=2*PI+neighbourchosen.global_position.angle_to_point(self.character.global_position)
+		gunSprite.rotation=neighbourchosen.global_position.angle_to_point(self.character.global_position)
 		speech_bubble_timer.start(randf_range(1,2))
 		active = true
 		speechBubble.option = gun_words.pick_random()
@@ -46,7 +46,7 @@ func tick(_delta: float):
 		switchState.emit(self)
 	# ja deze extra check is nodig, dank u godot
 	if neighbourchosen != null:
-		gunSprite.rotation=2*PI+neighbourchosen.global_position.angle_to_point(self.character.global_position)
+		gunSprite.rotation=neighbourchosen.global_position.angle_to_point(self.character.global_position)
 
 func exit():
 	state_length.stop()
@@ -67,8 +67,8 @@ func checkViable() -> bool:
 
 
 func _on_state_length_timeout() -> void:
-	var bullet=bulletScene.instantiate()
-	character.add_child(bullet)
+	var rad=self.character.global_position.angle_to_point(neighbourchosen.global_position)
+	EventBus.kogelHier.emit(character.global_position,Vector2(cos(rad), sin(rad)))
 	self.switchState.emit(self)
 
 

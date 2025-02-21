@@ -123,15 +123,14 @@ func getStates() -> Array[STATE]:
 func getViableNextStates():
 	return _state.possibleNextStates
 
-# Praten wordt via 1 user gedaan, dus als die stops moet ge bij den andere een volgende staat enforcen
+# zeer gevaarlijke functie, kan tot deadlocks zorgen
 func enforceNextState():
 	#signal functie gebruiken voor niet signal, freek gaat blij zijn
 	_on_state_switch_requested(_state)
 	
 #Voor praten of schieten ofzo moet ge meerdere characters samen iets laten doen
 func enforceState(sate: STATE):
-	if _state != null:
-		_state.exit()
+	_state.exit()
 	_stateType = sate
 	_state = stateMap[sate]
 	_state.enter()

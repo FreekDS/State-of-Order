@@ -29,9 +29,10 @@ const YELLOW_SHIRT = 4
 @onready var shirt: Sprite2D = $Shirt
 @onready var pants: Sprite2D = $Pants
 @onready var painfuldeath: Sprite2D = $painfuldeath
+@onready var gewir: Sprite2D = $Gewir2
 
 @onready var _sprites : Array[Sprite2D] = [
-	self, hair, face, shirt, pants, painfuldeath
+	self, hair, face, shirt, pants, painfuldeath,gewir
 ]
 
 var isWomen = false

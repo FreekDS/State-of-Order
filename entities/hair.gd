@@ -92,6 +92,7 @@ func DisableDragmode() -> void:
 	DragMode = false
 	#points.remove_at(len(points)-1)
 	points.reverse()
+	geweer.offset=Vector2(0,0)
 	
 
 func applyOffset(newOffset):

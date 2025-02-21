@@ -36,10 +36,10 @@ func _input(event: InputEvent) -> void:
 			$AnimationPlayer.play_backwards("start")
 			$CarpeDiem.modulate.a = 0
 			$CarpeDiem.hide()
+			plsStartDay.emit()
 			await $AnimationPlayer.animation_finished
 			TransitionAnimations.close()
 			await TransitionAnimations.done
-			plsStartDay.emit()
 			canAdvance = false
 		
 		

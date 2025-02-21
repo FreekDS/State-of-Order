@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://dylnvnx8f0goe"]
+[gd_scene load_steps=38 format=3 uid="uid://dylnvnx8f0goe"]
 
 [ext_resource type="Script" path="res://entities/scripts/EntityAILearning.gd" id="1_nkst8"]
 [ext_resource type="PackedScene" uid="uid://sa773o5v8h1g" path="res://decorations/Speechbubble.tscn" id="2_joovv"]
@@ -20,6 +20,8 @@
 [ext_resource type="Script" path="res://entities/hodl_gun.gd" id="18_yn2ai"]
 [ext_resource type="Script" path="res://entities/shoot_someone.gd" id="19_1vo04"]
 [ext_resource type="PackedScene" uid="uid://byymkb75eqjrp" path="res://entities/Bullet.tscn" id="20_uk0aw"]
+[ext_resource type="Script" path="res://entities/scripts/states/dead.gd" id="21_j5t5k"]
+[ext_resource type="PackedScene" uid="uid://dvtglnlceofpm" path="res://decorations/scripts/bloodsplotion.tscn" id="22_hs4q5"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_hrdx7"]
 radius = 94.6414
@@ -321,9 +323,8 @@ offset = Vector2(0, -12)
 
 [node name="Gewir2" type="Sprite2D" parent="DikkeRonSprites"]
 visible = false
-position = Vector2(0, 1)
+position = Vector2(0, -8.5)
 texture = ExtResource("17_k8mtw")
-offset = Vector2(4, -8)
 
 [node name="Speechbubble" parent="." instance=ExtResource("2_joovv")]
 position = Vector2(7, -33)
@@ -441,6 +442,12 @@ debug = NodePath("../../DEBUG")
 [node name="StateLength" type="Timer" parent="StateManager/SHOOT_SOMEONE"]
 
 [node name="SpeechBubbleTimer" type="Timer" parent="StateManager/SHOOT_SOMEONE"]
+
+[node name="DEAD" type="Node2D" parent="StateManager"]
+script = ExtResource("21_j5t5k")
+
+[node name="Bloodsplotion" parent="StateManager/DEAD" instance=ExtResource("22_hs4q5")]
+position = Vector2(0, -5)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

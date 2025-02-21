@@ -23,7 +23,7 @@ const TRANSLATION_STATES = {
 	NPCStateManager.STATE.PROTEST: "protest",
 	NPCStateManager.STATE.RUN: "run",
 	NPCStateManager.STATE.USE_TRAIN: "use the train",
-	
+	NPCStateManager.STATE.DEAD: "be dead"
 
 }
 

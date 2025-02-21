@@ -28,9 +28,10 @@ const YELLOW_SHIRT = 4
 @onready var face: Sprite2D = $Face
 @onready var shirt: Sprite2D = $Shirt
 @onready var pants: Sprite2D = $Pants
+@onready var painfuldeath: Sprite2D = $painfuldeath
 
 @onready var _sprites : Array[Sprite2D] = [
-	self, hair, face, shirt, pants
+	self, hair, face, shirt, pants, painfuldeath
 ]
 
 var isWomen = false
@@ -129,6 +130,8 @@ func showFaceOnly(visibility: bool):
 	face.z_index = 1 if visibility else 0
 	hair.z_index = 1 if visibility else 0
 	
+func diePainfully():
+	painfuldeath.show()
 
 #func _input(event: InputEvent) -> void:
 	#if event.is_action_pressed("ui_accept"):

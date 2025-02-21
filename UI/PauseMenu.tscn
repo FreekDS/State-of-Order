@@ -91,6 +91,7 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="DayCount" type="RichTextLabel" parent="RuleList"]
+layout_mode = 0
 offset_left = 62.0
 offset_top = 4.0
 offset_right = 163.0

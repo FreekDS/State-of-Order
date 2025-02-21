@@ -5,6 +5,21 @@
 [ext_resource type="PackedScene" uid="uid://duwfs4j1ne263" path="res://UI/components/single_rule.tscn" id="2_n8id2"]
 [ext_resource type="Texture2D" uid="uid://cpp3iuqcr7enr" path="res://Textures/all_my_fellas.png" id="4_0xftj"]
 
+[sub_resource type="Animation" id="Animation_j80ct"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("RuleList:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(70, 400)]
+}
+
 [sub_resource type="Animation" id="Animation_kgd0h"]
 resource_name = "start"
 length = 0.4
@@ -21,25 +36,25 @@ tracks/0/keys = {
 "values": [Vector2(70, 400), Vector2(70, 20), Vector2(70, 70)]
 }
 
-[sub_resource type="Animation" id="Animation_j80ct"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_f62v6"]
+_data = {
+"RESET": SubResource("Animation_j80ct"),
+"start": SubResource("Animation_kgd0h")
+}
+
+[sub_resource type="Animation" id="Animation_7oin0"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("RuleList:position")
+tracks/0/path = NodePath("CarpeDiem:scale")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(70, 400)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_f62v6"]
-_data = {
-"RESET": SubResource("Animation_j80ct"),
-"start": SubResource("Animation_kgd0h")
+"values": [Vector2(1, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_5qcqq"]
@@ -57,21 +72,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector2(1, 1), Vector2(1.02, 1.02)]
-}
-
-[sub_resource type="Animation" id="Animation_7oin0"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("CarpeDiem:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(1, 1)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_0jle7"]

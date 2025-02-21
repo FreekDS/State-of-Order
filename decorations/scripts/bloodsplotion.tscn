@@ -101,6 +101,7 @@ emitting = false
 amount = 100
 process_material = SubResource("ParticleProcessMaterial_m85no")
 lifetime = 5.0
+one_shot = true
 explosiveness = 1.0
 trail_enabled = true
 
@@ -109,4 +110,5 @@ emitting = false
 amount = 30
 process_material = SubResource("ParticleProcessMaterial_e05ot")
 lifetime = 5.0
+one_shot = true
 explosiveness = 1.0

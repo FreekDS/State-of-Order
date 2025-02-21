@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://4fa13uf524uu"]
+[gd_scene load_steps=5 format=3 uid="uid://4fa13uf524uu"]
 
 [ext_resource type="Texture2D" uid="uid://c5usasxqp6b3k" path="res://Textures/dikke_ron_wit.png" id="1_grknn"]
 [ext_resource type="Texture2D" uid="uid://cpp3iuqcr7enr" path="res://Textures/all_my_fellas.png" id="2_56j6r"]
 [ext_resource type="Script" path="res://entities/scripts/dikke_ron_sprites.gd" id="2_esm7k"]
+[ext_resource type="Texture2D" uid="uid://dxapbesfavfiw" path="res://Textures/pijnlijkedood.png" id="4_wnav6"]
 
 [node name="DikkeRonSprites" type="Sprite2D"]
 self_modulate = Color(0.0196078, 0.0196078, 0.0196078, 1)
@@ -36,3 +37,8 @@ texture = ExtResource("2_56j6r")
 offset = Vector2(0, -12)
 hframes = 10
 vframes = 5
+
+[node name="painfuldeath" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("4_wnav6")
+offset = Vector2(0, -11)

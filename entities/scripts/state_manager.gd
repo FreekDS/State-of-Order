@@ -12,6 +12,7 @@ extends Node2D
 
 enum STATE {
 	
+	_WAIT_DAYSTART,
 	
 	WANDER_AIMLESS,
 	TALK_TO_SOMEONE,
@@ -33,6 +34,7 @@ enum STATE {
 }
 
 @onready var stateMap = {
+	STATE._WAIT_DAYSTART: $_WAIT_DAYSTART,
 	STATE.WANDER_AIMLESS: $WANDER_AIMLESS,
 	STATE.TALK_TO_SOMEONE: $TALK_TO_SOMEONE,
 	STATE.STANDSTILL: $IDLE,
@@ -74,8 +76,8 @@ func _ready():
 	set_physics_process(false)
 	set_physics_process.call_deferred(true)
 	
-	_state = stateMap[STATE.STANDSTILL]
-	_stateType = STATE.STANDSTILL
+	_state = stateMap[STATE._WAIT_DAYSTART]
+	_stateType = STATE._WAIT_DAYSTART
 	_state.enter()
 
 
@@ -125,7 +127,8 @@ func enforceNextState():
 	
 #Voor praten of schieten ofzo moet ge meerdere characters samen iets laten doen
 func enforceState(sate: STATE):
-	_state.exit()
+	if _state != null:
+		_state.exit()
 	_stateType = sate
 	_state = stateMap[sate]
 	_state.enter()
@@ -151,8 +154,10 @@ func enforceState(sate: STATE):
 
 
 func _on_dikke_ron_drag_started() -> void:
-	_state.onDrag()
+	if _state != null:
+		_state.onDrag()
 
 
 func _on_dikke_ron_drag_ended() -> void:
-	_state.onDragEnd()
+	if _state != null:
+		_state.onDragEnd()

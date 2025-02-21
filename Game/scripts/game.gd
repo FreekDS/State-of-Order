@@ -18,3 +18,7 @@ func _ready() -> void:
 
 func _handleDayEnd():
 	pass
+
+
+func _on_start_day_sequence_pls_start_day() -> void:
+	EventBus.dayStarted.emit(dayInformation[0])

@@ -18,6 +18,8 @@ func playAnimation(withData: DayResource):
 		TransitionAnimations.open()
 		await TransitionAnimations.done
 	populateRules(withData)
+	$CarpeDiem.modulate.a = 0
+	$CarpeDiem.show()
 	$AnimationPlayer.play("start")
 	await $AnimationPlayer.animation_finished
 	rulesAnimation()
@@ -32,6 +34,7 @@ func _input(event: InputEvent) -> void:
 		if canAdvance and event.is_pressed():
 			$AnimationPlayer.play_backwards("start")
 			$CarpeDiem.modulate.a = 0
+			$CarpeDiem.hide()
 			await $AnimationPlayer.animation_finished
 			TransitionAnimations.close()
 			await TransitionAnimations.done

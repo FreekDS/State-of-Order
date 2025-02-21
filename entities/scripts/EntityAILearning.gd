@@ -26,6 +26,12 @@ var dead = false
 func _ready():
 	animations.play("idle", -1, 1.1)
 	hair.color = sprite.getHairColor()
+	
+	EventBus.dayStarted.connect(
+		func(_data):
+			traitManager.obtainTraitsFromSprites()
+	)
+	
 
 
 func setup(navigationMap: RID):

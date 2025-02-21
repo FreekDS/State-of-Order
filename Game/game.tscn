@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://dkydrawijeyqe"]
+[gd_scene load_steps=30 format=3 uid="uid://dkydrawijeyqe"]
 
 [ext_resource type="PackedScene" uid="uid://vfkensc2u1h1" path="res://UI/GameUI.tscn" id="1_2ob6e"]
 [ext_resource type="Script" path="res://Game/scripts/time_manager.gd" id="1_5ff1s"]
@@ -11,7 +11,11 @@
 [ext_resource type="Resource" uid="uid://815ki2igdjnh" path="res://resources/day1.tres" id="2_1wdd8"]
 [ext_resource type="Script" path="res://resources/DayRuleResource.gd" id="2_2iuh7"]
 [ext_resource type="PackedScene" uid="uid://dylnvnx8f0goe" path="res://entities/DikkeRon.tscn" id="3_gqgcv"]
+[ext_resource type="Resource" uid="uid://lvco8eqv0smw" path="res://resources/day2.tres" id="4_vt0jt"]
+[ext_resource type="Resource" uid="uid://de7ydjrna70vn" path="res://resources/day3.tres" id="5_kxptf"]
 [ext_resource type="Shader" path="res://Game/shaders/vignette.gdshader" id="5_r6mn3"]
+[ext_resource type="Resource" uid="uid://bu3rkdgdircsx" path="res://resources/day4.tres" id="6_hhb78"]
+[ext_resource type="Resource" uid="uid://dal6i6py1bs27" path="res://resources/day5.tres" id="7_bsa01"]
 [ext_resource type="Script" path="res://Game/scripts/politiezone_klein_brabant.gd" id="7_tagq4"]
 [ext_resource type="PackedScene" uid="uid://ilr4hbnewu7c" path="res://entities/dePolies/Politie.tscn" id="8_w3de5"]
 [ext_resource type="PackedScene" uid="uid://bq1e5kfxn4lle" path="res://decorations/hekker.tscn" id="9_s70as"]
@@ -39,7 +43,7 @@ shader_parameter/vignette_rgb = Color(0, 0, 0, 1)
 [node name="Game" type="Node2D"]
 y_sort_enabled = true
 script = ExtResource("1_dek3g")
-dayInformation = Array[ExtResource("2_2iuh7")]([null, null, null, null, null])
+dayInformation = Array[ExtResource("2_2iuh7")]([ExtResource("2_1wdd8"), ExtResource("4_vt0jt"), ExtResource("5_kxptf"), ExtResource("6_hhb78"), ExtResource("7_bsa01")])
 
 [node name="GamePlay" type="Node" parent="."]
 
@@ -329,7 +333,8 @@ script = ExtResource("23_m7f27")
 
 [node name="Sequences" type="CanvasLayer" parent="."]
 
-[node name="SequencingLayer" parent="Sequences" instance=ExtResource("23_j1lo2")]
+[node name="StartDaySequence" parent="Sequences" instance=ExtResource("23_j1lo2")]
+mouse_filter = 2
 
 [connection signal="timeout" from="GamePlay/GuySpawner/PollGuyCount" to="GamePlay/GuySpawner" method="_on_poll_guy_count_timeout"]
 [connection signal="timeout" from="GamePlay/TimeManager/Timer" to="GamePlay/TimeManager" method="_on_timer_timeout"]
@@ -338,3 +343,4 @@ script = ExtResource("23_m7f27")
 [connection signal="moving" from="GamePlay/Camera" to="GamePlay/NavigationRegion/UILayer/GameUI" method="_on_camera_moving"]
 [connection signal="stationary" from="GamePlay/Camera" to="GamePlay/NavigationRegion/UILayer/GameUI" method="_on_camera_stationary"]
 [connection signal="guyDragged" from="GamePlay/NavigationRegion/Characters" to="GamePlay/NavigationRegion/Politiezone Klein Brabant" method="_on_characters_guy_dragged"]
+[connection signal="plsStartDay" from="Sequences/StartDaySequence" to="." method="_on_start_day_sequence_pls_start_day"]

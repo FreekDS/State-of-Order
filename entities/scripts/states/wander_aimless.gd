@@ -16,7 +16,8 @@ func _ready():
 
 func enter():
 	debug.text = "WALK"
-	navAgent.navigation_finished.connect(_on_navigation_agent_2d_target_reached)
+	if !navAgent.navigation_finished.is_connected(_on_navigation_agent_2d_target_reached):
+		navAgent.navigation_finished.connect(_on_navigation_agent_2d_target_reached)
 	animations.play("run", -1, 1.1)
 	maxSingleDirTimer.start()
 	navAgent.target_position = NavigationServer2D.map_get_random_point(navAgent.get_navigation_map(), 1, true)

@@ -36,7 +36,8 @@ func _ready() -> void:
 
 func enter():
 	debug.text = "GUN"
-	navAgent.navigation_finished.connect(_on_navigation_agent_2d_target_reached)
+	if !navAgent.navigation_finished.is_connected(_on_navigation_agent_2d_target_reached):
+		navAgent.navigation_finished.connect(_on_navigation_agent_2d_target_reached)
 	animations.play("run", -1, 1.1)
 	state_length.start(randf_range(minStateTime, maxStateTime))
 	speech_bubble_timer.start(randf_range(2,4))

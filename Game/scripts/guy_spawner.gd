@@ -31,7 +31,8 @@ func setupGame():
 	var navmapId := navmap.get_navigation_map()
 	for i in range(amountOfInitialGuysOnMap):
 		var targetLocation := NavigationServer2D.map_get_random_point(navmapId, 1, true)
-		spawnGuy(targetLocation)
+		var guy := spawnGuy(targetLocation)
+		guy.stateManager.enforceState(NPCStateManager.STATE._WAIT_DAYSTART)
 		
 	$PollGuyCount.start()
 

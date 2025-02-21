@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://dylnvnx8f0goe"]
+[gd_scene load_steps=39 format=3 uid="uid://dylnvnx8f0goe"]
 
 [ext_resource type="Script" path="res://entities/scripts/EntityAILearning.gd" id="1_nkst8"]
 [ext_resource type="PackedScene" uid="uid://sa773o5v8h1g" path="res://decorations/Speechbubble.tscn" id="2_joovv"]
@@ -14,6 +14,7 @@
 [ext_resource type="Script" path="res://entities/scripts/states/swim_in_fountain.gd" id="9_lu0xe"]
 [ext_resource type="Texture2D" uid="uid://bn88r761sa15c" path="res://Textures/drouple.png" id="10_5mckd"]
 [ext_resource type="Texture2D" uid="uid://dynwv584ldh3w" path="res://Textures/vuist.png" id="10_sod6u"]
+[ext_resource type="Script" path="res://entities/scripts/_wait_daystart.gd" id="11_kr0qf"]
 [ext_resource type="PackedScene" uid="uid://4fa13uf524uu" path="res://entities/DikkeRonSprites.tscn" id="12_i5n12"]
 [ext_resource type="Script" path="res://entities/scripts/states/incoming.gd" id="16_wslee"]
 [ext_resource type="Texture2D" uid="uid://cocjyc71h37pu" path="res://Textures/gewir2.png" id="17_k8mtw"]
@@ -337,6 +338,9 @@ navigationAgent = NodePath("../NavigationAgent2D")
 animations = NodePath("../AnimationPlayer")
 detectOthers = NodePath("../DetectOthers")
 debug = NodePath("../DEBUG")
+
+[node name="_WAIT_DAYSTART" type="Node" parent="StateManager"]
+script = ExtResource("11_kr0qf")
 
 [node name="WANDER_AIMLESS" type="Node" parent="StateManager"]
 script = ExtResource("3_6e7u3")

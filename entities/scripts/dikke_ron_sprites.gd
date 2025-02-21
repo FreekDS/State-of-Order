@@ -14,7 +14,7 @@ const WOMEN_SHORTS = [
 
 
 const UNNATURAL_HAIR = [
-	3,7
+	2,6
 ]
 
 # Faces that can only be used for male characters

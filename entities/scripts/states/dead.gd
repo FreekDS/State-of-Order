@@ -28,6 +28,7 @@ func onDrag():
 
 
 func onDragEnd():
+	animations.stop()
 	var dir := 1 if character.sprite.flip_h else -1
 	character.rotation_degrees = dir * 90
 

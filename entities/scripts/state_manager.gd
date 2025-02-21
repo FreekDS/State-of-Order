@@ -126,6 +126,7 @@ func enforceNextState():
 #Voor praten of schieten ofzo moet ge meerdere characters samen iets laten doen
 func enforceState(sate: STATE):
 	_state.exit()
+	_stateType = sate
 	_state = stateMap[sate]
 	_state.enter()
 

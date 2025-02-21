@@ -60,7 +60,7 @@ func startDrag() -> void:
 	
 	set_collision_mask_value(1, false)
 	
-	if !stateManager._stateType != NPCStateManager.STATE.DEAD:
+	if stateManager._stateType != NPCStateManager.STATE.DEAD:
 		speechbubble.option = "😨"
 		speechbubble.open()
 	
@@ -70,7 +70,7 @@ func startDrag() -> void:
 	hair.EnableDragmode()
 	pickedUp=true
 	
-	if !stateManager._stateType != NPCStateManager.STATE.DEAD:
+	if stateManager._stateType != NPCStateManager.STATE.DEAD:
 		animations.play("run", -1, 5.0)
 	
 
@@ -84,14 +84,14 @@ func endDrag() -> void:
 	
 	if not dead:
 		stateManager.process_mode = Node.PROCESS_MODE_INHERIT
-	dragEnded.emit()
+	
 	
 	if speechbubble.isOpen:
 		speechbubble.close()
 	
 	pickedUp=false
 	if not dead:
-		animations.stop()
+		animations.play("idle")
 		
 		# Check if we dropped in the navigation map, if not, move character back in
 		var closestMapPoint = NavigationServer2D.map_get_closest_point(stateManager.navigationMap, global_position)
@@ -109,6 +109,8 @@ func endDrag() -> void:
 				stateManager.recalculateRoute()
 			)
 			tween.play()
+			
+	dragEnded.emit()
 
 ## Dying more like capturing
 func die():

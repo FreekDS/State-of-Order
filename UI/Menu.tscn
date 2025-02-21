@@ -33,7 +33,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Animation_0ainj"]
 resource_name = "play"
-length = 2.0
+length = 2.2
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -147,15 +147,15 @@ theme_override_constants/margin_bottom = 120
 
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
 layout_mode = 1
-offset_left = 10.0
-offset_top = 15.0
-offset_right = 360.0
-offset_bottom = 125.0
+offset_left = 15.0
+offset_top = 9.0
+offset_right = 365.0
+offset_bottom = 46.0
 theme_override_font_sizes/bold_italics_font_size = 30
 theme_override_font_sizes/mono_font_size = 30
 theme_override_font_sizes/normal_font_size = 45
 bbcode_enabled = true
-text = "INSERT TITLE HERE"
+text = "State of ......"
 fit_content = true
 autowrap_mode = 0
 

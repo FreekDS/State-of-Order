@@ -52,7 +52,7 @@ func setupTexts():
 	allArrestedText.text = "Total people arrested: [indent]" + str(guysCapturedToday)
 	goodArrestedText.text = "Rightful arrestations:[indent]" + str(rightGuysCapturedToday)
 	wrongArrestedText.text = "Unfortunate collateral convictions: [indent]" + str(wrongGuysCapturedToday)
-	socialCreditText.text = "Social credit after day 1: [indent]" + str(totalSocialCredit)
+	socialCreditText.text = "Social credit at end of day: [indent]" + str(totalSocialCredit)
 
 
 func _on_day_end():

@@ -1,5 +1,6 @@
 extends Control
 
+const GAME = preload("res://Game/game.tscn")
 
 func _on_play_pressed() -> void:
 	#TransitionAnimations.close()
@@ -9,7 +10,11 @@ func _on_play_pressed() -> void:
 				#print("verander nr game scene pls")
 	#)
 	$AnimationPlayer.play("play")
-	pass # Replace with function body.
+	await $AnimationPlayer.animation_finished
+	TransitionAnimations.open()
+	await TransitionAnimations.done
+	await get_tree().create_timer(1).timeout
+	get_tree().change_scene_to_packed(GAME)
 
 
 func _on_settings_pressed() -> void:

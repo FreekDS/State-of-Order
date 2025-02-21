@@ -86,6 +86,8 @@ func _ready():
 func _on_state_switch_requested(oldState: NPCState):
 	oldState.exit()
 	var counter=0
+	if oldState.possibleNextStates.is_empty():
+		return
 	var newstate = oldState.possibleNextStates.pick_random()
 	while not stateMap[newstate].checkViable():
 		newstate = oldState.possibleNextStates.pick_random()

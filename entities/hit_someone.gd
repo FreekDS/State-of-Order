@@ -70,6 +70,9 @@ func exit():
 	hitanimation.play("RESET")
 	neighbourchosen=null
 	active = false
+	talkBubbleTimer.stop()
+	hitTimer.stop()
+	fightLengthTimer.stop()
 	if speechBubble.isOpen:
 		speechBubble.close()
 

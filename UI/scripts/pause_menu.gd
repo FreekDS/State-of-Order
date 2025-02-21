@@ -16,7 +16,6 @@ const TRANSLATION_STATES = {
 	NPCStateManager.STATE.LEAVING: "leave",
 	NPCStateManager.STATE.INCOMING: "exist",
 	NPCStateManager.STATE.SHOOT_SOMEONE: "shoot others",
-	NPCStateManager.STATE.HODL_GUN: "hold gun",
 	NPCStateManager.STATE.HIT_SOMEONE: "hit others",
 	NPCStateManager.STATE.SMOKING: "smoke",
 	NPCStateManager.STATE.WATCH_TV: "watch TV on the square",

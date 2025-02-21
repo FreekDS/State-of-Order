@@ -23,6 +23,7 @@ const TRANSLATION_STATES = {
 	NPCStateManager.STATE.PROTEST: "protest",
 	NPCStateManager.STATE.RUN: "run",
 	NPCStateManager.STATE.USE_TRAIN: "use the train",
+	NPCStateManager.STATE.HODL_GUN: "hold weapon",
 	NPCStateManager.STATE.DEAD: "be dead"
 
 }
@@ -41,21 +42,28 @@ func _input(event: InputEvent) -> void:
 		if not open:
 			get_tree().paused = true
 			open = true
-			show() # TODO: actual animation
+			show()
 			TransitionAnimations.open()
 			await TransitionAnimations.done
 			animations.play("show")
 			
 		else:
-			animations.play_backwards("show")
-			await animations.animation_finished
-			TransitionAnimations.close()
-			await TransitionAnimations.done
-			get_tree().paused = false
-			open = false
-			hide()
+			_closeMenu()
+		return
+			
+	if event is InputEventKey and event.is_pressed() and open:
+		if event.keycode == KEY_ESCAPE:
+			_closeMenu()
 		
 
+func _closeMenu():
+	animations.play_backwards("show")
+	await animations.animation_finished
+	TransitionAnimations.close()
+	await TransitionAnimations.done
+	get_tree().paused = false
+	open = false
+	hide()
 
 func _ready() -> void:
 	EventBus.dayStarted.connect(populateRules)

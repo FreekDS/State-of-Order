@@ -6,3 +6,5 @@ extends Resource
 @export var disallowedTraits : Array[NPCTraitManager.TRAIT] = []
 
 @export var score = 1
+
+@export var isKillDay = false

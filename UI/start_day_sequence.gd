@@ -12,19 +12,31 @@ const data = preload("res://resources/day1.tres")
 
 var canAdvance = false
 
+
+func playAnimation(withData: DayResource):
+	if not TransitionAnimations.closed:
+		TransitionAnimations.open()
+		await TransitionAnimations.done
+	populateRules(withData)
+	$AnimationPlayer.play("start")
+	await $AnimationPlayer.animation_finished
+	rulesAnimation()
+
+
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_accept"):
-		populateRules(data as DayResource)
-		$AnimationPlayer.play("start")
-		await $AnimationPlayer.animation_finished
-		rulesAnimation()
+		playAnimation(data as DayResource)
+		
 	
-	if canAdvance and event.is_pressed() and event is InputEventKey:
-		$AnimationPlayer.play_backwards("start")
-		$CarpeDiem.modulate.a = 0
-		await $AnimationPlayer.animation_finished
-		plsStartDay.emit()
-		canAdvance = false
+	if event is InputEventKey or event is InputEventMouseButton:
+		if canAdvance and event.is_pressed():
+			$AnimationPlayer.play_backwards("start")
+			$CarpeDiem.modulate.a = 0
+			await $AnimationPlayer.animation_finished
+			TransitionAnimations.close()
+			await TransitionAnimations.done
+			plsStartDay.emit()
+			canAdvance = false
 		
 		
 

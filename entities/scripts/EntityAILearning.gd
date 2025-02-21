@@ -24,7 +24,7 @@ signal dragStarted
 var dead = false
 
 func _ready():
-	animations.play("run", -1, 1.1)
+	animations.play("idle", -1, 1.1)
 	hair.color = sprite.getHairColor()
 
 

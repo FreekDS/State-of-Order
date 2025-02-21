@@ -1,13 +1,15 @@
-[gd_scene load_steps=23 format=3 uid="uid://dkydrawijeyqe"]
+[gd_scene load_steps=26 format=3 uid="uid://dkydrawijeyqe"]
 
 [ext_resource type="PackedScene" uid="uid://vfkensc2u1h1" path="res://UI/GameUI.tscn" id="1_2ob6e"]
 [ext_resource type="Script" path="res://Game/scripts/time_manager.gd" id="1_5ff1s"]
 [ext_resource type="Script" path="res://Game/scripts/guy_spawner.gd" id="1_8lkux"]
 [ext_resource type="Script" path="res://Game/scripts/roel_manager.gd" id="1_d20kw"]
+[ext_resource type="Script" path="res://Game/scripts/game.gd" id="1_dek3g"]
 [ext_resource type="Script" path="res://Game/CameraController.gd" id="1_hw18y"]
 [ext_resource type="Script" path="res://Game/scripts/CharacterPicker.gd" id="1_iuers"]
 [ext_resource type="Texture2D" uid="uid://xjnhaqsrm5xk" path="res://Textures/grond.png" id="1_n0ep5"]
 [ext_resource type="Resource" uid="uid://815ki2igdjnh" path="res://resources/day1.tres" id="2_1wdd8"]
+[ext_resource type="Script" path="res://resources/DayRuleResource.gd" id="2_2iuh7"]
 [ext_resource type="PackedScene" uid="uid://dylnvnx8f0goe" path="res://entities/DikkeRon.tscn" id="3_gqgcv"]
 [ext_resource type="Shader" path="res://Game/shaders/vignette.gdshader" id="5_r6mn3"]
 [ext_resource type="Script" path="res://Game/scripts/politiezone_klein_brabant.gd" id="7_tagq4"]
@@ -19,6 +21,7 @@
 [ext_resource type="Texture2D" uid="uid://balnyvlsal5gi" path="res://Textures/buldings_2.png" id="13_tv7ae"]
 [ext_resource type="Script" path="res://Game/scripts/floaty_text_spawner.gd" id="18_fkr3s"]
 [ext_resource type="PackedScene" uid="uid://dgx4yfq0frsf6" path="res://decorations/fountain.tscn" id="18_tqgm8"]
+[ext_resource type="PackedScene" uid="uid://dg3p6rcp0ut81" path="res://UI/start_day_sequence.tscn" id="23_j1lo2"]
 [ext_resource type="Script" path="res://Game/cursor.gd" id="23_m7f27"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_700af"]
@@ -35,32 +38,36 @@ shader_parameter/vignette_rgb = Color(0, 0, 0, 1)
 
 [node name="Game" type="Node2D"]
 y_sort_enabled = true
+script = ExtResource("1_dek3g")
+dayInformation = Array[ExtResource("2_2iuh7")]([null, null, null, null, null])
 
-[node name="GuySpawner" type="Node" parent="." node_paths=PackedStringArray("targetNode", "navmap")]
+[node name="GamePlay" type="Node" parent="."]
+
+[node name="GuySpawner" type="Node" parent="GamePlay" node_paths=PackedStringArray("targetNode", "navmap")]
 script = ExtResource("1_8lkux")
 targetNode = NodePath("../NavigationRegion/Characters")
 navmap = NodePath("../NavigationRegion")
 
-[node name="SpawnMarker" type="Marker2D" parent="GuySpawner"]
+[node name="SpawnMarker" type="Marker2D" parent="GamePlay/GuySpawner"]
 position = Vector2(0, 640)
 
-[node name="PollGuyCount" type="Timer" parent="GuySpawner"]
+[node name="PollGuyCount" type="Timer" parent="GamePlay/GuySpawner"]
 wait_time = 2.0
 
-[node name="SpawnDelay" type="Timer" parent="GuySpawner"]
+[node name="SpawnDelay" type="Timer" parent="GamePlay/GuySpawner"]
 one_shot = true
 
-[node name="RoelManager" type="Node" parent="."]
+[node name="RoelManager" type="Node" parent="GamePlay"]
 script = ExtResource("1_d20kw")
 dayRules = ExtResource("2_1wdd8")
 
-[node name="TimeManager" type="Node" parent="."]
+[node name="TimeManager" type="Node" parent="GamePlay"]
 script = ExtResource("1_5ff1s")
 
-[node name="Timer" type="Timer" parent="TimeManager"]
+[node name="Timer" type="Timer" parent="GamePlay/TimeManager"]
 one_shot = true
 
-[node name="Camera" type="Camera2D" parent="."]
+[node name="Camera" type="Camera2D" parent="GamePlay"]
 limit_left = -700
 limit_top = -600
 limit_right = 700
@@ -70,9 +77,9 @@ position_smoothing_enabled = true
 position_smoothing_speed = 15.0
 script = ExtResource("1_hw18y")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="Camera"]
+[node name="CanvasLayer" type="CanvasLayer" parent="GamePlay/Camera"]
 
-[node name="left" type="PanelContainer" parent="Camera/CanvasLayer"]
+[node name="left" type="PanelContainer" parent="GamePlay/Camera/CanvasLayer"]
 modulate = Color(1, 1, 1, 0)
 anchors_preset = -1
 anchor_right = 0.08
@@ -82,7 +89,7 @@ grow_vertical = 2
 size_flags_horizontal = 3
 mouse_filter = 1
 
-[node name="right" type="PanelContainer" parent="Camera/CanvasLayer"]
+[node name="right" type="PanelContainer" parent="GamePlay/Camera/CanvasLayer"]
 modulate = Color(1, 1, 1, 0)
 anchors_preset = -1
 anchor_left = 0.92
@@ -94,7 +101,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 mouse_filter = 1
 
-[node name="bot" type="PanelContainer" parent="Camera/CanvasLayer"]
+[node name="bot" type="PanelContainer" parent="GamePlay/Camera/CanvasLayer"]
 modulate = Color(1, 1, 1, 0)
 anchors_preset = -1
 anchor_top = 0.9
@@ -107,7 +114,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 mouse_filter = 1
 
-[node name="top" type="PanelContainer" parent="Camera/CanvasLayer"]
+[node name="top" type="PanelContainer" parent="GamePlay/Camera/CanvasLayer"]
 modulate = Color(1, 1, 1, 0)
 anchors_preset = -1
 anchor_right = 1.0
@@ -118,18 +125,18 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 mouse_filter = 1
 
-[node name="NavigationRegion" type="NavigationRegion2D" parent="."]
+[node name="NavigationRegion" type="NavigationRegion2D" parent="GamePlay"]
 y_sort_enabled = true
 navigation_polygon = SubResource("NavigationPolygon_700af")
 
-[node name="Grond" type="Sprite2D" parent="NavigationRegion"]
+[node name="Grond" type="Sprite2D" parent="GamePlay/NavigationRegion"]
 z_index = -1
 texture_repeat = 2
 texture = ExtResource("1_n0ep5")
 region_enabled = true
 region_rect = Rect2(0, 0, 1200, 1300)
 
-[node name="Grond" type="Sprite2D" parent="NavigationRegion/Grond"]
+[node name="Grond" type="Sprite2D" parent="GamePlay/NavigationRegion/Grond"]
 modulate = Color(0.485703, 0.485704, 0.485703, 1)
 z_index = -1
 texture_repeat = 2
@@ -137,9 +144,9 @@ texture = ExtResource("1_n0ep5")
 region_enabled = true
 region_rect = Rect2(0, 0, 1800, 1300)
 
-[node name="UILayer" type="CanvasLayer" parent="NavigationRegion"]
+[node name="UILayer" type="CanvasLayer" parent="GamePlay/NavigationRegion"]
 
-[node name="vignette" type="ColorRect" parent="NavigationRegion/UILayer"]
+[node name="vignette" type="ColorRect" parent="GamePlay/NavigationRegion/UILayer"]
 material = SubResource("ShaderMaterial_rk6gf")
 anchors_preset = 15
 anchor_right = 1.0
@@ -147,183 +154,187 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="GameUI" parent="NavigationRegion/UILayer" instance=ExtResource("1_2ob6e")]
+[node name="GameUI" parent="GamePlay/NavigationRegion/UILayer" instance=ExtResource("1_2ob6e")]
 
-[node name="PauseMenu" parent="NavigationRegion/UILayer" instance=ExtResource("9_vtdpc")]
+[node name="PauseMenu" parent="GamePlay/NavigationRegion/UILayer" instance=ExtResource("9_vtdpc")]
 visible = false
 
-[node name="decorations" type="Node2D" parent="NavigationRegion"]
+[node name="decorations" type="Node2D" parent="GamePlay/NavigationRegion"]
 y_sort_enabled = true
 position = Vector2(-1, 4)
 
-[node name="HerasHekken" type="Node2D" parent="NavigationRegion/decorations"]
+[node name="HerasHekken" type="Node2D" parent="GamePlay/NavigationRegion/decorations"]
 y_sort_enabled = true
 
-[node name="Hekker" parent="NavigationRegion/decorations/HerasHekken" instance=ExtResource("9_s70as")]
+[node name="Hekker" parent="GamePlay/NavigationRegion/decorations/HerasHekken" instance=ExtResource("9_s70as")]
 position = Vector2(-450, -527)
 
-[node name="Hekker2" parent="NavigationRegion/decorations/HerasHekken" instance=ExtResource("9_s70as")]
+[node name="Hekker2" parent="GamePlay/NavigationRegion/decorations/HerasHekken" instance=ExtResource("9_s70as")]
 position = Vector2(-387, -527)
 
-[node name="Hekker3" parent="NavigationRegion/decorations/HerasHekken" instance=ExtResource("9_s70as")]
+[node name="Hekker3" parent="GamePlay/NavigationRegion/decorations/HerasHekken" instance=ExtResource("9_s70as")]
 position = Vector2(-358, -527)
 
-[node name="Hekker4" parent="NavigationRegion/decorations/HerasHekken" instance=ExtResource("9_s70as")]
+[node name="Hekker4" parent="GamePlay/NavigationRegion/decorations/HerasHekken" instance=ExtResource("9_s70as")]
 position = Vector2(-327, -527)
 
-[node name="Hekker5" parent="NavigationRegion/decorations/HerasHekken" instance=ExtResource("9_s70as")]
+[node name="Hekker5" parent="GamePlay/NavigationRegion/decorations/HerasHekken" instance=ExtResource("9_s70as")]
 position = Vector2(-294, -527)
 
-[node name="Hekker6" parent="NavigationRegion/decorations/HerasHekken" instance=ExtResource("9_s70as")]
+[node name="Hekker6" parent="GamePlay/NavigationRegion/decorations/HerasHekken" instance=ExtResource("9_s70as")]
 position = Vector2(-263, -527)
 
-[node name="Hekker7" parent="NavigationRegion/decorations/HerasHekken" instance=ExtResource("9_s70as")]
+[node name="Hekker7" parent="GamePlay/NavigationRegion/decorations/HerasHekken" instance=ExtResource("9_s70as")]
 position = Vector2(-235, -527)
 
-[node name="Hekker8" parent="NavigationRegion/decorations/HerasHekken" instance=ExtResource("9_s70as")]
+[node name="Hekker8" parent="GamePlay/NavigationRegion/decorations/HerasHekken" instance=ExtResource("9_s70as")]
 position = Vector2(-204, -527)
 
-[node name="Hekker9" parent="NavigationRegion/decorations/HerasHekken" instance=ExtResource("9_s70as")]
+[node name="Hekker9" parent="GamePlay/NavigationRegion/decorations/HerasHekken" instance=ExtResource("9_s70as")]
 position = Vector2(-184, -511)
 
-[node name="Hekker10" parent="NavigationRegion/decorations/HerasHekken" instance=ExtResource("9_s70as")]
+[node name="Hekker10" parent="GamePlay/NavigationRegion/decorations/HerasHekken" instance=ExtResource("9_s70as")]
 position = Vector2(-153, -511)
 
-[node name="Hekker11" parent="NavigationRegion/decorations/HerasHekken" instance=ExtResource("9_s70as")]
+[node name="Hekker11" parent="GamePlay/NavigationRegion/decorations/HerasHekken" instance=ExtResource("9_s70as")]
 position = Vector2(-124, -511)
 
-[node name="Hekker12" parent="NavigationRegion/decorations/HerasHekken" instance=ExtResource("9_s70as")]
+[node name="Hekker12" parent="GamePlay/NavigationRegion/decorations/HerasHekken" instance=ExtResource("9_s70as")]
 position = Vector2(-93, -511)
 
-[node name="Hekker13" parent="NavigationRegion/decorations/HerasHekken" instance=ExtResource("9_s70as")]
+[node name="Hekker13" parent="GamePlay/NavigationRegion/decorations/HerasHekken" instance=ExtResource("9_s70as")]
 position = Vector2(-60, -511)
 
-[node name="Hekker14" parent="NavigationRegion/decorations/HerasHekken" instance=ExtResource("9_s70as")]
+[node name="Hekker14" parent="GamePlay/NavigationRegion/decorations/HerasHekken" instance=ExtResource("9_s70as")]
 position = Vector2(-29, -511)
 
-[node name="Hekker15" parent="NavigationRegion/decorations/HerasHekken" instance=ExtResource("9_s70as")]
+[node name="Hekker15" parent="GamePlay/NavigationRegion/decorations/HerasHekken" instance=ExtResource("9_s70as")]
 position = Vector2(0, -511)
 
-[node name="Hekker16" parent="NavigationRegion/decorations/HerasHekken" instance=ExtResource("9_s70as")]
+[node name="Hekker16" parent="GamePlay/NavigationRegion/decorations/HerasHekken" instance=ExtResource("9_s70as")]
 position = Vector2(31, -511)
 
-[node name="Hekker17" parent="NavigationRegion/decorations/HerasHekken" instance=ExtResource("9_s70as")]
+[node name="Hekker17" parent="GamePlay/NavigationRegion/decorations/HerasHekken" instance=ExtResource("9_s70as")]
 position = Vector2(62, -511)
 
-[node name="Hekker18" parent="NavigationRegion/decorations/HerasHekken" instance=ExtResource("9_s70as")]
+[node name="Hekker18" parent="GamePlay/NavigationRegion/decorations/HerasHekken" instance=ExtResource("9_s70as")]
 position = Vector2(93, -511)
 
-[node name="Hekker19" parent="NavigationRegion/decorations/HerasHekken" instance=ExtResource("9_s70as")]
+[node name="Hekker19" parent="GamePlay/NavigationRegion/decorations/HerasHekken" instance=ExtResource("9_s70as")]
 position = Vector2(122, -511)
 
-[node name="Hekker20" parent="NavigationRegion/decorations/HerasHekken" instance=ExtResource("9_s70as")]
+[node name="Hekker20" parent="GamePlay/NavigationRegion/decorations/HerasHekken" instance=ExtResource("9_s70as")]
 position = Vector2(153, -511)
 
-[node name="Hekker21" parent="NavigationRegion/decorations/HerasHekken" instance=ExtResource("9_s70as")]
+[node name="Hekker21" parent="GamePlay/NavigationRegion/decorations/HerasHekken" instance=ExtResource("9_s70as")]
 position = Vector2(186, -511)
 
-[node name="Hekker22" parent="NavigationRegion/decorations/HerasHekken" instance=ExtResource("9_s70as")]
+[node name="Hekker22" parent="GamePlay/NavigationRegion/decorations/HerasHekken" instance=ExtResource("9_s70as")]
 position = Vector2(217, -511)
 
-[node name="Hekker23" parent="NavigationRegion/decorations/HerasHekken" instance=ExtResource("9_s70as")]
+[node name="Hekker23" parent="GamePlay/NavigationRegion/decorations/HerasHekken" instance=ExtResource("9_s70as")]
 position = Vector2(246, -511)
 
-[node name="Hekker24" parent="NavigationRegion/decorations/HerasHekken" instance=ExtResource("9_s70as")]
+[node name="Hekker24" parent="GamePlay/NavigationRegion/decorations/HerasHekken" instance=ExtResource("9_s70as")]
 position = Vector2(277, -511)
 
-[node name="Hekker25" parent="NavigationRegion/decorations/HerasHekken" instance=ExtResource("9_s70as")]
+[node name="Hekker25" parent="GamePlay/NavigationRegion/decorations/HerasHekken" instance=ExtResource("9_s70as")]
 position = Vector2(298, -531)
 
-[node name="Hekker26" parent="NavigationRegion/decorations/HerasHekken" instance=ExtResource("9_s70as")]
+[node name="Hekker26" parent="GamePlay/NavigationRegion/decorations/HerasHekken" instance=ExtResource("9_s70as")]
 position = Vector2(329, -531)
 
-[node name="Hekker27" parent="NavigationRegion/decorations/HerasHekken" instance=ExtResource("9_s70as")]
+[node name="Hekker27" parent="GamePlay/NavigationRegion/decorations/HerasHekken" instance=ExtResource("9_s70as")]
 position = Vector2(358, -531)
 
-[node name="Hekker28" parent="NavigationRegion/decorations/HerasHekken" instance=ExtResource("9_s70as")]
+[node name="Hekker28" parent="GamePlay/NavigationRegion/decorations/HerasHekken" instance=ExtResource("9_s70as")]
 position = Vector2(389, -531)
 
-[node name="Hekker29" parent="NavigationRegion/decorations/HerasHekken" instance=ExtResource("9_s70as")]
+[node name="Hekker29" parent="GamePlay/NavigationRegion/decorations/HerasHekken" instance=ExtResource("9_s70as")]
 position = Vector2(422, -531)
 
-[node name="Hekker30" parent="NavigationRegion/decorations/HerasHekken" instance=ExtResource("9_s70as")]
+[node name="Hekker30" parent="GamePlay/NavigationRegion/decorations/HerasHekken" instance=ExtResource("9_s70as")]
 position = Vector2(453, -531)
 
-[node name="Hekker31" parent="NavigationRegion/decorations/HerasHekken" instance=ExtResource("9_s70as")]
+[node name="Hekker31" parent="GamePlay/NavigationRegion/decorations/HerasHekken" instance=ExtResource("9_s70as")]
 position = Vector2(482, -531)
 
-[node name="Hekker32" parent="NavigationRegion/decorations/HerasHekken" instance=ExtResource("9_s70as")]
+[node name="Hekker32" parent="GamePlay/NavigationRegion/decorations/HerasHekken" instance=ExtResource("9_s70as")]
 position = Vector2(519, -553)
 
-[node name="Hekker33" parent="NavigationRegion/decorations/HerasHekken" instance=ExtResource("9_s70as")]
+[node name="Hekker33" parent="GamePlay/NavigationRegion/decorations/HerasHekken" instance=ExtResource("9_s70as")]
 position = Vector2(-418, -527)
 
-[node name="Hekker34" parent="NavigationRegion/decorations/HerasHekken" instance=ExtResource("9_s70as")]
+[node name="Hekker34" parent="GamePlay/NavigationRegion/decorations/HerasHekken" instance=ExtResource("9_s70as")]
 position = Vector2(-476, -537)
 
-[node name="Hekker35" parent="NavigationRegion/decorations/HerasHekken" instance=ExtResource("9_s70as")]
+[node name="Hekker35" parent="GamePlay/NavigationRegion/decorations/HerasHekken" instance=ExtResource("9_s70as")]
 position = Vector2(-503, -563)
 
-[node name="Tree1" parent="NavigationRegion/decorations" instance=ExtResource("10_fhypo")]
+[node name="Tree1" parent="GamePlay/NavigationRegion/decorations" instance=ExtResource("10_fhypo")]
 position = Vector2(89, -124)
 scale = Vector2(2, 2)
 
-[node name="Tree2" parent="NavigationRegion/decorations" instance=ExtResource("10_fhypo")]
+[node name="Tree2" parent="GamePlay/NavigationRegion/decorations" instance=ExtResource("10_fhypo")]
 position = Vector2(153, -124)
 scale = Vector2(2, 2)
 
-[node name="Tree3" parent="NavigationRegion/decorations" instance=ExtResource("10_fhypo")]
+[node name="Tree3" parent="GamePlay/NavigationRegion/decorations" instance=ExtResource("10_fhypo")]
 position = Vector2(153, -60)
 scale = Vector2(2, 2)
 
-[node name="Tree4" parent="NavigationRegion/decorations" instance=ExtResource("10_fhypo")]
+[node name="Tree4" parent="GamePlay/NavigationRegion/decorations" instance=ExtResource("10_fhypo")]
 position = Vector2(86, -60)
 scale = Vector2(2, 2)
 
-[node name="buldingsR" type="Sprite2D" parent="NavigationRegion/decorations"]
+[node name="buldingsR" type="Sprite2D" parent="GamePlay/NavigationRegion/decorations"]
 position = Vector2(601, -4)
 texture = ExtResource("12_rcx3c")
 
-[node name="buldingsL" type="Sprite2D" parent="NavigationRegion/decorations"]
+[node name="buldingsL" type="Sprite2D" parent="GamePlay/NavigationRegion/decorations"]
 position = Vector2(-599, -4)
 texture = ExtResource("13_tv7ae")
 
-[node name="Characters" type="Node2D" parent="NavigationRegion" node_paths=PackedStringArray("navigationRegion")]
+[node name="Characters" type="Node2D" parent="GamePlay/NavigationRegion" node_paths=PackedStringArray("navigationRegion")]
 y_sort_enabled = true
 position = Vector2(-78, 11)
 script = ExtResource("1_iuers")
 navigationRegion = NodePath("..")
 
-[node name="DikkeRon" parent="NavigationRegion/Characters" instance=ExtResource("3_gqgcv")]
+[node name="DikkeRon" parent="GamePlay/NavigationRegion/Characters" instance=ExtResource("3_gqgcv")]
 position = Vector2(110, -59)
 
-[node name="DikkeRon2" parent="NavigationRegion/Characters" instance=ExtResource("3_gqgcv")]
+[node name="DikkeRon2" parent="GamePlay/NavigationRegion/Characters" instance=ExtResource("3_gqgcv")]
 position = Vector2(-137, -167)
 
-[node name="Politiezone Klein Brabant" type="Node2D" parent="NavigationRegion"]
+[node name="Politiezone Klein Brabant" type="Node2D" parent="GamePlay/NavigationRegion"]
 script = ExtResource("7_tagq4")
 
-[node name="Politie2" parent="NavigationRegion/Politiezone Klein Brabant" instance=ExtResource("8_w3de5")]
+[node name="Politie2" parent="GamePlay/NavigationRegion/Politiezone Klein Brabant" instance=ExtResource("8_w3de5")]
 position = Vector2(-454, 142)
 
-[node name="Politie" parent="NavigationRegion/Politiezone Klein Brabant" instance=ExtResource("8_w3de5")]
+[node name="Politie" parent="GamePlay/NavigationRegion/Politiezone Klein Brabant" instance=ExtResource("8_w3de5")]
 position = Vector2(-227, 71)
 
-[node name="Politie3" parent="NavigationRegion/Politiezone Klein Brabant" instance=ExtResource("8_w3de5")]
+[node name="Politie3" parent="GamePlay/NavigationRegion/Politiezone Klein Brabant" instance=ExtResource("8_w3de5")]
 position = Vector2(396, -93)
 
-[node name="Fountain" parent="NavigationRegion" instance=ExtResource("18_tqgm8")]
+[node name="Fountain" parent="GamePlay/NavigationRegion" instance=ExtResource("18_tqgm8")]
 
-[node name="FloatyTextSpawner" type="Node2D" parent="."]
+[node name="FloatyTextSpawner" type="Node2D" parent="GamePlay"]
 script = ExtResource("18_fkr3s")
 
-[node name="Cursor" type="Node" parent="."]
+[node name="Cursor" type="Node" parent="GamePlay"]
 script = ExtResource("23_m7f27")
 
-[connection signal="timeout" from="GuySpawner/PollGuyCount" to="GuySpawner" method="_on_poll_guy_count_timeout"]
-[connection signal="timeout" from="TimeManager/Timer" to="TimeManager" method="_on_timer_timeout"]
-[connection signal="edgeNoLongerHit" from="Camera" to="NavigationRegion/UILayer/GameUI" method="_on_camera_edge_no_longer_hit"]
-[connection signal="hitEdge" from="Camera" to="NavigationRegion/UILayer/GameUI" method="_on_camera_hit_edge"]
-[connection signal="moving" from="Camera" to="NavigationRegion/UILayer/GameUI" method="_on_camera_moving"]
-[connection signal="stationary" from="Camera" to="NavigationRegion/UILayer/GameUI" method="_on_camera_stationary"]
-[connection signal="guyDragged" from="NavigationRegion/Characters" to="NavigationRegion/Politiezone Klein Brabant" method="_on_characters_guy_dragged"]
+[node name="Sequences" type="CanvasLayer" parent="."]
+
+[node name="SequencingLayer" parent="Sequences" instance=ExtResource("23_j1lo2")]
+
+[connection signal="timeout" from="GamePlay/GuySpawner/PollGuyCount" to="GamePlay/GuySpawner" method="_on_poll_guy_count_timeout"]
+[connection signal="timeout" from="GamePlay/TimeManager/Timer" to="GamePlay/TimeManager" method="_on_timer_timeout"]
+[connection signal="edgeNoLongerHit" from="GamePlay/Camera" to="GamePlay/NavigationRegion/UILayer/GameUI" method="_on_camera_edge_no_longer_hit"]
+[connection signal="hitEdge" from="GamePlay/Camera" to="GamePlay/NavigationRegion/UILayer/GameUI" method="_on_camera_hit_edge"]
+[connection signal="moving" from="GamePlay/Camera" to="GamePlay/NavigationRegion/UILayer/GameUI" method="_on_camera_moving"]
+[connection signal="stationary" from="GamePlay/Camera" to="GamePlay/NavigationRegion/UILayer/GameUI" method="_on_camera_stationary"]
+[connection signal="guyDragged" from="GamePlay/NavigationRegion/Characters" to="GamePlay/NavigationRegion/Politiezone Klein Brabant" method="_on_characters_guy_dragged"]

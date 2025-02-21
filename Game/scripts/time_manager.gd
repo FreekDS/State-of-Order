@@ -1,5 +1,6 @@
 extends Node
 
+
 ## In seconds
 @export var dayDuration = 120
 

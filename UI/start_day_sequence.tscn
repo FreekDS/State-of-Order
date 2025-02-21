@@ -81,6 +81,7 @@ _data = {
 }
 
 [node name="StartDaySequence" type="Control" node_paths=PackedStringArray("ruleList", "unnaturalhairtemplate")]
+z_index = 10
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0

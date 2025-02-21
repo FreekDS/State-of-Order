@@ -5,3 +5,5 @@ extends Node
 var allNpcs : Array[DikkeRon] = []
 
 var fountainPosition : Vector2 = Vector2.ZERO
+
+var dayIsActive = false

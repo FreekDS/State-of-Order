@@ -125,8 +125,14 @@ func die():
 		
 	dead = true
 	animations.play("die", -1, 1.5)
+	
 	animations.animation_finished.connect(
 		func(_anim): queue_free(), CONNECT_ONE_SHOT
+	)
+	
+	# Ne workaround voor nen bug :D
+	get_tree().create_timer(2).timeout.connect(
+		func(): if !is_queued_for_deletion(): queue_free()
 	)
 
 

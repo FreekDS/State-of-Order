@@ -46,7 +46,7 @@ func enter():
 	gunSprite.visible=true
 
 
-func tick(delta: float):
+func tick(_delta: float):
 	if navAgent.is_navigation_finished() or targetPoint.is_equal_approx(Vector2.ZERO):
 		navAgent.target_position = NavigationServer2D.map_get_random_point(navAgent.get_navigation_map(), 1, true)
 		targetPoint = navAgent.get_next_path_position()

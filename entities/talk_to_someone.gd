@@ -52,7 +52,7 @@ func enter():
 	speechBubble.option = babbel_words.pick_random()
 	speechBubble.open()
 
-func tick(delta: float):
+func tick(_delta: float):
 	character.velocity = Vector2.ZERO
 
 func exit():

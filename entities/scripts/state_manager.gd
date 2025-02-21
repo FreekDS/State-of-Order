@@ -54,7 +54,7 @@ var _targetState : STATE = STATE.WANDER_AIMLESS
 var navigationMap : RID
 
 var _state : NPCState = null
-var _stateType := STATE.WANDER_AIMLESS
+var _stateType := STATE._WAIT_DAYSTART
 
 var speed = 50
 var targetPoint := Vector2.ZERO

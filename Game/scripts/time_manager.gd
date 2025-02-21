@@ -13,6 +13,12 @@ var _currentHour = 0
 var _secondsPerTick := 0.0
 
 func _ready() -> void:
+	EventBus.dayStarted.connect(
+		func(_data): startDay()
+	)
+	
+
+func startDay():
 	_secondsPerTick = dayDuration / float(endTime - startTime)
 	_currentHour = startTime
 	

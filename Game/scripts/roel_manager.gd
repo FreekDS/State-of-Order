@@ -6,9 +6,6 @@ extends Node
 func _ready() -> void:
 	EventBus.guyCaptured.connect(_on_guy_captured)
 	
-	var initDayFunc = func(): EventBus.dayStarted.emit(dayRules)
-	initDayFunc.call_deferred()
-	
 	
 func _on_guy_captured(who: DikkeRon):
 	

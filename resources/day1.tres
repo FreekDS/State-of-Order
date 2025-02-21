@@ -8,3 +8,4 @@ dayNumber = 1
 disallowedActions = Array[int]([9, 6])
 disallowedTraits = Array[int]([3, 0])
 score = 1
+isKillDay = false

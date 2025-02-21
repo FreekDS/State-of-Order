@@ -112,7 +112,7 @@ func _on_hit_timer_timeout() -> void:
 	hitanimation.play("hit")
 
 
-func _on_hit_animation_player_animation_finished(anim_name: StringName) -> void:
+func _on_hit_animation_player_animation_finished(_anim_name: StringName) -> void:
 	if not active:
 		return
 	hitTimer.start(randf_range(0,1))

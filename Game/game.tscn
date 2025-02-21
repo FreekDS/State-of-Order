@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://dkydrawijeyqe"]
+[gd_scene load_steps=31 format=3 uid="uid://dkydrawijeyqe"]
 
 [ext_resource type="PackedScene" uid="uid://vfkensc2u1h1" path="res://UI/GameUI.tscn" id="1_2ob6e"]
 [ext_resource type="Script" path="res://Game/scripts/time_manager.gd" id="1_5ff1s"]
@@ -27,6 +27,7 @@
 [ext_resource type="PackedScene" uid="uid://dgx4yfq0frsf6" path="res://decorations/fountain.tscn" id="18_tqgm8"]
 [ext_resource type="PackedScene" uid="uid://dg3p6rcp0ut81" path="res://UI/start_day_sequence.tscn" id="23_j1lo2"]
 [ext_resource type="Script" path="res://Game/cursor.gd" id="23_m7f27"]
+[ext_resource type="PackedScene" uid="uid://dj8m2ck2dm71d" path="res://UI/dramatische_tekst.tscn" id="28_x8nq2"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_700af"]
 vertices = PackedVector2Array(-188, -516.75, 280, -520.75, 498, -520.75, 293, -513.25, -202, -513.25, 525.063, -533.281, 521.891, -361.258, 498, -533.25, 501, -542.75, -542.133, -350.492, -542.727, -364.898, -521.961, -360.953, -521.039, -342.461, 179, -49, 179, -73, 479, -117.938, 479, 21.8828, 179, -113, 477, -148.711, 503.898, -123.906, 35.9375, -5.15625, 38.1797, -13.5, 129, -49, 112, -49, 62, -49, 35.9375, -21.8438, 520, 279.258, 542, 274.258, 542, 285.18, 520, 291.18, -523.023, -531.508, -544.852, -539.453, -544.227, -555.648, -524, -550.602, -494, -526.75, 503.141, -154.75, -520, 509.75, -520, 499.023, -504.063, 502.008, -502, 517.75, -537.844, 289.227, -537.219, 273.047, -522, 276.102, -519.922, 294.219, -502, -126.383, -502, -152.297, -479, -149.313, -477, -116.391, -541, 97.3281, -541, 84.5469, -522.094, 86.5391, -522, 103.344, 293, -500.75, 521.039, -344.758, 477, -239.797, -468, -516.75, 522.094, 83.4922, 543, 81.5, 543, 96.9609, 520, 101.969, 544.25, -364.313, 544.828, -351.703, -524, -575.961, 523.281, -569.031, 524.094, -555.25, 501, -555.25, -487, -565.25, 499, 501.258, 519, 500.25, 519, 509.094, 498.953, 514.109, 179, -137, 29.8438, -27.9375, 499.93, 595.977, -502, 594, -188, -529.25, 280, -533.25, -487, -552.75, -521, -565.25, -521, -552.75, -460, -529.25, -460, -539.25, -468, -526.75, 129, -137, 129, -113, 115, -113, 115, -137, 129, -73, 112, -73, 65, -113, 62, -73, 499, 392.227, -502.961, 392.352, -202, -500.75, -479, -240.75, -477, 20.7813, 521.078, 22.8828, -521.07, 22.7734, 535, -542.75, 535, -552.359, 540.742, -552.719, 542.492, -541.023, -494, -539.25, 520, 386.219, -521.906, 386.352, 520.039, -251.797, -520.039, -252.75, 65, -137, -22.1563, -30, 29.8438, 0.9375, 22.1563, -30, -29.8438, -27.9375, -35.9375, -21.8438, -38.1797, -13.5, -35.9375, -5.15625, -29.8438, 0.9375, 22.1563, 3, -22.1563, 3)
@@ -40,10 +41,13 @@ shader_parameter/vignette_intensity = 0.4
 shader_parameter/vignette_opacity = 1.0
 shader_parameter/vignette_rgb = Color(0, 0, 0, 1)
 
-[node name="Game" type="Node2D"]
+[node name="Game" type="Node2D" node_paths=PackedStringArray("startSequence", "dramatischeText", "guySpawner")]
 y_sort_enabled = true
 script = ExtResource("1_dek3g")
 dayInformation = Array[ExtResource("2_2iuh7")]([ExtResource("2_1wdd8"), ExtResource("4_vt0jt"), ExtResource("5_kxptf"), ExtResource("6_hhb78"), ExtResource("7_bsa01")])
+startSequence = NodePath("Sequences/StartDaySequence")
+dramatischeText = NodePath("Sequences/DramatischeTekst")
+guySpawner = NodePath("GamePlay/GuySpawner")
 
 [node name="GamePlay" type="Node" parent="."]
 
@@ -336,6 +340,9 @@ script = ExtResource("23_m7f27")
 [node name="StartDaySequence" parent="Sequences" instance=ExtResource("23_j1lo2")]
 mouse_filter = 2
 
+[node name="DramatischeTekst" parent="Sequences" instance=ExtResource("28_x8nq2")]
+mouse_filter = 2
+
 [connection signal="timeout" from="GamePlay/GuySpawner/PollGuyCount" to="GamePlay/GuySpawner" method="_on_poll_guy_count_timeout"]
 [connection signal="timeout" from="GamePlay/TimeManager/Timer" to="GamePlay/TimeManager" method="_on_timer_timeout"]
 [connection signal="edgeNoLongerHit" from="GamePlay/Camera" to="GamePlay/NavigationRegion/UILayer/GameUI" method="_on_camera_edge_no_longer_hit"]
@@ -344,3 +351,4 @@ mouse_filter = 2
 [connection signal="stationary" from="GamePlay/Camera" to="GamePlay/NavigationRegion/UILayer/GameUI" method="_on_camera_stationary"]
 [connection signal="guyDragged" from="GamePlay/NavigationRegion/Characters" to="GamePlay/NavigationRegion/Politiezone Klein Brabant" method="_on_characters_guy_dragged"]
 [connection signal="plsStartDay" from="Sequences/StartDaySequence" to="." method="_on_start_day_sequence_pls_start_day"]
+[connection signal="done" from="Sequences/DramatischeTekst" to="." method="_on_dramatische_tekst_done"]

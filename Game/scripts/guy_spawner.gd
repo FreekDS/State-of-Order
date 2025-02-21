@@ -1,3 +1,4 @@
+class_name GuySpawner
 extends Node
 
 const GUY_SCENE = preload("res://entities/DikkeRon.tscn")
@@ -18,16 +19,23 @@ const GUY_SCENE = preload("res://entities/DikkeRon.tscn")
 @export var navmap : NavigationRegion2D
 
 
-func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("ui_accept"):
-		setupGame()
+#func _input(event: InputEvent) -> void:
+	#if event.is_action_pressed("ui_accept"):
+		#setupGame()
 
 
 @onready var SpawnDelay: Timer = $SpawnDelay
 @onready var spawnMarker: Marker2D = $SpawnMarker
 
 
-func setupGame():
+func _ready() -> void:
+	EventBus.dayEnded.connect(
+		func(): 
+			$PollGuyCount.stop()
+			SpawnDelay.stop()
+	)
+
+func setupGame(_dayData):
 	var navmapId := navmap.get_navigation_map()
 	for i in range(amountOfInitialGuysOnMap):
 		var targetLocation := NavigationServer2D.map_get_random_point(navmapId, 1, true)
@@ -56,8 +64,8 @@ func _on_poll_guy_count_timeout() -> void:
 			NPCStateManager.STATE.INCOMING
 		)
 		
-		var maxDelay = lerp(
-			minSpawnDelay, maxSpawnDelay, Globals.allNpcs.size() / maxGuysInScene)
+		@warning_ignore("integer_division")
+		var maxDelay = lerp(minSpawnDelay, maxSpawnDelay, Globals.allNpcs.size() / maxGuysInScene)
 		
 		SpawnDelay.start(randf_range(minSpawnDelay, maxDelay))
 		

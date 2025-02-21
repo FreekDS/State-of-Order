@@ -1,3 +1,4 @@
+class_name StartSequence
 extends Control
 
 signal plsStartDay
@@ -26,10 +27,8 @@ func playAnimation(withData: DayResource):
 
 
 func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("ui_accept"):
-		playAnimation(data as DayResource)
-		
-	
+	#if event.is_action_pressed("ui_accept"):
+		#playAnimation(data as DayResource)
 	if event is InputEventKey or event is InputEventMouseButton:
 		if canAdvance and event.is_pressed():
 			$AnimationPlayer.play_backwards("start")
@@ -83,8 +82,8 @@ func rulesAnimation():
 	canAdvance = true
 	
 	await get_tree().create_timer(.5).timeout
-	var tween = $CarpeDiem.create_tween()
-	tween.tween_property($CarpeDiem, "modulate:a", 1.0, 1)
+	var textTween = $CarpeDiem.create_tween()
+	textTween.tween_property($CarpeDiem, "modulate:a", 1.0, 1)
 
 
 func populateRules(dayData: DayResource):

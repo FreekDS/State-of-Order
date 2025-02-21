@@ -1,36 +1,8 @@
 [gd_scene load_steps=12 format=3 uid="uid://bvmslb2hf1aih"]
 
+[ext_resource type="Script" path="res://UI/components/scripts/TransitionAnimations.gd" id="1_2kc1n"]
 [ext_resource type="Shader" path="res://UI/components/shaders/Transition.gdshader" id="1_ou77r"]
 [ext_resource type="Shader" path="res://Game/shaders/distortionachtig.gdshader" id="2_0wxt5"]
-
-[sub_resource type="GDScript" id="GDScript_v15m0"]
-script/source = "## Load this as autoload to have a visual transition effect
-extends CanvasLayer
-
-@onready var anim : AnimationPlayer = $Distortion/AnimationPlayer
-
-signal done(isOpen: bool)
-
-var closed = false
-
-func open():
-	anim.play(\"fade\")
-	anim.animation_finished.connect(
-		func(_file):
-			done.emit(true),
-		CONNECT_ONE_SHOT
-	)
-	closed = false
-
-func close():
-	anim.play_backwards(\"fade\")
-	anim.animation_finished.connect(
-		func(_file):
-			done.emit(false),
-		CONNECT_ONE_SHOT
-	)
-	closed = true
-"
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_flo7b"]
 shader = ExtResource("2_0wxt5")
@@ -116,7 +88,7 @@ _data = {
 
 [node name="TransitionAnimations" type="CanvasLayer"]
 process_mode = 3
-script = SubResource("GDScript_v15m0")
+script = ExtResource("1_2kc1n")
 
 [node name="Distortion" type="ColorRect" parent="."]
 material = SubResource("ShaderMaterial_flo7b")

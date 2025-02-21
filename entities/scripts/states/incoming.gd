@@ -9,7 +9,7 @@ func enter():
 	navAgent.target_position = NavigationServer2D.map_get_random_point(navAgent.get_navigation_map(), 1, true)
 
 
-func tick(delta: float):
+func tick(_delta: float):
 	var targetPoint = navAgent.get_next_path_position()
 	
 	var direction = (targetPoint - character.global_position).normalized() * speed

@@ -1,7 +1,9 @@
 extends Node
 
-var vastenmen = load("res://Textures/and_grijpe.png")
-var normaal = load("res://Textures/andje.png")
+const vastenmen = preload("res://Textures/and_grijpe.png")
+const normaal = preload("res://Textures/andje.png")
+
+const HOTSPOT = Vector2(16, 15)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -11,6 +13,6 @@ func _ready() -> void:
 
 func changeSprit(normal : bool) -> void:
 	if normal:
-		Input.set_custom_mouse_cursor(normaal)
+		Input.set_custom_mouse_cursor(normaal, Input.CURSOR_ARROW, HOTSPOT)
 	else:
-		Input.set_custom_mouse_cursor(vastenmen)
+		Input.set_custom_mouse_cursor(vastenmen, Input.CURSOR_ARROW, HOTSPOT)

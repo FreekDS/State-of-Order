@@ -6,8 +6,8 @@
 script = ExtResource("1_4ate5")
 dayNumber = 1
 tagline = "have a nice day"
-disallowedActions = Array[int]([9, 6, 8])
+disallowedActions = Array[int]([9, 6, 8, 12])
 disallowedTraits = Array[int]([])
 score = 1
 isKillDay = false
-noGuys = true
+noGuys = false

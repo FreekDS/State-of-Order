@@ -35,6 +35,7 @@ func _ready() -> void:
 		20,
 		10,
 	]
+	
 #wandelen naar de neighbour niet nodig, want na het praten staat ge er al naast normaal
 func enter():
 	if neighbourchosen:

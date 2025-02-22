@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://cx8nibvpoil7u"]
+[gd_scene load_steps=20 format=3 uid="uid://cx8nibvpoil7u"]
 
 [ext_resource type="Script" path="res://Audio/audio_node.gd" id="1_7wniy"]
 [ext_resource type="AudioStream" uid="uid://0cce3v6q46ga" path="res://Audio/brackies1.wav" id="2_c0wa5"]
@@ -17,6 +17,7 @@
 [ext_resource type="AudioStream" uid="uid://belry5diwns3o" path="res://Audio/f_blabla4.wav" id="13_7xmxx"]
 [ext_resource type="AudioStream" uid="uid://qqa7yfi8lmar" path="res://Audio/clock_tick.wav" id="14_3ub3v"]
 [ext_resource type="AudioStream" uid="uid://bmapr4cd2rgwh" path="res://Audio/download_audio.wav" id="14_dgdad"]
+[ext_resource type="AudioStream" uid="uid://bfoy1f8rj16om" path="res://Misc/EenTofLieke.mp3" id="14_igvhc"]
 [ext_resource type="AudioStream" uid="uid://baasadieln6u5" path="res://Audio/punch.wav" id="17_f7sqw"]
 
 [node name="AudioNode" type="Node2D"]
@@ -24,6 +25,11 @@ script = ExtResource("1_7wniy")
 dayAudios = Array[AudioStreamWAV]([ExtResource("2_c0wa5"), ExtResource("3_hs7bn"), ExtResource("4_c7an2"), ExtResource("5_njt7k"), ExtResource("6_u82nm")])
 speakingFemaleAudios = Array[AudioStreamWAV]([ExtResource("7_8ecaf"), ExtResource("8_hqkf4"), ExtResource("9_2w0v7")])
 speakingMaleAudios = Array[AudioStreamWAV]([ExtResource("10_4so5v"), ExtResource("11_hkr75"), ExtResource("12_7ue5u"), ExtResource("13_7xmxx")])
+
+[node name="rik" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("14_igvhc")
+volume_db = -35.0
+bus = &"Music"
 
 [node name="music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_c0wa5")

@@ -27,8 +27,8 @@ func _on_navigation_agent_2d_target_reached() -> void:
 		NPCStateManager.STATE.STANDSTILL
 	]
 	nextStatesWeigths=[
-		20,
+		10,
 		50, 
-		30
+		40
 	]	
 	switchState.emit(self)

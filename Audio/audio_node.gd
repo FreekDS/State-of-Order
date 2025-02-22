@@ -22,6 +22,8 @@ extends Node2D
 @onready var tring: AudioStreamPlayer = $tring
 @onready var punchAudio: AudioStreamPlayer2D = $punch
 
+@onready var deRik : AudioStreamPlayer2D = $rik
+
 func _ready() -> void:
 	if not music.playing:
 		music.stream = dayAudios[0]
@@ -108,4 +110,9 @@ func blablaFemale(at: Vector2):
 	firstSpeaker.pitch_scale = randf_range(.9, 1.1)
 	
 	_play(firstSpeaker, at)
-	
+
+func playDeRikZijneMuziek(at: Vector2):
+	_play(deRik, at)
+
+func stopDeRikeZineMuziek():
+	deRik.stop()

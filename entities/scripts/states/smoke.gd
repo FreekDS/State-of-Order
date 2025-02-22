@@ -18,8 +18,8 @@ func _ready() -> void:
 	nextStatesWeigths=[
 		20,
 		30, 
-		15,
-		35
+		10,
+		40
 	]
 
 func enter():

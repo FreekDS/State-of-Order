@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://i0rv5tohwo52"]
+
+[ext_resource type="Texture2D" uid="uid://dn87wpbneeyuu" path="res://Textures/bank.png" id="1_iuhqj"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jdg3r"]
+size = Vector2(36, 8.5)
+
+[node name="bank" type="StaticBody2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -2.75)
+shape = SubResource("RectangleShape2D_jdg3r")
+
+[node name="bank" type="Sprite2D" parent="."]
+texture = ExtResource("1_iuhqj")
+offset = Vector2(0, -10)

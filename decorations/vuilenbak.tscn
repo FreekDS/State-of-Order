@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://bff2gtu0qofci"]
+
+[ext_resource type="Texture2D" uid="uid://ce54fnf41s45h" path="res://Textures/vuilbak_sus.png" id="1_18qfw"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jdg3r"]
+size = Vector2(8, 4.5)
+
+[node name="Vuilbak" type="StaticBody2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-2, -0.75)
+shape = SubResource("RectangleShape2D_jdg3r")
+
+[node name="bank" type="Sprite2D" parent="."]
+texture = ExtResource("1_18qfw")
+offset = Vector2(0, -10)

@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://bxu81c3efnvkq"]
+
+[ext_resource type="Texture2D" uid="uid://dcuuikr6gcbd5" path="res://Textures/tree.png" id="1_nn31k"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jdg3r"]
+size = Vector2(24, 14.5)
+
+[node name="Boom" type="StaticBody2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, -5.75)
+shape = SubResource("RectangleShape2D_jdg3r")
+
+[node name="bank" type="Sprite2D" parent="."]
+texture = ExtResource("1_nn31k")
+offset = Vector2(0, -20)

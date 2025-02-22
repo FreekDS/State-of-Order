@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://dsimgym8d01ip"]
+
+[ext_resource type="Texture2D" uid="uid://bumm710w0w65u" path="res://Textures/kaaswinkel.png" id="1_kd1ng"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jdg3r"]
+size = Vector2(54, 6.5)
+
+[node name="Kraam1" type="StaticBody2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -1.75)
+shape = SubResource("RectangleShape2D_jdg3r")
+
+[node name="bank" type="Sprite2D" parent="."]
+texture = ExtResource("1_kd1ng")
+offset = Vector2(0, -24)

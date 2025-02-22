@@ -5,6 +5,7 @@ extends CharacterBody2D
 @onready var collision: CollisionShape2D = $CollisionShape2D
 @onready var highlight: Sprite2D = $DikkeRonSprites/Highlight
 @onready var sprite: DikkeRonSprites = $DikkeRonSprites
+@onready var vuist: Sprite2D= $DikkeRonSprites/Vuist
 
 @onready var hair: Node2D = $DikkeRonSprites/Hair
 @onready var stateManager: NPCStateManager = $StateManager
@@ -24,6 +25,7 @@ signal dragStarted
 var dead = false
 
 func _ready():
+	vuist.visible = false
 	animations.play("idle", -1, 1.1)
 	hair.color = sprite.getHairColor()
 	
@@ -32,8 +34,6 @@ func _ready():
 			traitManager.obtainTraitsFromSprites()
 	)
 	
-
-
 func setup(navigationMap: RID):
 	stateManager.navigationMap = navigationMap
 

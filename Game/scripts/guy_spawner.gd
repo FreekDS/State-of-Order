@@ -69,7 +69,7 @@ func spawnGuy(at: Vector2) -> DikkeRon:
 	var guyInstance := GUY_SCENE.instantiate() as DikkeRon
 	targetNode.add_child(guyInstance)
 	guyInstance.global_position = at
-	targetNode.setupGuy(guyInstance)
+	targetNode.setupGuy(guyInstance,dayData)
 	return guyInstance
 
 

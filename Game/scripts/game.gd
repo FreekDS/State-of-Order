@@ -12,6 +12,7 @@ extends Node2D
 @export var startSequence : StartSequence
 @export var dramatischeText : DramaDramaGroteLama
 @export var guySpawner : GuySpawner
+@export var tuimelaarSpawner : TuimelaarSpawner
 
 var currentDay = 0
 
@@ -24,6 +25,7 @@ func _ready() -> void:
 			func():
 				EventBus.daySetup.emit(dayInformation[currentDay])
 				guySpawner.setupGame(dayInformation[currentDay])
+				tuimelaarSpawner.setupGame(dayInformation[currentDay])
 				_on_dramatische_tekst_done()
 		)
 		return
@@ -32,6 +34,7 @@ func _ready() -> void:
 			func():
 				EventBus.daySetup.emit(dayInformation[currentDay])
 				guySpawner.setupGame(dayInformation[currentDay])
+				tuimelaarSpawner.setupGame(dayInformation[currentDay])
 	)
 	startSequence.playAnimation(dayInformation[currentDay])
 
@@ -56,7 +59,9 @@ func _on_end_of_day_sequence_done() -> void:
 		return
 		
 	guySpawner.clear()
+	tuimelaarSpawner.clear()
 	
 	EventBus.daySetup.emit(dayInformation[currentDay])
 	guySpawner.setupGame(dayInformation[currentDay])
+	tuimelaarSpawner.setupGame(dayInformation[currentDay])
 	startSequence.playAnimation(dayInformation[currentDay])

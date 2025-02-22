@@ -139,6 +139,21 @@ alpha_curve = SubResource("CurveTexture_siyyi")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rj142"]
 size = Vector2(95, 60)
 
+[sub_resource type="Animation" id="Animation_eipik"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sigar:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
 [sub_resource type="Animation" id="Animation_8xtmv"]
 resource_name = "smoke"
 loop_mode = 1
@@ -153,21 +168,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [0, 3, 0]
-}
-
-[sub_resource type="Animation" id="Animation_eipik"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("sigar:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_k5wyk"]

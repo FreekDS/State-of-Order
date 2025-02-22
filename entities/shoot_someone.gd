@@ -26,6 +26,11 @@ func _ready() -> void:
 		NPCStateManager.STATE.WANDER_AIMLESS,
 		NPCStateManager.STATE.TALK_TO_SOMEONE,
 	]
+	nextStatesWeigths=[
+		10,
+		10, 
+		10
+	]
 func enter():
 	if neighbourchosen != null:
 		gunSprite.visible = true

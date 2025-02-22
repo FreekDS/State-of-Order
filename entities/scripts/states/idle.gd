@@ -30,6 +30,14 @@ func _ready() -> void:
 		NPCStateManager.STATE.SMOKING,
 		NPCStateManager.STATE.SWIM_IN_FONTAIN,
 	]
+	nextStatesWeigths=[
+		10,
+		10, 
+		40,
+		20,
+		10,
+		40,
+	]
 
 
 func enter():

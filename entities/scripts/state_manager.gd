@@ -83,17 +83,29 @@ func _ready():
 	_state.enter()
 
 
+func pickstate(oldState : NPCState) -> STATE:
+	var max=0
+	for i in oldState.nextStatesWeigths:
+		max += i
+	var rand = randf_range(0, max)
+	for i in len(oldState.nextStatesWeigths):
+		rand -= oldState.nextStatesWeigths[i]
+		if rand<0:
+			return oldState.possibleNextStates[i]
+	return oldState.possibleNextStates[len(oldState.possibleNextStates)-1]
 
 func _on_state_switch_requested(oldState: NPCState):
+	if _stateType==STATE.DEAD or _stateType==STATE.LEAVING:
+		return
 	oldState.exit()
 	var counter=0
 	if oldState.possibleNextStates.is_empty():
 		return
-	var newstate = oldState.possibleNextStates.pick_random()
+	var newstate = pickstate(oldState)
 	while not stateMap[newstate].checkViable():
-		newstate = oldState.possibleNextStates.pick_random()
+		newstate = pickstate(oldState)
 		counter+=1
-		if counter > 10:
+		if counter > 20:
 			print("Yup tis kapot, na nen hoop trys op niets uitgekomen, wandel anders maar efkes")
 			newstate = STATE.WANDER_AIMLESS
 			break

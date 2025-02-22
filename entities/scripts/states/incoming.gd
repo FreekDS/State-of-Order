@@ -21,12 +21,14 @@ func exit():
 	
 
 func _on_navigation_agent_2d_target_reached() -> void:
-	var chance = randi_range(0, 100)
-	if chance < 20:
-		possibleNextStates = [NPCStateManager.STATE.SWIM_IN_FONTAIN]
-	elif chance > 20 and chance < 70:
-		possibleNextStates = [NPCStateManager.STATE.WANDER_AIMLESS]
-	else:
-		possibleNextStates = [NPCStateManager.STATE.STANDSTILL]
-	
+	possibleNextStates=[
+		NPCStateManager.STATE.SWIM_IN_FONTAIN,
+		NPCStateManager.STATE.WANDER_AIMLESS,
+		NPCStateManager.STATE.STANDSTILL
+	]
+	nextStatesWeigths=[
+		20,
+		50, 
+		30
+	]	
 	switchState.emit(self)

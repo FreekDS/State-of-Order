@@ -8,6 +8,11 @@ func enter():
 		NPCStateManager.STATE.WANDER_AIMLESS,
 		NPCStateManager.STATE.TALK_TO_SOMEONE,
 	]
+	nextStatesWeigths=[
+		10,
+		10, 
+		40 #als ze kunnen babbelen mogen ze dat doen
+	]
 	animations.play("idle")
 	EventBus.dayStarted.connect(
 		func(_dayData):

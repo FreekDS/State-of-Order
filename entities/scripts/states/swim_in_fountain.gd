@@ -43,7 +43,15 @@ class CurveProgress:
 
 var _curveProgress : CurveProgress = null
 
-
+func _ready() -> void:
+	possibleNextStates = [
+		NPCStateManager.STATE.STANDSTILL,
+		NPCStateManager.STATE.WANDER_AIMLESS
+	]
+	nextStatesWeigths=[
+		10,
+		10, 
+	]
 func enter():
 	print("ENTER SWIM")
 	debug.text = "SWIM (move)"
@@ -107,10 +115,6 @@ func _jump(delta: float):
 				exiting = true
 				character.sprite.rotation_degrees = 0
 				await get_tree().create_timer(.5).timeout
-				possibleNextStates = [
-					NPCStateManager.STATE.STANDSTILL,
-					NPCStateManager.STATE.WANDER_AIMLESS
-				]
 				switchState.emit(self)
 
 

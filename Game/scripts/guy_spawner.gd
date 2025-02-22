@@ -82,9 +82,9 @@ func _on_poll_guy_count_timeout() -> void:
 		guy.stateManager.enforceState(
 			NPCStateManager.STATE.INCOMING
 		)
-		
+	
 		@warning_ignore("integer_division")
-		var maxDelay = lerp(minSpawnDelay, maxSpawnDelay, Globals.allNpcs.size() / maxGuysInScene)
+		var maxDelay = lerp(minSpawnDelay, maxSpawnDelay, Globals.aliveNPCCount() / maxGuysInScene)
 		
 		SpawnDelay.start(randf_range(minSpawnDelay, maxDelay))
 

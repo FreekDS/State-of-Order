@@ -4,16 +4,20 @@ extends Area2D
 
 var _canAcceptStouterik := false
 
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var pointer: Sprite2D = $Sprite2D2
 
 var pendingStouterik : DikkeRon = null
 
 
 func enableAcceptStouterik():
+	pointer.show()
 	_canAcceptStouterik = true
 	monitoring = true
 
 
 func noLongerAcceptStouterik():
+	pointer.hide()
 	_canAcceptStouterik = false
 	monitoring = false
 

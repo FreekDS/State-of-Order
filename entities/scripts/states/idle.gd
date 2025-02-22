@@ -29,6 +29,8 @@ func _ready() -> void:
 		NPCStateManager.STATE.HODL_GUN,
 		NPCStateManager.STATE.SMOKING,
 		NPCStateManager.STATE.SWIM_IN_FONTAIN,
+		NPCStateManager.STATE.WATCH_TV,
+		NPCStateManager.STATE.PROTEST,
 	]
 	nextStatesWeigths=[
 		10,
@@ -37,6 +39,8 @@ func _ready() -> void:
 		20,
 		40,
 		10,
+		2,
+		8
 	]
 
 

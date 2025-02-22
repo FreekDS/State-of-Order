@@ -5,6 +5,8 @@
 ##	- After last day, go back to menu
 extends Node2D
 
+
+
 @export var skipIntroSequence := false
 @export var dayInformation : Array[DayResource] = []
 
@@ -13,6 +15,8 @@ extends Node2D
 @export var dramatischeText : DramaDramaGroteLama
 @export var guySpawner : GuySpawner
 @export var tuimelaarSpawner : TuimelaarSpawner
+
+@export var thanksForPlaying : RichTextLabel
 
 var currentDay = 0
 
@@ -49,6 +53,11 @@ func _on_start_day_sequence_pls_start_day() -> void:
 
 func _on_dramatische_tekst_done() -> void:
 	EventBus.dayStarted.emit(dayInformation[currentDay])
+	
+	if currentDay == len(dayInformation) -1:
+		get_tree().create_timer(6.0).timeout.connect(
+			func(): thanksForPlaying.show()
+		)
 
 
 func _on_end_of_day_sequence_done() -> void:
@@ -56,6 +65,7 @@ func _on_end_of_day_sequence_done() -> void:
 	currentDay += 1
 	if currentDay >= len(dayInformation):
 		print("EINDE SPEL, GEDAAN MET SPELEN")
+		get_tree().change_scene_to_file("res://UI/Menu.tscn")
 		return
 		
 	guySpawner.clear()

@@ -13,12 +13,14 @@ func _ready():
 		NPCStateManager.STATE.WANDER_AIMLESS,
 		NPCStateManager.STATE.TALK_TO_SOMEONE,
 		NPCStateManager.STATE.SMOKING,
+		NPCStateManager.STATE.PROTEST,
 	]
 	nextStatesWeigths=[
 		10,
 		10, 
 		40, #als ze kunnen babbelen mogen ze dat doen
-		10
+		10,
+		8
 	]
 
 func enter():

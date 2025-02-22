@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://cx8nibvpoil7u"]
+[gd_scene load_steps=21 format=3 uid="uid://cx8nibvpoil7u"]
 
 [ext_resource type="Script" path="res://Audio/audio_node.gd" id="1_7wniy"]
 [ext_resource type="AudioStream" uid="uid://0cce3v6q46ga" path="res://Audio/brackies1.wav" id="2_c0wa5"]
@@ -16,6 +16,7 @@
 [ext_resource type="AudioStream" uid="uid://d1ft3fq6a7k3c" path="res://Audio/f_blabla3.wav" id="12_7ue5u"]
 [ext_resource type="AudioStream" uid="uid://belry5diwns3o" path="res://Audio/f_blabla4.wav" id="13_7xmxx"]
 [ext_resource type="AudioStream" uid="uid://qqa7yfi8lmar" path="res://Audio/clock_tick.wav" id="14_3ub3v"]
+[ext_resource type="AudioStream" uid="uid://dyjwg365t8p5f" path="res://Audio/pang.wav" id="14_btk6o"]
 [ext_resource type="AudioStream" uid="uid://bmapr4cd2rgwh" path="res://Audio/download_audio.wav" id="14_dgdad"]
 [ext_resource type="AudioStream" uid="uid://bfoy1f8rj16om" path="res://Misc/EenTofLieke.mp3" id="14_igvhc"]
 [ext_resource type="AudioStream" uid="uid://baasadieln6u5" path="res://Audio/punch.wav" id="17_f7sqw"]
@@ -26,12 +27,19 @@ dayAudios = Array[AudioStreamWAV]([ExtResource("2_c0wa5"), ExtResource("3_hs7bn"
 speakingFemaleAudios = Array[AudioStreamWAV]([ExtResource("7_8ecaf"), ExtResource("8_hqkf4"), ExtResource("9_2w0v7")])
 speakingMaleAudios = Array[AudioStreamWAV]([ExtResource("10_4so5v"), ExtResource("11_hkr75"), ExtResource("12_7ue5u"), ExtResource("13_7xmxx")])
 
+[node name="pang" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("14_btk6o")
+volume_db = -10.0
+max_polyphony = 3
+bus = &"Effects"
+
 [node name="rik" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("14_igvhc")
-volume_db = -35.0
+volume_db = -15.0
 bus = &"Music"
 
 [node name="music" type="AudioStreamPlayer" parent="."]
+process_mode = 3
 stream = ExtResource("2_c0wa5")
 bus = &"Music"
 

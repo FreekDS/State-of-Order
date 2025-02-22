@@ -155,7 +155,8 @@ theme_override_font_sizes/bold_italics_font_size = 30
 theme_override_font_sizes/mono_font_size = 30
 theme_override_font_sizes/normal_font_size = 45
 bbcode_enabled = true
-text = "State of ......"
+text = "[center]State of Order
+[font_size=10]You are in safe hands"
 fit_content = true
 autowrap_mode = 0
 

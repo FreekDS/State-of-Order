@@ -39,6 +39,10 @@ func spawnTuimelaar(at: Vector2) -> DikkeRon:
 	guyInstance.global_position = at
 	return guyInstance
 
+func clear():
+	for child in targetNode.get_children():
+		if child is Tuimelaar:
+			child.queue_free()
 
 func _on_spawn_timer_timeout() -> void:
 	var navmapId := navmap.get_navigation_map()

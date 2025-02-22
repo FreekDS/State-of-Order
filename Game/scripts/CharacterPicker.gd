@@ -38,7 +38,8 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("grab_character"):
 		if dayData.isKillDay:
 			_selected.beKilled()
-		else:	
+			Audio.pang()
+		else:
 			_selected.startDrag()
 			_mouseDown = true
 			EventBus.changeCursor.emit(false)
@@ -50,8 +51,8 @@ func _input(event: InputEvent) -> void:
 	
 
 func _on_select(who: DikkeRon):
-	
 	if _selected == null:
+		EventBus.changeShootCursor.emit(false)
 		_selected = who
 		for child : DikkeRon in get_children():
 			if child is not DikkeRon or child == who:
@@ -65,6 +66,7 @@ func _on_deselect(who: DikkeRon):
 		return
 	if who == _selected:
 		_selected = null
+		EventBus.changeShootCursor.emit(true)
 		for child : DikkeRon in get_children():
 			if child is not DikkeRon:
 				continue

@@ -1,3 +1,4 @@
+class_name Televies
 extends Sprite2D
 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
@@ -9,3 +10,6 @@ func _ready() -> void:
 
 func play():
 	animation_player.play("start")
+
+func stop():
+	animation_player.stop()

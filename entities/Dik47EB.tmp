@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=3 uid="uid://dylnvnx8f0goe"]
+[gd_scene load_steps=47 format=3 uid="uid://dylnvnx8f0goe"]
 
 [ext_resource type="Script" path="res://entities/scripts/EntityAILearning.gd" id="1_nkst8"]
 [ext_resource type="PackedScene" uid="uid://sa773o5v8h1g" path="res://decorations/Speechbubble.tscn" id="2_joovv"]
@@ -28,8 +28,6 @@
 [ext_resource type="Texture2D" uid="uid://ckh3oxs61j6s7" path="res://Textures/rokende_sigaar.png" id="26_f0xr0"]
 [ext_resource type="Script" path="res://entities/scripts/watch_tv.gd" id="27_6jqtv"]
 [ext_resource type="PackedScene" uid="uid://pt2mjgd7kydv" path="res://decorations/scripts/Televies.tscn" id="28_wvdkq"]
-[ext_resource type="Script" path="res://entities/scripts/states/protest.gd" id="29_rpvso"]
-[ext_resource type="Texture2D" uid="uid://kwnuoqlol2br" path="res://Textures/protest_sign.png" id="30_23kxn"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_hrdx7"]
 radius = 94.6414
@@ -178,56 +176,6 @@ tracks/0/keys = {
 _data = {
 "RESET": SubResource("Animation_eipik"),
 "smoke": SubResource("Animation_8xtmv")
-}
-
-[sub_resource type="Animation" id="Animation_c4xco"]
-resource_name = "protest"
-length = 0.7
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("ProtestSign:position:y")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.266667),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [-15.0, -20.0]
-}
-
-[sub_resource type="Animation" id="Animation_6aewq"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("ProtestSign:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(12, -15)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("ProtestSign:position:y")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [-15.0]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_67h6v"]
-_data = {
-"RESET": SubResource("Animation_6aewq"),
-"protest": SubResource("Animation_c4xco")
 }
 
 [sub_resource type="Animation" id="Animation_fiwkm"]
@@ -597,25 +545,10 @@ script = ExtResource("27_6jqtv")
 
 [node name="Televies" parent="StateManager/WATCH_TV" instance=ExtResource("28_wvdkq")]
 visible = false
-position = Vector2(30, -9)
+position = Vector2(0, -9)
+offset = Vector2(30, 0)
 
 [node name="TV_Timer" type="Timer" parent="StateManager/WATCH_TV"]
-
-[node name="PROTEST" type="Node2D" parent="StateManager"]
-script = ExtResource("29_rpvso")
-
-[node name="ProtestTimer" type="Timer" parent="StateManager/PROTEST"]
-
-[node name="ProtestSign" type="Sprite2D" parent="StateManager/PROTEST"]
-visible = false
-position = Vector2(12, -15)
-texture = ExtResource("30_23kxn")
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="StateManager/PROTEST"]
-libraries = {
-"": SubResource("AnimationLibrary_67h6v")
-}
-autoplay = "protest"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -644,4 +577,3 @@ autoplay = "run"
 [connection signal="timeout" from="StateManager/SHOOT_SOMEONE/SpeechBubbleTimer" to="StateManager/SHOOT_SOMEONE" method="_on_speech_bubble_timer_timeout"]
 [connection signal="timeout" from="StateManager/SMOKE/SmokeTime" to="StateManager/SMOKE" method="_on_smoke_time_timeout"]
 [connection signal="timeout" from="StateManager/WATCH_TV/TV_Timer" to="StateManager/WATCH_TV" method="_on_tv_timer_timeout"]
-[connection signal="timeout" from="StateManager/PROTEST/ProtestTimer" to="StateManager/PROTEST" method="_on_protest_timer_timeout"]

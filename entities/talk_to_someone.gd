@@ -33,7 +33,8 @@ func _ready() -> void:
 		NPCStateManager.STATE.HIT_SOMEONE,
 		NPCStateManager.STATE.HODL_GUN,
 		NPCStateManager.STATE.SMOKING,
-		NPCStateManager.STATE.TALK_TO_SOMEONE
+		NPCStateManager.STATE.TALK_TO_SOMEONE,
+		NPCStateManager.STATE.PROTEST,
 	]
 	nextStatesWeigths=[
 		10,
@@ -41,7 +42,8 @@ func _ready() -> void:
 		30,
 		10,
 		20,
-		5 #nog eens praten heel laag
+		5, #nog eens praten heel laag
+		15
 	]
 
 func enter():

@@ -46,10 +46,12 @@ var _curveProgress : CurveProgress = null
 
 func _ready() -> void:
 	possibleNextStates = [
-		NPCStateManager.STATE.WANDER_AIMLESS
+		NPCStateManager.STATE.WANDER_AIMLESS,
+		NPCStateManager.STATE.PROTEST,
 	]
 	nextStatesWeigths=[
-		10
+		10,
+		2
 	]
 func enter():
 	debug.text = "SWIM (move)"

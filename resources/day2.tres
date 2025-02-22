@@ -6,8 +6,8 @@
 script = ExtResource("1_3600p")
 dayNumber = 2
 tagline = "a new opportunity"
-disallowedActions = Array[int]([9, 8, 12, 6, 11])
-disallowedTraits = Array[int]([1])
+disallowedActions = Array[int]([9, 7, 8, 6, 12])
+disallowedTraits = Array[int]([1, 3])
 score = 1
 isKillDay = false
 noGuys = false

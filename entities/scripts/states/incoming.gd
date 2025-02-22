@@ -24,11 +24,13 @@ func _on_navigation_agent_2d_target_reached() -> void:
 	possibleNextStates=[
 		NPCStateManager.STATE.SWIM_IN_FONTAIN,
 		NPCStateManager.STATE.WANDER_AIMLESS,
-		NPCStateManager.STATE.STANDSTILL
+		NPCStateManager.STATE.STANDSTILL,
+		NPCStateManager.STATE.PROTEST,
 	]
 	nextStatesWeigths=[
 		10,
 		50, 
-		40
+		40,
+		3
 	]	
 	switchState.emit(self)

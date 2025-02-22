@@ -46,6 +46,8 @@ enum STATE {
 	STATE.SHOOT_SOMEONE: $SHOOT_SOMEONE,
 	STATE.DEAD: $DEAD,
 	STATE.SMOKING: $SMOKE,
+	STATE.WATCH_TV: $WATCH_TV,
+	STATE.PROTEST: $PROTEST,
 }
 
 
@@ -143,6 +145,8 @@ func enforceNextState():
 	
 #Voor praten of schieten ofzo moet ge meerdere characters samen iets laten doen
 func enforceState(sate: STATE):
+	if _stateType in [STATE.DEAD, STATE.LEAVING]:
+		return
 	_state.exit()
 	_stateType = sate
 	_state = stateMap[sate]

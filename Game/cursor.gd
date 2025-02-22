@@ -10,8 +10,17 @@ var dayData: DayResource
 func _ready() -> void:
 	EventBus.daySetup.connect(_daydata)
 	EventBus.changeCursor.connect(changeSprit)
+	EventBus.changeShootCursor.connect(changeShootSprite)
 	Input.set_custom_mouse_cursor(normaal)
-	
+
+
+func changeShootSprite(nrmal: bool):
+	if dayData.isKillDay:
+		if nrmal:
+			Input.set_custom_mouse_cursor(normaal, Input.CURSOR_ARROW, HOTSPOT)
+		else:
+			Input.set_custom_mouse_cursor(shoot, Input.CURSOR_ARROW, HOTSPOT)
+
 
 func changeSprit(normal : bool) -> void:
 	if dayData.isKillDay:
@@ -23,9 +32,4 @@ func changeSprit(normal : bool) -> void:
 		
 func _daydata(data:DayResource):
 	dayData=data
-	if dayData.isKillDay:
-		Input.set_custom_mouse_cursor(shoot, Input.CURSOR_ARROW, HOTSPOT)
-	else:
-		Input.set_custom_mouse_cursor(normaal, Input.CURSOR_ARROW, HOTSPOT)
-		
-	
+	Input.set_custom_mouse_cursor(normaal, Input.CURSOR_ARROW, HOTSPOT)

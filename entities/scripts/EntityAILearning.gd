@@ -137,11 +137,11 @@ func die():
 	)
 
 
-func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("ui_cancel"):
-		#breakpoint
-		print("pls remove this, just to test")
-		stateManager.enforceState(NPCStateManager.STATE.SHOOT_SOMEONE)
+#func _input(event: InputEvent) -> void:
+	#if event.is_action_pressed("ui_focus_next"):
+		##breakpoint
+		#print("pls remove this, just to test")
+		#stateManager.enforceState(NPCStateManager.STATE.PROTEST)
 
 func beKilled():
 	stateManager.enforceState(NPCStateManager.STATE.DEAD)

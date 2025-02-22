@@ -2,6 +2,12 @@ extends Control
 
 const GAME = preload("res://Game/game.tscn")
 
+
+func _ready() -> void:
+	if TransitionAnimations.closed:
+		TransitionAnimations.close()
+
+
 func _on_play_pressed() -> void:
 	#TransitionAnimations.close()
 	#TransitionAnimations.done.connect(

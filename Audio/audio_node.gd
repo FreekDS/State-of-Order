@@ -16,6 +16,7 @@ extends Node2D
 	
 ]
 
+@onready var pangAudio: AudioStreamPlayer = $pang
 
 @onready var blablas: Node2D = $Blablas
 @onready var clock_tick: AudioStreamPlayer = $clockTick
@@ -112,7 +113,13 @@ func blablaFemale(at: Vector2):
 	_play(firstSpeaker, at)
 
 func playDeRikZijneMuziek(at: Vector2):
+	if deRik.playing:
+		return
 	_play(deRik, at)
 
 func stopDeRikeZineMuziek():
 	deRik.stop()
+	
+func pang():
+	pangAudio.pitch_scale = randf_range(.5, .9)
+	pangAudio.play()

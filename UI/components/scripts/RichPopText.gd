@@ -19,9 +19,9 @@ func _ready() -> void:
 
 
 
-func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("ui_accept"):
-		doPop()
+#func _input(event: InputEvent) -> void:
+	#if event.is_action_pressed("ui_accept"):
+		#doPop()
 
 ## Perform the popping animation
 func doPop() -> Tween:

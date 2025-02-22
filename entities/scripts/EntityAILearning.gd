@@ -67,7 +67,8 @@ func startDrag() -> void:
 	set_collision_mask_value(1, false)
 	
 	if stateManager._stateType != NPCStateManager.STATE.DEAD:
-		speechbubble.option = "😨"
+		speechbubble.option = ["fearful", "scream"].pick_random()
+		speechbubble.shaking = true
 		speechbubble.open()
 	
 	dragStarted.emit()

@@ -347,7 +347,6 @@ position = Vector2(0, -12)
 shape = SubResource("CircleShape2D_hrdx7")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
-debug_enabled = true
 
 [node name="DEBUG" type="Label" parent="."]
 offset_left = -20.0
@@ -394,7 +393,6 @@ texture = ExtResource("17_k8mtw")
 
 [node name="Speechbubble" parent="." instance=ExtResource("2_joovv")]
 position = Vector2(7, -33)
-option = "[shake]😨"
 
 [node name="StateManager" type="Node2D" parent="." node_paths=PackedStringArray("characterBody", "navigationAgent", "animations", "detectOthers", "debug")]
 script = ExtResource("5_gy3v6")

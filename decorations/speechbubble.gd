@@ -3,7 +3,7 @@ extends Sprite2D
 
 
 const options : Dictionary = {
-	"scared": "[shake]😨"
+	"scared": "fearful"
 }
 
 #@export_enum(
@@ -15,7 +15,8 @@ const options : Dictionary = {
 	#"💤",
 	#"🐱‍🐉",
 	#"[shake]😨"
-@export var option : String = "[shake]😠"
+@export var option : String = "fearful"
+@export var shaking = false
 
 @onready var label: RichTextLabel = $RichTextLabel
 @onready var animations: AnimationPlayer = $AnimationPlayer
@@ -31,13 +32,19 @@ var isOpen := false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	label.text = "\n" + option
+	
+	label.text = "[img=16]res://emoji/" + option + ".png[/img]" 
+	if shaking:
+		label.text = "[shake]" + label.text
 
 func open():
-	label.text = "\n" + option
+	label.text = "[img=20]res://emoji/" + option + ".png[/img]" 
+	if shaking:
+		label.text = "[shake]" + label.text
 	if not isOpen:
 		animations.play("show", -1, 4)
 	isOpen = true
+	shaking = false
 	
 	
 func close():

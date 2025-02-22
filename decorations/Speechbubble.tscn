@@ -79,7 +79,7 @@ offset_bottom = 18.9294
 scale = Vector2(0.35, 0.35)
 bbcode_enabled = true
 text = "
-[shake]😠"
+[shake] [img=10]res://emoji/ear.png[/img]"
 fit_content = true
 scroll_active = false
 autowrap_mode = 0

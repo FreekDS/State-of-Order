@@ -12,18 +12,18 @@ extends NPCState
 
 var neighbourchosen : DikkeRon
 var babbel_words = [
-	"🙂",
-	"💲",
-	"☠",
-	"🕙",
-	"😁",
-	"🤨",
-	"👺",
-	"👌",
-	"🤔",
-	"👂",
-	"👄",
-	"🗣"
+	"face_with_raised_eyebrow",
+	"heavy_dollar_sign",
+	"skull_and_crossbones",
+	"clock2",
+	"rage",
+	"sleeping",
+	"no_entry",
+	"bed",
+	"thinking_face",
+	"ear",
+	"lips",
+	"speaking_head_in_shilouette"
 ]
 var active = false
 func _ready() -> void:
@@ -32,6 +32,7 @@ func _ready() -> void:
 		NPCStateManager.STATE.WANDER_AIMLESS,
 		NPCStateManager.STATE.HIT_SOMEONE,
 		NPCStateManager.STATE.HODL_GUN,
+		NPCStateManager.STATE.SMOKING,
 		#NPCStateManager.STATE.TALK_TO_SOMEONE
 	]
 

@@ -11,15 +11,13 @@ extends NPCState
 var targetPoint = Vector2.ZERO
 
 var gun_words = [
-	"💲",
-	"☠",
-	"🥸",
-	"💪",
-	"🥷",
-	"👩‍✈️",
-	"🥷🏻",
-	"🚝",
-	"🔜",
+	"heavy_dollar_sign",
+	"skull_and_crossbones",
+	"gun",
+	"rage",
+	"thinking_face",
+	"slightly_smiling_face",
+	"no_entry"
 ]
 var speed = 10
 var active = false

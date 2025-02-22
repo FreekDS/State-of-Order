@@ -11,7 +11,8 @@ func _ready():
 	possibleNextStates = [
 		NPCStateManager.STATE.STANDSTILL, 
 		NPCStateManager.STATE.WANDER_AIMLESS,
-		NPCStateManager.STATE.TALK_TO_SOMEONE
+		NPCStateManager.STATE.TALK_TO_SOMEONE,
+		NPCStateManager.STATE.SMOKING,
 	]
 
 func enter():

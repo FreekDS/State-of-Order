@@ -44,7 +44,8 @@ func onDragEnd():
 	sigar.show()
 	character.rotation_degrees = 0
 	character.sprite.rotation_degrees = 0
-	animations.play("idle")
+	if not character.dead:
+		animations.play("idle")
 
 
 func _on_smoke_time_timeout() -> void:

@@ -16,7 +16,7 @@ extends NPCState
 var neighbourchosen : DikkeRon
 
 var gun_words = [
-	"🔫",
+	"gun",
 ]
 var active = false
 

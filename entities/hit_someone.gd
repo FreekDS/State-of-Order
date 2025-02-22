@@ -16,7 +16,7 @@ extends NPCState
 
 var neighbourchosen : DikkeRon
 var boos_words = [
-	"😡",
+	"rage",
 ]
 var active = false
 

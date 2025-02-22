@@ -9,15 +9,14 @@ extends NPCState
 @export var speechBubble : SpeechBubble
 
 var idle_words = [
-	"🙂",
-	"💲",
-	"💤",
-	"🐱‍🐉",
-	"...",
-	"☠",
-	"🕙",
-	"🛌",
-	"😴"
+	"smile",
+	"heavy_dollar_sign",
+	"zzz",
+	"japanese_ogre",
+	"skull_and_crossbones",
+	"clock2",
+	"bed",
+	"sleeping"
 ]
 
 var active = false
@@ -27,7 +26,9 @@ func _ready() -> void:
 		NPCStateManager.STATE.STANDSTILL, 
 		NPCStateManager.STATE.WANDER_AIMLESS,
 		NPCStateManager.STATE.TALK_TO_SOMEONE,
-		NPCStateManager.STATE.HODL_GUN
+		NPCStateManager.STATE.HODL_GUN,
+		NPCStateManager.STATE.SMOKING,
+		NPCStateManager.STATE.SWIM_IN_FONTAIN,
 	]
 
 

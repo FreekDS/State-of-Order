@@ -17,6 +17,11 @@ func _ready() -> void:
 	EventBus.wrongCapture.connect(
 		func(_guy, amount): score.updateScore(amount)
 	)
+	EventBus.daySetup.connect(
+		func(dayData: DayResource):
+			dayCounter.text = str(dayData.dayNumber)
+			timeLabel.text = str(6).lpad(2, '0') + ":00"
+	)
 	
 	EventBus.timeUpdated.connect(
 		func(newTime: int):

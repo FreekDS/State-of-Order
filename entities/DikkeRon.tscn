@@ -441,6 +441,8 @@ animations = NodePath("HitAnimationPlayer")
 navAgent = NodePath("../../NavigationAgent2D")
 
 [node name="HitAnimationPlayer" type="AnimationPlayer" parent="StateManager/HIT_SOMEONE"]
+active = false
+reset_on_save = false
 libraries = {
 "": SubResource("AnimationLibrary_whagq")
 }

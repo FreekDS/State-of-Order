@@ -57,6 +57,7 @@ func enter():
 	# ik snap het echt niet, maar dit is mogelijk 
 	if neighbourchosen != null:	
 		vuistSprite.rotation=180+neighbourchosen.global_position.angle_to_point(self.character.global_position)
+		hitanimation.active=true
 		hitanimation.play("hit")
 		talkBubbleTimer.start(randf_range(1,2))
 		active = true
@@ -75,6 +76,7 @@ func tick(_delta: float):
 
 func exit():
 	hitanimation.play("RESET")
+	hitanimation.active=false
 	neighbourchosen=null
 	active = false
 	talkBubbleTimer.stop()
@@ -117,6 +119,7 @@ func _on_fight_length_timer_timeout() -> void:
 
 
 func _on_hit_timer_timeout() -> void:
+	hitTimer.stop()
 	if not active:
 		return
 	hitanimation.play("hit")
@@ -124,6 +127,8 @@ func _on_hit_timer_timeout() -> void:
 
 
 func _on_hit_animation_player_animation_finished(_anim_name: StringName) -> void:
+	hitanimation.stop()
 	if not active:
 		return
-	hitTimer.start(randf_range(0,1))
+	if _anim_name=="hit":
+		hitTimer.start(randf_range(0,1))

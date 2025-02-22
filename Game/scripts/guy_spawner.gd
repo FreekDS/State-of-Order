@@ -27,8 +27,10 @@ const GUY_SCENE = preload("res://entities/DikkeRon.tscn")
 @onready var SpawnDelay: Timer = $SpawnDelay
 @onready var spawnMarker: Marker2D = $SpawnMarker
 
+var dayData : DayResource
 
 func _ready() -> void:
+	EventBus.daySetup.connect(_daydata)
 	EventBus.timesUp.connect(
 		func(): 
 			$PollGuyCount.stop()
@@ -41,7 +43,9 @@ func _ready() -> void:
 				child.stateManager.enforceState(NPCStateManager.STATE.LEAVING)
 	)
 
-func setupGame(_dayData):
+func setupGame(_dayData: DayResource):
+	if _dayData.noGuys:
+		return
 	var navmapId := navmap.get_navigation_map()
 	for i in range(amountOfInitialGuysOnMap):
 		var targetLocation := NavigationServer2D.map_get_random_point(navmapId, 1, true)
@@ -60,6 +64,8 @@ func clear():
 
 
 func spawnGuy(at: Vector2) -> DikkeRon:
+	if dayData.noGuys:
+		return
 	var guyInstance := GUY_SCENE.instantiate() as DikkeRon
 	targetNode.add_child(guyInstance)
 	guyInstance.global_position = at
@@ -81,3 +87,7 @@ func _on_poll_guy_count_timeout() -> void:
 		var maxDelay = lerp(minSpawnDelay, maxSpawnDelay, Globals.allNpcs.size() / maxGuysInScene)
 		
 		SpawnDelay.start(randf_range(minSpawnDelay, maxDelay))
+
+
+func _daydata(data:DayResource):
+	dayData=data

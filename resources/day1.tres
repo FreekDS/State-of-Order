@@ -10,4 +10,4 @@ disallowedActions = Array[int]([9, 6, 8])
 disallowedTraits = Array[int]([])
 score = 1
 isKillDay = false
-noGuys = false
+noGuys = true

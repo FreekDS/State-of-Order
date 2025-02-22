@@ -1,0 +1,54 @@
+[gd_scene load_steps=2 format=3 uid="uid://3pqd74ua0tsa"]
+
+[ext_resource type="Texture2D" uid="uid://xjnhaqsrm5xk" path="res://Textures/grond.png" id="1_fbjob"]
+
+[node name="TutorialSequence" type="Node2D"]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_repeat = 2
+position = Vector2(386, 280)
+scale = Vector2(1.965, 1.93333)
+texture = ExtResource("1_fbjob")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="MarginContainer" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_top = 20
+
+[node name="Control" type="Control" parent="CanvasLayer/Control"]
+layout_mode = 2
+
+[node name="PressToContinue" type="RichTextLabel" parent="CanvasLayer/Control/Control"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -640.0
+offset_top = -340.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "click to continue"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/Control/Control"]
+layout_mode = 2
+offset_top = -1.0
+offset_right = 640.0
+offset_bottom = 339.0
+grow_horizontal = 2
+theme_override_font_sizes/normal_font_size = 40
+bbcode_enabled = true
+text = "[center]welcome"
+fit_content = true
+autowrap_mode = 0

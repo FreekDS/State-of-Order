@@ -1,0 +1,63 @@
+extends NPCState
+
+
+@onready var sigar: Sprite2D = $sigar
+@onready var anim: AnimationPlayer = $AnimationPlayer
+@onready var smoke_time: Timer = $SmokeTime
+
+@export var minSmokeTime = 1
+@export var maxSmokeTime = 3
+
+
+func enter():
+	debug.text = "SMOKE"
+	character.rotation_degrees = 0
+	character.sprite.rotation_degrees = 0
+	sigar.show()
+	animations.play("idle")
+	anim.play("smoke")
+	
+	sigar.flip_h = character.sprite.flip_h
+	if character.sprite.flip_h:
+		sigar.offset.x = -.7
+	else:
+		sigar.offset.x = 7 
+		
+	smoke_time.start(randf_range(minSmokeTime, maxSmokeTime))
+	
+
+func exit():
+	sigar.hide()
+	anim.stop()
+	smoke_time.stop()
+	
+
+func tick(_delta: float):
+	character.velocity = Vector2.ZERO
+
+func onDrag():
+	sigar.hide()
+	pass
+
+
+func onDragEnd():
+	sigar.show()
+	character.rotation_degrees = 0
+	character.sprite.rotation_degrees = 0
+	animations.play("idle")
+
+
+func _on_smoke_time_timeout() -> void:
+	
+	var rand = randf_range(0, 100)
+	if rand < 20:
+		possibleNextStates = [NPCStateManager.STATE.STANDSTILL]
+	if rand >= 20 and rand < 50:
+		possibleNextStates = [NPCStateManager.STATE.SMOKING]
+		smoke_time.start(randf_range(minSmokeTime, maxSmokeTime))
+	if rand >= 50 and rand < 65:
+		possibleNextStates = [NPCStateManager.STATE.SWIM_IN_FONTAIN]
+	if rand >= 65:
+		possibleNextStates = [NPCStateManager.STATE.WANDER_AIMLESS]
+	
+	switchState.emit(self)

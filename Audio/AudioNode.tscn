@@ -1,0 +1,16 @@
+[gd_scene load_steps=7 format=3 uid="uid://cx8nibvpoil7u"]
+
+[ext_resource type="Script" path="res://Audio/audio_node.gd" id="1_7wniy"]
+[ext_resource type="AudioStream" uid="uid://0cce3v6q46ga" path="res://Audio/brackies1.wav" id="2_c0wa5"]
+[ext_resource type="AudioStream" uid="uid://f0jbqdw5yhar" path="res://Audio/brackies2.wav" id="3_hs7bn"]
+[ext_resource type="AudioStream" uid="uid://dymt26ggvvonw" path="res://Audio/brackies3.wav" id="4_c7an2"]
+[ext_resource type="AudioStream" uid="uid://dyjt12o4heedh" path="res://Audio/brackies4.wav" id="5_njt7k"]
+[ext_resource type="AudioStream" uid="uid://b41marmihhxko" path="res://Audio/no-sound-but-the-wind.wav" id="6_u82nm"]
+
+[node name="AudioNode" type="Node2D"]
+script = ExtResource("1_7wniy")
+dayAudios = Array[AudioStreamWAV]([ExtResource("2_c0wa5"), ExtResource("3_hs7bn"), ExtResource("4_c7an2"), ExtResource("5_njt7k"), ExtResource("6_u82nm")])
+
+[node name="music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_c0wa5")
+bus = &"Music"

@@ -47,6 +47,7 @@ shader_parameter/vignette_rgb = Color(0, 0, 0, 1)
 [node name="Game" type="Node2D" node_paths=PackedStringArray("startSequence", "dramatischeText", "guySpawner")]
 y_sort_enabled = true
 script = ExtResource("1_dek3g")
+skipIntroSequence = true
 dayInformation = Array[ExtResource("2_2iuh7")]([ExtResource("2_1wdd8"), ExtResource("4_vt0jt"), ExtResource("5_kxptf"), ExtResource("6_hhb78"), ExtResource("7_bsa01")])
 startSequence = NodePath("Sequences/StartDaySequence")
 dramatischeText = NodePath("Sequences/DramatischeTekst")

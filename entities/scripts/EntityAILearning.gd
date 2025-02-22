@@ -140,7 +140,7 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_cancel"):
 		breakpoint
 		print("pls remove this, just to test")
-		beKilled()
+		stateManager.enforceState(NPCStateManager.STATE.SWIM_IN_FONTAIN)
 
 func beKilled():
 	stateManager.enforceState(NPCStateManager.STATE.DEAD)

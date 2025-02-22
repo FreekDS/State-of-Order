@@ -134,6 +134,7 @@ func showFaceOnly(visibility: bool):
 func diePainfully():
 	painfuldeath.show()
 
+
 #func _input(event: InputEvent) -> void:
 	#if event.is_action_pressed("ui_accept"):
 		#randomOutfit()

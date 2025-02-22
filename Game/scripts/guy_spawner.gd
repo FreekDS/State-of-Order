@@ -36,6 +36,8 @@ func _ready() -> void:
 			for child in targetNode.get_children():
 				if child is not DikkeRon:
 					continue
+				if child.stateManager._stateType == NPCStateManager.STATE.DEAD:
+					continue
 				child.stateManager.enforceState(NPCStateManager.STATE.LEAVING)
 	)
 
@@ -51,7 +53,11 @@ func setupGame(_dayData):
 func clear():
 	for child in targetNode.get_children():
 		if child is DikkeRon:
+			if child.stateManager._stateType == NPCStateManager.STATE.DEAD:
+				# Keep the dead bodies :)
+				continue
 			child.queue_free()
+
 
 func spawnGuy(at: Vector2) -> DikkeRon:
 	var guyInstance := GUY_SCENE.instantiate() as DikkeRon

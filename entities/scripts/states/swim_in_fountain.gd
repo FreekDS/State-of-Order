@@ -47,6 +47,7 @@ var _curveProgress : CurveProgress = null
 func enter():
 	print("ENTER SWIM")
 	debug.text = "SWIM (move)"
+	animations.play("run")
 	fountainDetector.monitoring = true
 	fountainDetector.visible = true
 	exiting = false

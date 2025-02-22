@@ -104,9 +104,9 @@ func reset():
 
 func _input(event: InputEvent) -> void:
 	
-	if event.is_action_pressed("reset_camera"):
-		reset()
-		_on_day_end()
+	#if event.is_action_pressed("reset_camera"):
+		#reset()
+		#_on_day_end()
 	
 	if event is InputEventKey or event is InputEventMouseButton:
 		if event is InputEventMouseButton and event.button_index in [MOUSE_BUTTON_WHEEL_DOWN, MOUSE_BUTTON_WHEEL_UP]:

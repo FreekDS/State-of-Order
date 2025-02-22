@@ -23,7 +23,7 @@ var babbel_words = [
 	"thinking_face",
 	"ear",
 	"lips",
-	"speaking_head_in_shilouette"
+	"speaking_head"
 ]
 var active = false
 func _ready() -> void:
@@ -86,6 +86,13 @@ func _on_talk_bubble_timer_timeout() -> void:
 	if speechBubble != null:
 		speechBubble.option = babbel_words.pick_random()
 		speechBubble.open()
+		
+		if randf_range(0, 100) < 70:
+			if character.sprite.isWomen:
+				Audio.blablaFemale(character.global_position)
+			else:
+				Audio.blablaMale(character.global_position)
+		
 		animations.play("run")
 		
 		get_tree().create_timer(4.0).timeout.connect(

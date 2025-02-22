@@ -92,6 +92,7 @@ func _jump(delta: float):
 		
 		if _curveProgress.t >= 1:
 			if _substate == SubStates.JUMP_IN:
+				Audio.splash(character.global_position)
 				_substate = SubStates.SWIM
 				splash.emitting = true
 				_curveProgress = null

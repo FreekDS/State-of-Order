@@ -68,6 +68,8 @@ func checkViable() -> bool:
 
 func _on_state_length_timeout() -> void:
 	var rad=self.character.global_position.angle_to_point(neighbourchosen.global_position)
+	Audio.iShotTheSherrif(character.global_position)
+	await get_tree().create_timer(.8).timeout
 	EventBus.kogelHier.emit(character.global_position,Vector2(cos(rad), sin(rad)))
 	self.switchState.emit(self)
 

@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://c2dxlr4t6p3hf"
-path="res://.godot/imported/speaking_head_in_silhouette.png-19fcbb06d98bc533da800f98937835c0.ctex"
+path="res://.godot/imported/speaking_head.png-db45dbf2d2e7b58dbd500812bb3eb84b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://emoji/speaking_head_in_silhouette.png"
-dest_files=["res://.godot/imported/speaking_head_in_silhouette.png-19fcbb06d98bc533da800f98937835c0.ctex"]
+source_file="res://emoji/speaking_head.png"
+dest_files=["res://.godot/imported/speaking_head.png-db45dbf2d2e7b58dbd500812bb3eb84b.ctex"]
 
 [params]
 

@@ -139,9 +139,9 @@ func die():
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_cancel"):
-		breakpoint
+		#breakpoint
 		print("pls remove this, just to test")
-		stateManager.enforceState(NPCStateManager.STATE.SWIM_IN_FONTAIN)
+		stateManager.enforceState(NPCStateManager.STATE.SHOOT_SOMEONE)
 
 func beKilled():
 	stateManager.enforceState(NPCStateManager.STATE.DEAD)

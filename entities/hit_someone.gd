@@ -29,6 +29,12 @@ func _ready() -> void:
 		NPCStateManager.STATE.TALK_TO_SOMEONE,
 		NPCStateManager.STATE.HODL_GUN
 	]
+	nextStatesWeigths=[
+		10,
+		10, 
+		20,
+		10,
+	]
 #wandelen naar de neighbour niet nodig, want na het praten staat ge er al naast normaal
 func enter():
 	if neighbourchosen:

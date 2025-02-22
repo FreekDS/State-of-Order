@@ -14,6 +14,12 @@ func _ready():
 		NPCStateManager.STATE.TALK_TO_SOMEONE,
 		NPCStateManager.STATE.SMOKING,
 	]
+	nextStatesWeigths=[
+		10,
+		10, 
+		40, #als ze kunnen babbelen mogen ze dat doen
+		10
+	]
 
 func enter():
 	debug.text = "WALK"

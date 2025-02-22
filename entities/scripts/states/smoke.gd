@@ -8,6 +8,19 @@ extends NPCState
 @export var minSmokeTime = 1
 @export var maxSmokeTime = 3
 
+func _ready() -> void:
+	possibleNextStates = [
+		NPCStateManager.STATE.STANDSTILL,
+		NPCStateManager.STATE.SMOKING,
+		NPCStateManager.STATE.SWIM_IN_FONTAIN,
+		NPCStateManager.STATE.WANDER_AIMLESS
+	]
+	nextStatesWeigths=[
+		20,
+		30, 
+		15,
+		35
+	]
 
 func enter():
 	debug.text = "SMOKE"
@@ -49,16 +62,4 @@ func onDragEnd():
 
 
 func _on_smoke_time_timeout() -> void:
-	
-	var rand = randf_range(0, 100)
-	if rand < 20:
-		possibleNextStates = [NPCStateManager.STATE.STANDSTILL]
-	if rand >= 20 and rand < 50:
-		possibleNextStates = [NPCStateManager.STATE.SMOKING]
-		smoke_time.start(randf_range(minSmokeTime, maxSmokeTime))
-	if rand >= 50 and rand < 65:
-		possibleNextStates = [NPCStateManager.STATE.SWIM_IN_FONTAIN]
-	if rand >= 65:
-		possibleNextStates = [NPCStateManager.STATE.WANDER_AIMLESS]
-	
 	switchState.emit(self)

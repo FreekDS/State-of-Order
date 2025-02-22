@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://dkydrawijeyqe"]
+[gd_scene load_steps=33 format=3 uid="uid://dkydrawijeyqe"]
 
 [ext_resource type="PackedScene" uid="uid://vfkensc2u1h1" path="res://UI/GameUI.tscn" id="1_2ob6e"]
 [ext_resource type="Script" path="res://Game/scripts/time_manager.gd" id="1_5ff1s"]
@@ -10,7 +10,6 @@
 [ext_resource type="Texture2D" uid="uid://xjnhaqsrm5xk" path="res://Textures/grond.png" id="1_n0ep5"]
 [ext_resource type="Resource" uid="uid://815ki2igdjnh" path="res://resources/day1.tres" id="2_1wdd8"]
 [ext_resource type="Script" path="res://resources/DayRuleResource.gd" id="2_2iuh7"]
-[ext_resource type="PackedScene" uid="uid://dylnvnx8f0goe" path="res://entities/DikkeRon.tscn" id="3_gqgcv"]
 [ext_resource type="Resource" uid="uid://lvco8eqv0smw" path="res://resources/day2.tres" id="4_vt0jt"]
 [ext_resource type="Resource" uid="uid://de7ydjrna70vn" path="res://resources/day3.tres" id="5_kxptf"]
 [ext_resource type="Shader" path="res://Game/shaders/vignette.gdshader" id="5_r6mn3"]
@@ -57,10 +56,12 @@ guySpawner = NodePath("GamePlay/GuySpawner")
 
 [node name="GuySpawner" type="Node" parent="GamePlay" node_paths=PackedStringArray("targetNode", "navmap")]
 script = ExtResource("1_8lkux")
+amountOfInitialGuysOnMap = 25
 targetNode = NodePath("../NavigationRegion/Characters")
 navmap = NodePath("../NavigationRegion")
 
 [node name="SpawnMarker" type="Marker2D" parent="GamePlay/GuySpawner"]
+visible = false
 position = Vector2(0, 640)
 
 [node name="PollGuyCount" type="Timer" parent="GamePlay/GuySpawner"]
@@ -317,12 +318,6 @@ y_sort_enabled = true
 position = Vector2(-78, 11)
 script = ExtResource("1_iuers")
 navigationRegion = NodePath("..")
-
-[node name="DikkeRon" parent="GamePlay/NavigationRegion/Characters" instance=ExtResource("3_gqgcv")]
-position = Vector2(110, -59)
-
-[node name="DikkeRon2" parent="GamePlay/NavigationRegion/Characters" instance=ExtResource("3_gqgcv")]
-position = Vector2(-137, -167)
 
 [node name="Politiezone Klein Brabant" type="Node2D" parent="GamePlay/NavigationRegion"]
 script = ExtResource("7_tagq4")

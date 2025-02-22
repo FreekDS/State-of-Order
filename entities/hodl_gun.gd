@@ -24,11 +24,16 @@ var active = false
 
 func _ready() -> void:
 	possibleNextStates = [
-		#NPCStateManager.STATE.STANDSTILL, 
+		NPCStateManager.STATE.STANDSTILL, 
 		#NPCStateManager.STATE.WANDER_AIMLESS,
 		#NPCStateManager.STATE.TALK_TO_SOMEONE,
-		#NPCStateManager.STATE.HIT_SOMEONE,
+		NPCStateManager.STATE.HIT_SOMEONE,
 		NPCStateManager.STATE.SHOOT_SOMEONE,
+	]
+	nextStatesWeigths=[
+		10,
+		10, 
+		50
 	]
 
 
@@ -64,8 +69,6 @@ func exit():
 	speech_bubble_timer.stop()
 	if speechBubble.isOpen:
 		speechBubble.close()
-
-
 		
 func _on_navigation_agent_2d_target_reached() -> void:
 	navAgent.target_position = NavigationServer2D.map_get_random_point(navAgent.get_navigation_map(), 1, true)

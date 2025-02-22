@@ -14,7 +14,8 @@ enum SubStates {
 	MOVE_TOWARDS_FOUNTAIN,
 	JUMP_IN,
 	JUMP_OUT,
-	SWIM
+	SWIM,
+	SPREAD_OUT,
 }
 
 var _substate := SubStates.MOVE_TOWARDS_FOUNTAIN
@@ -53,7 +54,6 @@ func _ready() -> void:
 		10, 
 	]
 func enter():
-	print("ENTER SWIM")
 	debug.text = "SWIM (move)"
 	animations.play("run")
 	fountainDetector.monitoring = true
@@ -74,6 +74,14 @@ func tick(delta: float):
 			_swim()
 		SubStates.JUMP_OUT:
 			_jump(delta)
+		SubStates.SPREAD_OUT:
+			var direction = (navAgent.target_position - character.global_position).normalized() * 50
+			character.velocity = direction
+			
+			if navAgent.target_position.distance_to(character.global_position) < 10:
+				exiting = true
+				await get_tree().create_timer(.5).timeout
+				switchState.emit(self)
 		
 
 func _moveToFountain():
@@ -113,10 +121,11 @@ func _jump(delta: float):
 					randf_range(minSwimTime, maxSwimTime)
 				)
 			elif _substate == SubStates.JUMP_OUT:
-				exiting = true
+				animations.play("run")
+				debug.text = "SWIM (spread)"
 				character.sprite.rotation_degrees = 0
-				await get_tree().create_timer(.5).timeout
-				switchState.emit(self)
+				_substate = SubStates.SPREAD_OUT
+				navAgent.target_position = NavigationServer2D.map_get_random_point(navAgent.get_navigation_map(), 1, true)
 
 
 func _swim():

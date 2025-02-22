@@ -11,7 +11,7 @@ signal timeUpdated(hour: int)
 signal timesUp
 
 @warning_ignore("unused_signal")
-signal successfulCapture(who: DikkeRon, score: int)
+signal successfulCapture(who: DikkeRon, score: int, whyStates, whyTraits)
 
 @warning_ignore("unused_signal")
 signal wrongCapture(who: DikkeRon, score: int)

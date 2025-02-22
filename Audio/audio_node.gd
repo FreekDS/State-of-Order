@@ -16,7 +16,11 @@ extends Node2D
 	
 ]
 
+
 @onready var blablas: Node2D = $Blablas
+@onready var clock_tick: AudioStreamPlayer = $clockTick
+@onready var tring: AudioStreamPlayer = $tring
+@onready var punchAudio: AudioStreamPlayer2D = $punch
 
 func _ready() -> void:
 	if not music.playing:
@@ -24,6 +28,16 @@ func _ready() -> void:
 		music.play()
 	
 	EventBus.daySetup.connect(_fadeDayMusic)
+	
+	EventBus.timeUpdated.connect(
+		func(_ignored):
+			clock_tick.play()
+	)
+	
+	EventBus.dayEnded.connect(
+		func():
+			tring.play()
+	)
 
 
 func _fadeDayMusic(dayData: DayResource):
@@ -54,6 +68,9 @@ func _play(audio : AudioStreamPlayer2D, at: Vector2):
 func splash(at: Vector2):
 	_play(splashAudio, at)
 
+func punch(at: Vector2):
+	punchAudio.pitch_scale = randf_range(.7, 1.3)
+	_play(punchAudio, at)
 
 func iShotTheSherrif(at: Vector2):
 	_play(shoot1, at)

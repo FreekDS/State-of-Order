@@ -35,7 +35,7 @@ func _ready() -> void:
 	)
 	
 	EventBus.successfulCapture.connect(
-		func(_guy, _amount):
+		func(_guy, _amount, _whyStates, _whyTraits):
 			guysCapturedToday += 1
 			rightGuysCapturedToday += 1
 			totalSocialCredit += 1

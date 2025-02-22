@@ -12,7 +12,7 @@ var _highlighted : Array[Vector2i] = []
 
 func _ready() -> void:
 	EventBus.successfulCapture.connect(
-		func(_guy, amount): score.updateScore(amount)
+		func(_guy, amount, _whyStates, _whyTraits): score.updateScore(amount)
 	)
 	EventBus.wrongCapture.connect(
 		func(_guy, amount): score.updateScore(amount)

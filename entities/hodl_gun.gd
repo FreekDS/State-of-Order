@@ -79,7 +79,6 @@ func _on_max_single_dir_time_timeout() -> void:
 
 func _on_speech_bubble_timer_timeout() -> void:
 	if speechBubble != null:
-		print("HUH")
 		speechBubble.option = gun_words.pick_random()
 		speechBubble.open()
 		

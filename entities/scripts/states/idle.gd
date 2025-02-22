@@ -66,7 +66,6 @@ func _on_idle_time_timeout() -> void:
 
 func _on_idle_effect_timeout() -> void:
 	if speechBubble != null:
-		print("HUH")
 		speechBubble.option = idle_words.pick_random()
 		speechBubble.open()
 		

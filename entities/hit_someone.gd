@@ -119,6 +119,7 @@ func _on_hit_timer_timeout() -> void:
 	if not active:
 		return
 	hitanimation.play("hit")
+	Audio.punch(character.global_position)
 
 
 func _on_hit_animation_player_animation_finished(_anim_name: StringName) -> void:

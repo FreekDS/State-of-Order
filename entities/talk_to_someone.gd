@@ -95,7 +95,7 @@ func _on_talk_bubble_timer_timeout() -> void:
 		speechBubble.option = babbel_words.pick_random()
 		speechBubble.open()
 		
-		if randf_range(0, 100) < 70:
+		if randf_range(0, 100) < 50:
 			if character.sprite.isWomen:
 				Audio.blablaFemale(character.global_position)
 			else:

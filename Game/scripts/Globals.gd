@@ -18,3 +18,6 @@ func aliveNPCCount():
 var fountainPosition : Vector2 = Vector2.ZERO
 
 var dayIsActive = false
+
+
+var playedTutorial = false

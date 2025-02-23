@@ -1,8 +1,46 @@
-[gd_scene load_steps=7 format=3 uid="uid://b244o38gti0l2"]
+[gd_scene load_steps=11 format=3 uid="uid://b244o38gti0l2"]
 
 [ext_resource type="Script" path="res://UI/scripts/menu.gd" id="1_047pa"]
 [ext_resource type="Texture2D" uid="uid://dsda4basnteu4" path="res://Textures/main_menu.png" id="2_jmutx"]
 [ext_resource type="PackedScene" uid="uid://br4o8j3bbcfll" path="res://UI/components/SettingsMenu.tscn" id="2_loq58"]
+[ext_resource type="Texture2D" uid="uid://b7pc5rqmneem" path="res://Textures/arrow_down.png" id="3_6rbgr"]
+
+[sub_resource type="Animation" id="Animation_6ybov"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D2:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.5, 0.5)]
+}
+
+[sub_resource type="Animation" id="Animation_fyg45"]
+resource_name = "here"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D2:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.566667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0.5, 0.5), Vector2(0.7, 0.7)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6qluq"]
+_data = {
+"RESET": SubResource("Animation_6ybov"),
+"here": SubResource("Animation_fyg45")
+}
 
 [sub_resource type="Animation" id="Animation_ol51n"]
 length = 0.001
@@ -65,7 +103,7 @@ _data = {
 "play": SubResource("Animation_0ainj")
 }
 
-[node name="Menu" type="Control"]
+[node name="Menu" type="Control" node_paths=PackedStringArray("hierzo")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -73,6 +111,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_047pa")
+hierzo = NodePath("HBoxContainer/How to play/Sprite2D2")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 1
@@ -118,17 +157,35 @@ theme_override_constants/separation = 20
 alignment = 1
 
 [node name="Play" type="Button" parent="HBoxContainer"]
-custom_minimum_size = Vector2(150, 0)
+custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 text = "Play"
 
+[node name="How to play" type="Button" parent="HBoxContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "How to play"
+
+[node name="Sprite2D2" type="Sprite2D" parent="HBoxContainer/How to play"]
+modulate = Color(1, 1, 1, 0.47451)
+position = Vector2(47, -4.48795)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("3_6rbgr")
+offset = Vector2(0, -20)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="HBoxContainer/How to play"]
+libraries = {
+"": SubResource("AnimationLibrary_6qluq")
+}
+autoplay = "here"
+
 [node name="Settings" type="Button" parent="HBoxContainer"]
-custom_minimum_size = Vector2(150, 0)
+custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 text = "Settings"
 
 [node name="Hilde Credits" type="Button" parent="HBoxContainer"]
-custom_minimum_size = Vector2(150, 0)
+custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 text = "Credits"
 
@@ -205,6 +262,7 @@ libraries = {
 }
 
 [connection signal="pressed" from="HBoxContainer/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="HBoxContainer/How to play" to="." method="_on_how_to_play_pressed"]
 [connection signal="pressed" from="HBoxContainer/Settings" to="." method="_on_settings_pressed"]
 [connection signal="pressed" from="HBoxContainer/Hilde Credits" to="." method="_on_hilde_credits_pressed"]
 [connection signal="pressed" from="CreditsContainer/VBoxContainer/HBoxContainer/Go Back" to="." method="_on_go_back_pressed"]

@@ -14,13 +14,15 @@ func _ready():
 		NPCStateManager.STATE.TALK_TO_SOMEONE,
 		NPCStateManager.STATE.SMOKING,
 		NPCStateManager.STATE.PROTEST,
+		NPCStateManager.STATE.WATCH_TV,
 	]
 	nextStatesWeigths=[
 		10,
 		10, 
 		40, #als ze kunnen babbelen mogen ze dat doen
 		10,
-		8
+		8,
+		.5
 	]
 
 func enter():
@@ -63,3 +65,8 @@ func _on_max_single_dir_time_timeout() -> void:
 	navAgent.target_position = NavigationServer2D.map_get_random_point(navAgent.get_navigation_map(), 1, true)
 	targetPoint = navAgent.get_next_path_position()
 	_on_navigation_agent_2d_target_reached()
+	
+func onDragEnd():
+	if character.dead:
+		return
+	animations.play("run")

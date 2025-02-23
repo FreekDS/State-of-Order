@@ -6,6 +6,7 @@ extends Control
 const singleRule = preload("res://UI/components/single_rule.tscn")
 @onready var animations: AnimationPlayer = $AnimationPlayer
 @onready var unnaturalhairtemplate: Sprite2D = $UnnaturalHairTemplate
+@onready var unpause: RichTextLabel = $unpause
 
 var open = false
 
@@ -46,7 +47,8 @@ func _input(event: InputEvent) -> void:
 			TransitionAnimations.open()
 			await TransitionAnimations.done
 			animations.play("show")
-			
+			await get_tree().create_timer(2).timeout
+			unpause.show()
 		else:
 			_closeMenu()
 		return
@@ -57,6 +59,7 @@ func _input(event: InputEvent) -> void:
 		
 
 func _closeMenu():
+	unpause.hide()
 	animations.play_backwards("show")
 	await animations.animation_finished
 	TransitionAnimations.close()

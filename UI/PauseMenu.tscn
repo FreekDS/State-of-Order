@@ -151,6 +151,7 @@ offset_top = -22.0
 offset_right = 115.0
 grow_horizontal = 2
 grow_vertical = 0
+theme_override_constants/outline_size = 2
 bbcode_enabled = true
 text = "[shake]Press pause key (P) to return to game"
 fit_content = true

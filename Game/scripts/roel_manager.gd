@@ -4,6 +4,10 @@ extends Node
 
 
 func _ready() -> void:
+	EventBus.daySetup.connect(
+		func(dayData: DayResource):
+			dayRules = dayData
+	)
 	EventBus.guyCaptured.connect(_on_guy_captured)
 	
 	

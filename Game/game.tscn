@@ -91,7 +91,7 @@ dayRules = ExtResource("2_1wdd8")
 
 [node name="TimeManager" type="Node" parent="GamePlay"]
 script = ExtResource("1_5ff1s")
-dayDuration = 90
+dayDuration = 20
 
 [node name="Timer" type="Timer" parent="GamePlay/TimeManager"]
 one_shot = true

@@ -10,8 +10,8 @@ config_version=5
 
 [application]
 
-config/name="Brackeys2025.1"
-run/main_scene="res://Game/game.tscn"
+config/name="State of Order"
+run/main_scene="res://UI/Menu.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://icon.svg"
 

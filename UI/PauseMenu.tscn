@@ -138,5 +138,23 @@ hframes = 10
 vframes = 5
 frame = 2
 
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -114.0
+offset_top = -22.0
+offset_right = 115.0
+grow_horizontal = 2
+grow_vertical = 0
+bbcode_enabled = true
+text = "[shake]Press pause key (P) to return to game"
+fit_content = true
+autowrap_mode = 0
+
 [connection signal="pressed" from="SettingsButton" to="." method="_on_settings_button_pressed"]
 [connection signal="closeRequest" from="Settings" to="." method="_on_settings_close_request"]

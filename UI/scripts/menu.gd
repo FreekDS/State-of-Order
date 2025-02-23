@@ -28,8 +28,9 @@ func _on_settings_pressed() -> void:
 
 
 func _on_hilde_credits_pressed() -> void:
-	pass
-
+	$HBoxContainer.visible=false
+	$CreditsContainer.visible=true
+	$TextureRect.visible=false
 
 func _on_settings_close_request() -> void:
 	$Settings.hide()
@@ -43,3 +44,9 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 			if isOpen:
 				print("verander nr game scene pls")
 	)
+
+
+func _on_go_back_pressed() -> void:
+	$HBoxContainer.visible=true
+	$CreditsContainer.visible=false
+	$TextureRect.visible=true

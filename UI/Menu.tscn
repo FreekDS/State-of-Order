@@ -195,12 +195,41 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = -64.0
+offset_top = -6.0
+offset_right = -64.0
+offset_bottom = 7.0
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(1.16619, 1.08138)
 theme_override_constants/margin_left = 120
 theme_override_constants/margin_top = 120
 theme_override_constants/margin_right = 120
 theme_override_constants/margin_bottom = 120
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CreditsContainer"]
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CreditsContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "Made by:
+- Wofke: programming lead
+- Steineman: art and sound
+- Troye888: also programming 
+- Plenni: did absolutely nothing
+- The flu: couldnt pick a better week"
+fit_content = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CreditsContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Go Back" type="Button" parent="CreditsContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+text = "Go Back"
 
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
 layout_mode = 1
@@ -236,5 +265,6 @@ libraries = {
 [connection signal="pressed" from="HBoxContainer/How to play" to="." method="_on_how_to_play_pressed"]
 [connection signal="pressed" from="HBoxContainer/Settings" to="." method="_on_settings_pressed"]
 [connection signal="pressed" from="HBoxContainer/Hilde Credits" to="." method="_on_hilde_credits_pressed"]
+[connection signal="pressed" from="CreditsContainer/VBoxContainer/HBoxContainer/Go Back" to="." method="_on_go_back_pressed"]
 [connection signal="closeRequest" from="Settings" to="." method="_on_settings_close_request"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

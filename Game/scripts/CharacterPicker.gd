@@ -14,6 +14,10 @@ func _ready() -> void:
 	for child : DikkeRon in get_children():
 		if child is not DikkeRon:
 			continue
+	
+	EventBus.dayStarted.connect(
+		func(data: DayResource): dayData = data
+	)
 
 		#setupGuy(child)
 

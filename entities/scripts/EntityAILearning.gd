@@ -28,7 +28,7 @@ func _ready():
 	vuist.visible = false
 	animations.play("idle", -1, 1.1)
 	hair.color = sprite.getHairColor()
-	
+	traitManager.obtainTraitsFromSprites()
 	EventBus.dayStarted.connect(
 		func(_data):
 			traitManager.obtainTraitsFromSprites()

@@ -53,14 +53,15 @@ func _ready() -> void:
 		10,
 		2
 	]
+	
 func enter():
 	debug.text = "SWIM (move)"
 	animations.play("run")
 	fountainDetector.monitoring = true
 	fountainDetector.visible = true
 	exiting = false
-	
-
+	_substate = SubStates.MOVE_TOWARDS_FOUNTAIN
+	navAgent.target_position = Globals.fountainPosition
 
 func tick(delta: float):
 	if exiting:
@@ -92,6 +93,7 @@ func _moveToFountain():
 	
 	var direction = (targetPoint - character.global_position).normalized() * speed
 	character.velocity = direction
+
 
 func _jump(delta: float):
 	character.velocity = Vector2.ZERO

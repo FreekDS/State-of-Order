@@ -14,9 +14,14 @@ var _traits : Array[TRAIT] = []
 
 func obtainTraitsFromSprites():
 	if dikkeRonSprites.wearsYellow():
-		_traits.append(TRAIT.WEARS_YELLOW)
+		if not _traits.has(TRAIT.WEARS_YELLOW):
+			_traits.append(TRAIT.WEARS_YELLOW)
 	if dikkeRonSprites.hasUnnaturalHair():
-		_traits.append(TRAIT.NON_NATURAL_HAIR)
+		if not _traits.has(TRAIT.NON_NATURAL_HAIR):
+			_traits.append(TRAIT.NON_NATURAL_HAIR)
+	if dikkeRonSprites.isWomen:
+		if not _traits.has(TRAIT.IS_WOMEN):
+			_traits.append(TRAIT.IS_WOMEN)
 
 
 func addTrait(traitt: TRAIT):

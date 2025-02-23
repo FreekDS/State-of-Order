@@ -47,7 +47,6 @@ func tick(_delta: float):
 	character.velocity = Vector2.ZERO
 
 func onDrag():
-	protestSign.stop()
 	protestSign.hide()
 
 

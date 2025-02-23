@@ -2,9 +2,13 @@ extends NPCState
 
 @onready var bloodsplotion: Node2D = $Bloodsplotion
 
+@export var fightClubSprites : Sprite2D
+
 # Called when the node enters the scene tree for the first time.
 func enter() -> void:
 	debug.text = "DED LMAO"
+	if fightClubSprites != null:
+		fightClubSprites.hide()
 	animations.stop()
 	character.sprite.rotation_degrees = 0
 	character.rotation_degrees = 0

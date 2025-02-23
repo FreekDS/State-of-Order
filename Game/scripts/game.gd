@@ -18,7 +18,7 @@ extends Node2D
 
 @export var thanksForPlaying : RichTextLabel
 
-var currentDay = 0
+var currentDay = 3
 
 
 func _ready() -> void:

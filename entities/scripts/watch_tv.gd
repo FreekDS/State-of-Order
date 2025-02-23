@@ -65,7 +65,7 @@ func onDragEnd():
 	character.sprite.rotation_degrees = 0
 	if not character.dead:
 		animations.play("idle")
-	switchState.emit()
+	switchState.emit(self)
 
 
 func _on_tv_time_timeout() -> void:

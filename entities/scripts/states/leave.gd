@@ -9,6 +9,7 @@ func enter():
 	debug.text = "VAARWEL"
 	navAgent.target_position = TARGET
 	navAgent.target_reached.connect(func(): character.queue_free())
+	animations.play("run")
 
 
 func tick(_delta):

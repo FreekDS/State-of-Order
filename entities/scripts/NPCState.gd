@@ -10,7 +10,7 @@ signal switchState(oldState: NPCState)
 @export var debug : Label
 
 var possibleNextStates : Array[NPCStateManager.STATE] = []
-var nextStatesWeigths : Array[int] = []
+var nextStatesWeigths : Array[float] = []
 
 func setup(ch : DikkeRon,
 		   anim : AnimationPlayer,

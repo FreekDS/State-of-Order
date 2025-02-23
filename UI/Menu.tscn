@@ -161,11 +161,13 @@ text = "Made by:
 - Wofke: programming lead
 - Steineman: art and sound
 - Troye888: also programming 
-- Plenni: did absolutely nothing"
+- Plenni: did absolutely nothing
+- The flu: couldnt pick a better week"
 fit_content = true
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CreditsContainer/VBoxContainer"]
 layout_mode = 2
+alignment = 1
 
 [node name="Go Back" type="Button" parent="CreditsContainer/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(150, 0)

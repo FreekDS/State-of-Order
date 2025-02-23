@@ -2,10 +2,17 @@ extends Control
 
 const GAME = preload("res://Game/game.tscn")
 
+@export var hierzo : Sprite2D 
 
 func _ready() -> void:
 	if TransitionAnimations.closed:
 		TransitionAnimations.close()
+	
+	if hierzo != null:
+		if Globals.playedTutorial == false:
+			hierzo.show()
+		else:
+			hierzo.hide()
 
 
 func _on_play_pressed() -> void:
@@ -43,3 +50,7 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 			if isOpen:
 				print("verander nr game scene pls")
 	)
+
+
+func _on_how_to_play_pressed() -> void:
+	get_tree().change_scene_to_file("res://UI/tutorial_sequence.tscn")

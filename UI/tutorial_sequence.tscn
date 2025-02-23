@@ -1,10 +1,259 @@
-[gd_scene load_steps=2 format=3 uid="uid://3pqd74ua0tsa"]
+[gd_scene load_steps=14 format=3 uid="uid://3pqd74ua0tsa"]
 
+[ext_resource type="Script" path="res://UI/tutorial_sequence.gd" id="1_5fypo"]
 [ext_resource type="Texture2D" uid="uid://xjnhaqsrm5xk" path="res://Textures/grond.png" id="1_fbjob"]
+[ext_resource type="PackedScene" uid="uid://vfkensc2u1h1" path="res://UI/GameUI.tscn" id="2_011km"]
+[ext_resource type="Texture2D" uid="uid://i1kgswh0hynq" path="res://Textures/andje.png" id="2_skdxr"]
+[ext_resource type="PackedScene" uid="uid://4fa13uf524uu" path="res://entities/DikkeRonSprites.tscn" id="3_w6y45"]
+[ext_resource type="Texture2D" uid="uid://icibryrvsevc" path="res://Textures/and_grijpe.png" id="3_ykhfk"]
+[ext_resource type="PackedScene" uid="uid://ilr4hbnewu7c" path="res://entities/dePolies/Politie.tscn" id="5_lax7w"]
+[ext_resource type="Texture2D" uid="uid://c75pdmv73elb4" path="res://Textures/rule_paper.png" id="6_7rvgn"]
+
+[sub_resource type="Animation" id="Animation_sy7f6"]
+resource_name = "camera_move"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/Control/Control/info:text")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["[center]pan the mouse or use wasd to move the camera
+Scroll to zoom in and out"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CanvasLayer/andje:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CanvasLayer/andje:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.466667, 0.966667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(95, 177), Vector2(20, 180), Vector2(44.4565, 179.022)]
+}
+
+[sub_resource type="Animation" id="Animation_1tc0e"]
+resource_name = "drag"
+length = 2.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/Control/Control/info:text")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["[center]Drag people not obeying the rules to a police car"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CanvasLayer/andje:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.233333, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(213, 177), Vector2(213, 177), Vector2(168, 179)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CanvasLayer/andje:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.7),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CanvasLayer/andje2:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.0666667, 0.7),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("CanvasLayer/andje2:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.7, 1.66667, 2.46667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(168, 179), Vector2(473, 142), Vector2(473, 142)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("CanvasLayer/DikkeRonSprites:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0.0333333, 0.7, 1.66667, 2.46667),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(161, 208), Vector2(161, 208), Vector2(466, 181), Vector2(466, 181)]
+}
+
+[sub_resource type="Animation" id="Animation_vip62"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/Control/Control/info:text")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [""]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CanvasLayer/andje:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CanvasLayer/andje:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CanvasLayer/Control/Control/RuleList:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("CanvasLayer/andje2:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("CanvasLayer/andje2:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-28, -21)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("CanvasLayer/DikkeRonSprites:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(161, 208)]
+}
+
+[sub_resource type="Animation" id="Animation_joavm"]
+resource_name = "pause info"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/Control/Control/RuleList:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CanvasLayer/Control/Control/info:text")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["[center]Press P to review the rules of the day
+[font_size=10]press P again to hide"]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_shidi"]
+_data = {
+"RESET": SubResource("Animation_vip62"),
+"camera_move": SubResource("Animation_sy7f6"),
+"drag": SubResource("Animation_1tc0e"),
+"pause info": SubResource("Animation_joavm")
+}
 
 [node name="TutorialSequence" type="Node2D"]
-
-[node name="Camera2D" type="Camera2D" parent="."]
+script = ExtResource("1_5fypo")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_repeat = 2
@@ -12,7 +261,23 @@ position = Vector2(386, 280)
 scale = Vector2(1.965, 1.93333)
 texture = ExtResource("1_fbjob")
 
+[node name="Camera2D" type="Camera2D" parent="."]
+
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="DikkeRonSprites" parent="CanvasLayer" instance=ExtResource("3_w6y45")]
+position = Vector2(161, 208)
+
+[node name="Gewir2" type="Sprite2D" parent="CanvasLayer/DikkeRonSprites"]
+
+[node name="andje2" type="Sprite2D" parent="CanvasLayer"]
+visible = false
+position = Vector2(-28, -21)
+texture = ExtResource("3_ykhfk")
+
+[node name="andje" type="Sprite2D" parent="CanvasLayer"]
+visible = false
+texture = ExtResource("2_skdxr")
 
 [node name="Control" type="MarginContainer" parent="CanvasLayer"]
 anchors_preset = 15
@@ -25,30 +290,98 @@ theme_override_constants/margin_top = 20
 [node name="Control" type="Control" parent="CanvasLayer/Control"]
 layout_mode = 2
 
-[node name="PressToContinue" type="RichTextLabel" parent="CanvasLayer/Control/Control"]
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -640.0
-offset_top = -340.0
-grow_horizontal = 0
-grow_vertical = 0
-text = "click to continue"
-fit_content = true
-scroll_active = false
-autowrap_mode = 0
-
 [node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/Control/Control"]
-layout_mode = 2
-offset_top = -1.0
-offset_right = 640.0
-offset_bottom = 339.0
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -94.0
+offset_right = 94.0
+offset_bottom = 35.0
 grow_horizontal = 2
 theme_override_font_sizes/normal_font_size = 40
 bbcode_enabled = true
-text = "[center]welcome"
+text = "[center]HOW TO PLAY
+[font_size=10]click to continue..."
 fit_content = true
 autowrap_mode = 0
+
+[node name="info" type="RichTextLabel" parent="CanvasLayer/Control/Control"]
+z_index = 4
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -181.0
+offset_top = -117.0
+offset_right = 179.0
+offset_bottom = -82.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_font_sizes/normal_font_size = 20
+bbcode_enabled = true
+fit_content = true
+autowrap_mode = 0
+
+[node name="RuleList" type="TextureRect" parent="CanvasLayer/Control/Control"]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.242
+anchor_top = 1.0
+anchor_right = 0.242
+anchor_bottom = 1.0
+offset_left = -90.88
+offset_top = -157.0
+offset_right = 219.12
+offset_bottom = 245.0
+grow_vertical = 0
+texture = ExtResource("6_7rvgn")
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Control/Control/RuleList"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 75
+theme_override_constants/margin_top = 20
+
+[node name="RuleList" type="VBoxContainer" parent="CanvasLayer/Control/Control/RuleList/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/Control/Control/RuleList/MarginContainer/RuleList"]
+layout_mode = 2
+theme_override_colors/default_color = Color(0.0702305, 3.27289e-06, 0.562614, 1)
+bbcode_enabled = true
+text = "do not wear a blue shirt"
+fit_content = true
+autowrap_mode = 0
+
+[node name="DayCount" type="RichTextLabel" parent="CanvasLayer/Control/Control/RuleList"]
+layout_mode = 0
+offset_left = 62.0
+offset_top = 4.0
+offset_right = 163.0
+offset_bottom = 44.0
+bbcode_enabled = true
+text = "[color=black]MANIFESTO DAY 0"
+fit_content = true
+autowrap_mode = 0
+
+[node name="Politie" parent="CanvasLayer" instance=ExtResource("5_lax7w")]
+position = Vector2(471, 196)
+
+[node name="GameUI" parent="CanvasLayer" instance=ExtResource("2_011km")]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_shidi")
+}
+autoplay = "camera_move"

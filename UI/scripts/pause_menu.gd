@@ -47,7 +47,7 @@ func _input(event: InputEvent) -> void:
 			TransitionAnimations.open()
 			await TransitionAnimations.done
 			animations.play("show")
-			await get_tree().create_timer(2).timeout
+			await get_tree().create_timer(.1).timeout
 			unpause.show()
 		else:
 			_closeMenu()

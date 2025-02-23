@@ -138,7 +138,7 @@ hframes = 10
 vframes = 5
 frame = 2
 
-[node name="RichTextLabel" type="RichTextLabel" parent="."]
+[node name="unpause" type="RichTextLabel" parent="."]
 visible = false
 layout_mode = 1
 anchors_preset = 7

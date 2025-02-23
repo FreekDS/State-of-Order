@@ -5,7 +5,7 @@
 [resource]
 script = ExtResource("1_4ate5")
 dayNumber = 1
-tagline = "have a nice day"
+tagline = "Have a nice day"
 disallowedActions = Array[int]([9, 7, 8, 6, 12])
 disallowedTraits = Array[int]([])
 score = 1

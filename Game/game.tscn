@@ -72,6 +72,8 @@ wait_time = 2.0
 
 [node name="GuySpawner" type="Node" parent="GamePlay" node_paths=PackedStringArray("targetNode", "navmap")]
 script = ExtResource("1_8lkux")
+maxGuysInScene = 45
+amountOfInitialGuysOnMap = 12
 targetNode = NodePath("../NavigationRegion/Characters")
 navmap = NodePath("../NavigationRegion")
 
@@ -91,7 +93,7 @@ dayRules = ExtResource("2_1wdd8")
 
 [node name="TimeManager" type="Node" parent="GamePlay"]
 script = ExtResource("1_5ff1s")
-dayDuration = 20
+dayDuration = 90
 
 [node name="Timer" type="Timer" parent="GamePlay/TimeManager"]
 one_shot = true

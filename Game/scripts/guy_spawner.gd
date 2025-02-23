@@ -74,7 +74,7 @@ func spawnGuy(at: Vector2) -> DikkeRon:
 
 
 func _on_poll_guy_count_timeout() -> void:
-	if len(Globals.allNpcs) < maxGuysInScene and SpawnDelay.is_stopped():
+	if SpawnDelay.is_stopped():
 		var at = spawnMarker.global_position
 		at.x += randf_range(-200, 200)
 		var guy := spawnGuy(at)
